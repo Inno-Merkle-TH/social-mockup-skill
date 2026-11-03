@@ -17,7 +17,7 @@ Ask in rounds with AskUserQuestion (max 4 questions per call, multiple-choice wi
 |---|---|---|
 | 5 | Brand name + LINE OA / FB page / TikTok handle as it should appear | handles must look real but avoid real third-party accounts |
 | 6 | Brand assets: logo files, colours, fonts? Or may I pull them from the brand's public website? | if fetching: record source URLs in notes.md. Fonts: only use files the brand/agency is licensed for; else fall back to the kit's OFL fonts |
-| 7 | Product / KV images: provided, fetch from brand site, or placeholders for now? | placeholders render as striped `.ph-img` boxes and QA flags them |
+| 7 | **Images: where should they come from?** Options: (a) I'll provide them · (b) use the brand's website / press kit · (c) **let Claude find images from the internet** (recommended when nothing is supplied) · (d) placeholders for now | default (c). See `references/image-sourcing.md`. Every image is logged in `assets/credits.json` |
 | 8 | Brand voice + CTA style (pill / rounded / square; solid / outline) | default: brand's website button style |
 
 ## Round 3: Content
@@ -40,4 +40,4 @@ Ask in rounds with AskUserQuestion (max 4 questions per call, multiple-choice wi
 
 ## Defaults when the user says "just go"
 
-Android Galaxy frame, LINE dark mode, FB light, TikTok dark; Thai copy; kit OFL fonts; placeholders for every missing image/offer; one storyboard screen per stage in the brief; overview board on.
+Android Galaxy frame, LINE dark mode, FB light, TikTok dark; Thai copy; kit OFL fonts; **real photos found online for every image slot** (placeholders only for offers/prices); one storyboard screen per stage in the brief; overview board on.

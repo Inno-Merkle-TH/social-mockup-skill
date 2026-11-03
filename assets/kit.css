@@ -572,3 +572,5 @@ svg.wt { filter: invert(1) brightness(.12); }
 .fbd-feed .fb-ph .nm { font-size: 15px; } .fbd-feed .fb-ph .mt { font-size: 13px; }
 .fbd-body { grid-template-columns: 340px 1fr 340px; }
 .fbd-side { overflow: hidden; }
+/* narrow Android screens: the 2026 tab row compresses */
+.android .tt-top { gap: 11px; font-size: 15px; } .android .tt-top .lv { left: 10px; } .android .tt-top .se { right: 10px; }

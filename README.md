@@ -28,6 +28,9 @@ node scripts/export.cjs ~/work/acme-launch          # → captures/*.png + qa.js
 ```
 Preview while editing: `cd ~/work && python3 -m http.server 8000` → `http://127.0.0.1:8000/acme-launch/` (needs http, not file://). `?only=<shot-id>` shows one screen; `?safe=1` shows TikTok safe zones.
 
+## Images
+If you don't supply photos, Claude finds real ones online (Wikimedia Commons by default; add free `PEXELS_API_KEY` / `UNSPLASH_ACCESS_KEY` for ad-grade stock), shows itself a contact sheet, picks, crops to the placement ratio and logs sources in `assets/credits.json`. See `references/image-sourcing.md`.
+
 ## What's inside
 
 - `SKILL.md`: the workflow Claude follows

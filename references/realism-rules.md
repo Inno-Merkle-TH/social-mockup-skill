@@ -14,6 +14,7 @@ Each of these came from a real client round. They are the difference between "ni
 7. **Plausible micro-data.** Engagement counts, timestamps (push at 08:00–20:00), battery (not 100%), read receipts.
 
 ## Craft
+0. **Real photos, real ad craft.** Ad creative = a real photo + small brand mark (+ maybe a price/offer tag). Not big headline text on a gradient. TikTok frames look like video stills, with text in TikTok's native sticker style (`.tt-sticker`). Find photos online if the user didn't provide them (`references/image-sourcing.md`).
 8. **Legible at phone size.** Body text ≥13 px CSS, product thumbnails ≥60 px, no logos smaller than the OA avatar. Open every PNG at 100%.
 9. **High-res assets.** Use images ≥2× their displayed size (≥3× for heroes). Upscaled or JPEG-crunched product shots read as fake immediately.
 10. **Brand CI correct.** Brand font (licensed) for brand content, correct logo lockup, CTA shape from the brand's own site.

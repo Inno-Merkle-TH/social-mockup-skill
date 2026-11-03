@@ -16,7 +16,9 @@ Swapping brands = swapping `brand.css` + images + copy. That is what makes resul
 
 1. **Intake (ask, don't guess).** Read `references/intake.md` and ask the questions in rounds with AskUserQuestion. Only skip a question if the user already answered it or a sensible default is listed. Never invent offers, prices, dates, loyalty programs or product claims. Ask, or mark them as placeholders.
 2. **Scaffold.** `bash scripts/new_project.sh <path/to/project-name>` → copies the kit, a starter `index.html`, `brand.css` and `notes.md`.
-3. **Brand.** Fill `brand.css` from the intake. Put licensed fonts in `brand/fonts/`, logo (one-colour mark for avatars) in `brand/`, product/KV images in `assets/`. If allowed to fetch from the brand's site, download the highest resolution available (≥2× display size) and keep the source URL in notes.md.
+3. **Brand + images.** Fill `brand.css` from the intake. Put licensed fonts in `brand/fonts/` and the logo (one-colour mark for avatars) in `brand/`.
+   Every image slot gets a **real photo**. CSS gradients or placeholder text in place of photography is what makes a mockup look fake. Follow `references/image-sourcing.md`:
+   user-supplied → brand website/press kit → find online (`scripts/find_images.py "<query>" --orient portrait` builds a contact sheet you look at; then `scripts/fetch_image.py <url> assets/<name>.jpg --crop 4:5`). You can also web-search any page (news, retailer, brand social) and pass its URL to fetch_image.py; it reads the page's main image. Each download is logged in `assets/credits.json`.
 4. **Build shots.** The gallery has one example per surface, not every surface × OS combination (see the matrix below). Copy the closest block from `templates/gallery.html` into `index.html`, then switch the device using `references/devices.md`: swap `.dev.android` ↔ `.dev.ios` and apply that OS's chrome differences (e.g. FB tabs top ↔ bottom tab bar). Edit copy and images. Platform specifics are in `references/line.md`, `facebook.md`, `tiktok.md`.
    - Give every shot a unique `data-shot` id; it becomes the file name. Per-shot CSS may be scoped with `[data-shot="id"]`.
    - Name project classes with a project prefix (e.g. `.sb-hero`, not `.kv`/`.hero`) so they never collide with kit classes.
@@ -62,6 +64,8 @@ Build it in the project's `index.html` `<style>` using the same conventions (pla
 | `templates/brand.example.css` | brand variables with comments |
 | `templates/index.starter.html`, `notes.template.md` | project starters |
 | `scripts/new_project.sh` | scaffold a project |
+| `scripts/find_images.py`, `fetch_image.py` | find real photos online (contact sheet) · download + crop + log source |
+| `references/image-sourcing.md` | where images come from, crops per placement, ad-craft rules |
 | `scripts/export.cjs` | render + QA (needs `npm install` in `scripts/` once) |
 | `references/intake.md` | the question rounds + defaults |
 | `references/line.md`, `facebook.md`, `tiktok.md` | anatomy, limits, class map per platform |
