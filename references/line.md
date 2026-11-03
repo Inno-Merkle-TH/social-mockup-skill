@@ -6,10 +6,12 @@
 |---|---|---|
 | OA chat | `.screen.line-dark` or `.line-light` → `.sb` `.ln-head` `.ln-msgs` `.ln-bar` (or `.ln-input`) `.sysnav` | OA name + green verified badge (`#minibadge`) in header |
 | Text bubble | `.ln-row > .ln-av + .ln-col > .ln-line > .ln-bub.tail + .ln-tm` | add `.cont` for follow-up rows (no avatar), `.me` for user bubbles |
-| Flex bubble | `.flex` (`.micro` / `.kilo` / `.mega` widths) → `.fx-hero` `.fx-bd` (`.fx-t1` `.fx-t2` `.fx-sep` `.fx-kv`) `.fx-ft` | brand-authored: brand vars allowed |
+| Flex bubble | `.flex` (`.micro` / `.kilo` / `.mega` widths) → `.fx-hero` `.fx-bd` (`.fx-t1` `.fx-t2` `.fx-sep` `.fx-kv`) `.fx-ft` | brand colours allowed (button/text/bg colours, images); text is ALWAYS the system font (Flex has no custom fonts); buttons radius 8, filled or link only |
 | Flex carousel | `.ln-car > .flex…` | max 12 bubbles; show 1.5 cards so it reads as swipeable |
 | Quick replies | `.ln-qrs > .ln-qr` | sit above the input bar |
-| Rich menu | `.rm > .rm-art.g6` (`g4`, `g3`, `big-left`, `banner-top`, `.compact`) + `.ln-bar` with chevron up | ONE image in reality |
+| Rich menu | `.rm > .rm-art.g6` (`g4`, `g3`, `big-left`, `banner-top`, `.compact`) + `.ln-bar` with `<i class="tri up">` | ONE image in reality |
+| Rich message (imagemap) | `.ln-imap > img` (`style="--r:1"`) | full width, no avatar, no radius: the most common OA broadcast format |
+| Quoted reply / link / jump button | `.ln-quote > b + span`, `.lk`, `.ln-down` | 2026 iOS details |
 | Push / lock screen | `.lock > .date + .clk + .qa.l + .qa.r` and `.notif` (iOS: card in the lower half; add `.top` for the old top position. Android: heads-up card at top) | title = OA name, body = message text or Flex altText |
 
 ## Real-platform constraints
@@ -29,6 +31,6 @@
 
 ## Theme notes
 
-- `.line-dark` values were verified against Android screenshots [V]. `.line-light` is an estimate [~]. Calibrate with `references/screens/` before shipping light-mode work. The chat wallpaper is user-themable, so `--ln-bg` can be any plain colour.
+- `.line-dark` values were verified against Android screenshots [V]. `.line-light` is calibrated pixel-by-pixel to IMG_0910 [V] (replica: `screens/calibrate/line-ios-0910.html`). Calibrate with `references/screens/` before shipping light-mode work. The chat wallpaper is user-themable, so `--ln-bg` can be any plain colour.
 - LINE header and bars are never brand coloured. Brand only appears in avatar, Flex, rich menu art, images.
-- Android: header 54 px with back arrow left, title left-aligned. iOS: header 46 px, title centred.
+- Android: header 54 px with back arrow left, title left-aligned. iOS 2026 (`.line-light`): header 48 px, title **left-aligned** after "‹ 99+" (the old centred title is gone).

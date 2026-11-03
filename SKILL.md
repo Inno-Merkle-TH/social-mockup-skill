@@ -22,8 +22,9 @@ Swapping brands = swapping `brand.css` + images + copy. That is what makes resul
 4. **Build shots.** The gallery has one example per surface, not every surface × OS combination (see the matrix below). Copy the closest block from `templates/gallery.html` into `index.html`, then switch the device using `references/devices.md`: swap `.dev.android` ↔ `.dev.ios` and apply that OS's chrome differences (e.g. FB tabs top ↔ bottom tab bar). Edit copy and images. Platform specifics are in `references/line.md`, `facebook.md`, `tiktok.md`.
    - Give every shot a unique `data-shot` id; it becomes the file name. Per-shot CSS may be scoped with `[data-shot="id"]`.
    - Name project classes with a project prefix (e.g. `.sb-hero`, not `.kv`/`.hero`) so they never collide with kit classes.
+   - **Fonts and ratios (read `references/typography-and-ratios.md`):** text the app draws (bubbles, Flex, post copy, CTA buttons, captions) is always the platform font, so never put `--brand-head`/`--brand-body` on it. Brand fonts go only inside images. Media boxes take a ratio, never a fixed height: FB feed 4:5, carousel 1:1, Stories/Reels/TikTok 9:16, LINE rich message 1:1 edge to edge, Flex hero 20:13.
    - Thai copy: wrap prices, dates, units and final particles in `<span style="white-space:nowrap">` so lines never end with an orphan "ค่ะ", "ml" or a split word.
-5. **Export.** `node scripts/export.cjs <project>` (first time on a machine: `cd scripts && npm install`; it falls back to the installed Google Chrome if Playwright's browser isn't downloaded). It serves only the project folder. → `captures/NN-<shot-id>.png` (3× phones, 2× desktop, transparent), `00-overview.png`, `qa.json`. Fix every failed request and QA issue it prints.
+5. **Export (on a Mac, so iOS text renders in real SF Pro + Thonburi).** `node scripts/export.cjs <project>` (first time on a machine: `cd scripts && npm install`; it falls back to the installed Google Chrome if Playwright's browser isn't downloaded). It serves only the project folder. → `captures/NN-<shot-id>.png` (3× phones, 2× desktop, transparent), `00-overview.png`, `qa.json`. Fix every failed request and QA issue it prints.
 6. **Review like a client would.** Open every PNG at full size (not just the overview) and run `references/qa-checklist.md`. Put your mockup side by side with a real device capture from `references/screens/device/` (or ask the user for fresh phone screenshots of the same surface). Platform UIs change every few months, and a real capture is the only ground truth.
 7. **Record.** Update `notes.md`: placeholders still open, assumptions, image sources, timeline. Then report the capture paths to the user.
 
@@ -71,4 +72,6 @@ Build it in the project's `index.html` `<style>` using the same conventions (pla
 | `references/line.md`, `facebook.md`, `tiktok.md` | anatomy, limits, class map per platform |
 | `references/devices.md` | frames, status bars, OS differences |
 | `references/realism-rules.md`, `qa-checklist.md`, `localization-th.md` | quality bars |
-| `references/screens/` | dated real-app screenshots for calibration |
+| `references/screens/` | dated real-app screenshots + `calibrate/` replicas |
+| `references/typography-and-ratios.md` | which font every platform really uses, measured sizes, media ratios |
+| `scripts/calibrate.cjs` | overlay a kit replica on a real screenshot (side/blend/diff + per-band score) |

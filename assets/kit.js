@@ -23,6 +23,15 @@
     }
   };
 
+  // Off macOS, system-ui is Segoe UI / Cantarell, not SF Pro: swap iOS + desktop stacks to the closest open fonts.
+  if (!/Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent)) {
+    const st = document.createElement("style");
+    st.textContent = ':root{--f-ios:"Inter","Noto Sans Thai Looped",sans-serif;--f-desktop:"Segoe UI","Inter","Noto Sans Thai",sans-serif}' +
+      '.dev.ios .screen{--f-tiktok:"TikTok Sans App","Inter","Noto Sans Thai Looped",sans-serif}';
+    document.head.appendChild(st);
+    console.warn("[kit] not macOS: iOS mockups use Inter as SF Pro stand-in. Export on a Mac for exact SF Pro + Thonburi.");
+  }
+
   function osOf(el) { const d = el.closest(".dev"); return d ? (d.classList.contains("ios") ? "ios" : d.classList.contains("android") ? "android" : "desktop") : "desktop"; }
 
   function fillStatus(sb) {

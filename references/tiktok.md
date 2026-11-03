@@ -30,6 +30,6 @@
 
 ## Realism
 
-- TikTok's own UI uses TikTok Sans (OFL, bundled). Video overlay text belongs to the creative (brand font or TikTok's in-app text styles).
+- TikTok's own UI uses TikTok Sans at its display optical size. The kit bundles "TikTok Sans App" (opsz 36, wdth 95 pinned; measured against IMG_0906). Plain TikTok Sans with auto optical sizing is about 8–15% too wide. Video overlay text belongs to the creative (brand font or TikTok's in-app text styles).
 - Counts: in-feed brand ads, likes ~1K–50K, comments ~1–3% of likes, saves ~3–8%, shares ~2–5%. Spark Ads carry the creator's organic numbers (can be 10× higher). Use K/M abbreviations above 10,000 (48.2K).
 - The rail sits over the video, so creative text that runs under it looks like a real video. Keep it out of the rail for client polish (use `?safe=1` to check).

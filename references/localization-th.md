@@ -1,6 +1,6 @@
 # Thai localisation notes
 
-- **Fonts**: Thai UI on Android = loopless sans (Noto Sans Thai, bundled; SamsungOne Thai on Galaxy if licensed). iOS = Sukhumvit Set/Thonburi (system on macOS). Brand fonts often lack Thai glyphs. Then pair brand Latin with a Thai fallback in `--brand-head` / `--brand-body`.
+- **Fonts**: Thai UI on Android = loopless sans (Noto Sans Thai, bundled; SamsungOne Thai on Galaxy if licensed). iOS = **Thonburi** (looped; what LINE/FB/TikTok show on iPhone, verified on device). It comes through `system-ui` on macOS. The fallback elsewhere is Noto Sans Thai Looped (bundled). Brand fonts are only for text inside images, and often lack Thai glyphs, so pair brand Latin with a Thai fallback in `--brand-head` / `--brand-body`.
 - **Line breaks**: Thai has no spaces between words; browsers break by dictionary but can split badly in narrow bubbles. Insert `<wbr>` or a zero-width space (`&#8203;`) between words where breaks look wrong, and `white-space: nowrap` for prices/dates ("4–24 มี.ค.").
 - **Year**: Thai consumer copy often uses the Buddhist Era (BE = CE + 543 → 2026 = 2569, 2027 = 2570). Pick one per project and record it in notes.md. Status bars/lock screens use the phone's calendar setting (usually Gregorian numbers with Thai month names).
 - **Dates**: "ศุกร์ 26 มีนาคม", short "26 มี.ค.". Weekday must be correct for the year.

@@ -11,11 +11,18 @@
 @import url("fonts/fonts.css");
 
 :root {
-  /* system UI fonts per OS. On macOS, -apple-system renders real SF Pro. */
-  --f-ios: -apple-system, "SF Pro Text", "Sukhumvit Set", "Thonburi", "Noto Sans Thai", sans-serif;
+  /* PLATFORM fonts. Every piece of UI text the app itself renders (chat bubbles, Flex text,
+     buttons, captions, post copy, nav labels) uses these, never the brand font. Brand fonts only
+     live inside images (creative, rich menu, imagemap). Verified against device captures 2026-11.
+     iOS: SF Pro + Thonburi (Thai). Headless Chromium on macOS resolves `system-ui` to exactly that;
+          `-apple-system` / "SF Pro Text" are NOT resolved by Chromium, so system-ui must come first.
+          Off macOS kit.js swaps in Inter + Noto Sans Thai Looped (closest open look-alikes).
+     Android: Roboto + Noto Sans Thai (UI, loopless) = AOSP system fonts.
+     facebook.com (mac): system-ui (SF Pro); Windows: Segoe UI. tiktok.com: TikTokFont ≈ TikTok Sans. */
+  --f-ios: system-ui, "Thonburi", "Inter", "Noto Sans Thai Looped", sans-serif;
   --f-android: "Roboto", "Noto Sans Thai", sans-serif;
-  --f-desktop: -apple-system, "Segoe UI", "Helvetica Neue", "Noto Sans Thai", sans-serif;
-  --f-tiktok: "TikTok Sans", "Noto Sans Thai", sans-serif;
+  --f-desktop: system-ui, "Segoe UI", "Thonburi", "Inter", "Noto Sans Thai", sans-serif;
+  --f-tiktok: "TikTok Sans", system-ui, "Tahoma", "Noto Sans Thai", sans-serif;  /* desktop web; phones override per OS below */
 
   /* brand defaults (overridden by brand.css) */
   --brand-name: "Brand";
@@ -68,7 +75,7 @@ body.capture .board { padding: 0; }
   box-shadow: 0 0 0 4.5px #0A0A0B, 0 0 0 6px #CDD6E2, 0 0 0 6.6px #8E9AAB; }
 .dev.android::before, .dev.android::after { content: ""; position: absolute; right: -9.5px; width: 2.5px; border-radius: 0 2px 2px 0; background: #B9C4D2; }
 .dev.android::before { top: 150px; height: 88px; } .dev.android::after { top: 262px; height: 52px; }
-.dev.android .screen { border-radius: 27px; font-family: var(--f-android); }
+.dev.android .screen { border-radius: 27px; font-family: var(--f-android); --f-tiktok: "TikTok Sans App", "Roboto", "Noto Sans Thai", sans-serif; }
 .dev.android .cam { position: absolute; top: 13px; left: 50%; margin-left: -5px; width: 10px; height: 10px; border-radius: 50%; background: #050505; z-index: 60; box-shadow: inset 0 0 0 2px #151515; }
 
 /* iOS · iPhone 17 Pro class (402×874 pt) [~] */
@@ -76,7 +83,7 @@ body.capture .board { padding: 0; }
   box-shadow: 0 0 0 10px #050506, 0 0 0 11.5px #9A9CA3, 0 0 0 12.5px #5E6066; }
 .dev.ios::before { content: ""; position: absolute; left: -15px; top: 190px; width: 3px; height: 62px; border-radius: 2px 0 0 2px; background: #8B8D94; box-shadow: 0 78px 0 #8B8D94, 0 -64px 0 #8B8D94; }
 .dev.ios::after { content: ""; position: absolute; right: -15px; top: 250px; width: 3px; height: 100px; border-radius: 0 2px 2px 0; background: #8B8D94; }
-.dev.ios .screen { border-radius: 62px; font-family: var(--f-ios); }
+.dev.ios .screen { border-radius: 62px; font-family: var(--f-ios); --f-tiktok: "TikTok Sans App", system-ui, "Thonburi", "Noto Sans Thai Looped", sans-serif; }
 .dev.ios .cam { position: absolute; top: 11px; left: 50%; width: 124px; height: 36px; margin-left: -62px; border-radius: 18px; background: #000; z-index: 60; }
 
 /* Desktop · macOS window (set width/height inline) */
@@ -114,7 +121,7 @@ body.capture .board { padding: 0; }
   background: linear-gradient(90deg, var(--bf, #000) 0 var(--lvl, 50%), var(--bu, #fff) var(--lvl, 50%)); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .light .sb .bat b, .sb.light .bat b { --bf: #fff; --bu: #000; } .light .sb .bat, .sb.light .bat { background: rgba(0,0,0,.22); }
 /* iOS [~] */
-.ios .sb { height: 58px; padding: 6px 30px 0 52px; font: 600 17px var(--f-ios); letter-spacing: -.2px; }
+.ios .sb { height: 58px; padding: 6px 36px 0 30px; /* [V] IMG_0906-0910: clock centre x≈65pt, icons end x≈365pt */ font: 600 17px var(--f-ios); letter-spacing: -.2px; }
 .ios .sb .l { width: 70px; justify-content: center; }
 .ios .sb .r { gap: 6px; }
 .ios .ibat { position: relative; width: 27px; height: 13px; border-radius: 4.3px; border: 1px solid currentColor; opacity: .95; padding: 1.5px; }
@@ -216,15 +223,18 @@ body.capture .board { padding: 0; }
 .flex .fx-hero { position: relative; overflow: hidden; background: var(--brand-surface); }
 .flex .fx-hero > img { width: 100%; height: 100%; object-fit: cover; }
 .flex .fx-bd { padding: 20px 20px 4px; }
-.flex .fx-t1 { font: 700 19px/1.3 var(--brand-head); } /* lg */
-.flex .fx-t2 { font-size: 14px; line-height: 1.45; color: #666; margin-top: 8px; font-family: var(--brand-body); } /* sm */
+.flex .fx-t1 { font-size: 19px; font-weight: 700; line-height: 1.4; } /* text size lg, weight bold. Flex text is ALWAYS the app system font (no custom fonts in Flex) */
+.flex .fx-t2 { font-size: 14px; line-height: 1.4; color: #666; margin-top: 8px; } /* size sm */
 .flex .fx-sep { height: .5px; background: #D4D6DA; margin: 16px 0 4px; }
 .flex .fx-kv { display: flex; justify-content: space-between; gap: 10px; font-size: 14px; color: #888; margin-top: 8px; }
 .flex .fx-kv b { color: #111; text-align: right; }
 .flex .fx-ft { padding: 10px; display: flex; flex-direction: column; gap: 8px; }
-.cta { height: 52px; border-radius: var(--brand-radius); display: flex; align-items: center; justify-content: center; text-align: center; font: 700 14px var(--brand-body); padding: 0 12px; }
+/* Flex buttons = LINE renderer (flex2html.css): 52px (sm 40px), radius 8px FIXED (no cornerRadius on buttons),
+   16px regular label, padding 0 16. Only 3 styles exist: primary (filled, any colour), secondary (filled, any colour), link.
+   No outline / pill / gradient buttons in Flex; brand-radius never applies here. */
+.cta { height: 52px; border-radius: 8px; display: flex; align-items: center; justify-content: center; text-align: center; font-size: 16px; font-weight: 400; padding: 0 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .cta.pri { background: var(--brand-primary); color: var(--brand-on-primary); }
-.cta.sec { box-shadow: inset 0 0 0 1.5px var(--brand-primary); color: var(--brand-primary); background: #fff; }
+.cta.sec { background: var(--brand-sec-bg, #DCDFE5); color: #111; } /* secondary = filled light button; set --brand-sec-bg for a tinted one */
 .cta.sm { height: 40px; }
 .cta.link { color: #42659A; height: 52px; font-weight: 400; font-size: 16px; } /* LINE default link button */
 .cta.line-pri { background: #17C950; color: #fff; border-radius: 8px; } .cta.line-sec { background: #DCDFE5; color: #111; border-radius: 8px; } /* LINE default button styles */
@@ -281,7 +291,8 @@ body.capture .board { padding: 0; }
 .fb-ph .ac svg { width: 22px; height: 22px; }
 .fb-tx { font-size: 15px; line-height: 1.34; padding: 6px 12px 8px; }
 .fb-tx .more { color: var(--fb-sub); font-weight: 600; }
-.fb-media { position: relative; overflow: hidden; background: #000; }
+.fb-media { position: relative; overflow: hidden; background: #000; aspect-ratio: 4 / 5; } /* feed default = 4:5 (FB max for feed; real ads 2026 are mostly 4:5) */
+.fb-media.r45 { aspect-ratio: 4 / 5; } .fb-media.r11 { aspect-ratio: 1; } .fb-media.r191 { aspect-ratio: 1.91; } .fb-media.r916 { aspect-ratio: 9 / 16; }
 .fb-media > img, .fb-media > .ph-img { width: 100%; height: 100%; object-fit: cover; }
 .fb-link { display: flex; align-items: center; gap: 10px; background: #F0F2F5; padding: 9px 12px; }
 .fb.dark .fb-link { background: #3A3B3C; }
@@ -333,23 +344,23 @@ body.capture .board { padding: 0; }
    TIKTOK · calibrated 2026-11 against official TikTok Ads Help mocks + live tiktok.com
    (references/screens/tiktok/SPEC.md). App values scaled from 375pt mocks [V≈]; desktop measured [V].
    ===================================================================== */
-.tt { position: relative; flex: 1; overflow: hidden; background: #000; color: #fff; font-family: var(--f-tiktok); }
+.tt { position: relative; flex: 1; overflow: hidden; background: #000; color: #fff; font-family: var(--f-tiktok); } /* phones use "TikTok Sans App" (opsz 36, wdth 95 pinned: auto opsz made small text ~8-15% too wide) [V] */
 .tt .vid { position: absolute; inset: 0; }
 .tt .vid > img, .tt .vid > .ph-img { width: 100%; height: 100%; object-fit: cover; }
 .tt .vid::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 38%; background: linear-gradient(180deg, transparent, rgba(0,0,0,.45)); }
 .tt .vid::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 18%; background: linear-gradient(180deg, rgba(0,0,0,.28), transparent); z-index: 1; }
 /* top tabs: LIVE icon · Explore · Following · For You · search */
 .tt-top { position: absolute; left: 0; right: 0; height: 44px; z-index: 5; display: flex; align-items: center; justify-content: center; gap: 20px; font: 600 17px var(--f-tiktok); text-shadow: 0 1px 2px rgba(0,0,0,.3); }
-.android .tt-top { top: 36px; } .ios .tt-top { top: 54px; }
+.android .tt-top { top: 40px; } .ios .tt-top { top: 62px; }
 .tt-top span { color: rgba(255,255,255,.72); }
 .tt-top .on { color: #fff; font-weight: 700; position: relative; }
 .tt-top .on::after { content: ""; position: absolute; left: 50%; margin-left: -15px; bottom: -8px; width: 30px; height: 2.5px; border-radius: 2px; background: #fff; }
 .tt-top .lv { position: absolute; left: 14px; } .tt-top .se { position: absolute; right: 14px; }
 /* right rail: avatar(+), like, comment, bookmark, share, music disc */
-.tt-rail { position: absolute; right: 8px; width: 52px; z-index: 5; display: flex; flex-direction: column; align-items: center; gap: 16px; font: 600 12.5px var(--f-tiktok); text-shadow: 0 1px 1.5px rgba(0,0,0,.35); }
-.android .tt-rail { bottom: 158px; } .ios .tt-rail { bottom: 176px; }
+.tt-rail { position: absolute; right: 8px; width: 52px; z-index: 5; display: flex; flex-direction: column; align-items: center; gap: 16px; font: 600 11px var(--f-tiktok); text-shadow: 0 1px 1.5px rgba(0,0,0,.35); }
+.android .tt-rail { bottom: 146px; } .ios .tt-rail { bottom: 160px; } /* [V] IMG_0906: share label bottom y≈713pt, icon pitch ≈66pt */
 .tt-rail .it { display: flex; flex-direction: column; align-items: center; gap: 3px; }
-.tt-rail .it svg { width: 38px; height: 38px; filter: drop-shadow(0 1px 1.5px rgba(0,0,0,.25)); opacity: .97; }
+.tt-rail .it svg { width: 33px; height: 33px; filter: drop-shadow(0 1px 1.5px rgba(0,0,0,.25)); opacity: .97; }
 .tt-rail .av { width: 48px; height: 48px; border-radius: 50%; border: 1px solid #fff; position: relative; margin-bottom: 8px; background: var(--brand-primary) var(--brand-logo) center / 62% no-repeat; }
 .tt-rail .av img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
 .tt-rail .av b { position: absolute; left: 50%; bottom: -10px; margin-left: -10px; width: 20px; height: 20px; border-radius: 50%; background: #FE2C55; color: #fff; font: 700 15px/19px var(--f-tiktok); text-align: center; }
@@ -378,7 +389,7 @@ body.capture .board { padding: 0; }
 .tt-nav svg { width: 26px; height: 26px; }
 .tt-nav .on { color: #fff; }
 .tt-nav .bdg { position: absolute; top: 2px; left: 50%; margin-left: 4px; min-width: 17px; height: 17px; border-radius: 9px; background: #FE2C55; color: #fff; font: 700 11px/17px var(--f-tiktok); text-align: center; padding: 0 4px; }
-.tt-plus { width: 44px; height: 30px; border-radius: 9px; background: #fff; position: relative; box-shadow: -3.5px 0 0 #25F4EE, 3.5px 0 0 #FE2C55; color: #000; font: 700 22px/30px var(--f-tiktok); text-align: center; }
+.tt-plus { width: 31px; height: 22px; border-radius: 7px; background: #fff; position: relative; box-shadow: -3px 0 0 #25F4EE, 3px 0 0 #FE2C55; color: #000; font: 600 18px/22px var(--f-tiktok); text-align: center; } /* [V] 37×22pt incl. colour edges */
 /* official safe zone (720×1280 template → %): top 12.5%, sides 11%, bottom 34%, rail x≥72% for bottom 56% */
 .tt-safe { display: none; position: absolute; inset: 0; z-index: 9; pointer-events: none; }
 .tt-safe::before { content: ""; position: absolute; left: 11.1%; right: 11.1%; top: 12.5%; bottom: 34.4%; outline: 2px dashed #00E5FF; }
@@ -476,26 +487,27 @@ svg.wt { filter: invert(1) brightness(.12); }
    ===================================================================== */
 .fb.dark { --fb-bg: #252728; --fb-fg: #F2F4F7; --fb-sub: #B0B3B8; --fb-sep: #3A3B3C; --fb-chip: #474748; --fb-link: #333334; --fb-gap: #18191A; }
 .fb { --fb-link: #F0F2F5; }
-.fb-hdr { height: 56px; display: flex; align-items: center; padding: 0 12px; gap: 12px; background: var(--fb-bg); color: var(--fb-fg); }
-.fb-hdr .wm { height: 23px; width: 128px; color: var(--fb-fg); }
+.fb-hdr { height: 60px; display: flex; align-items: center; padding: 0 15px 0 8px; gap: 8px; background: var(--fb-bg); color: var(--fb-fg); } /* [V] IMG_0908/0909: ☰ glyph x12.7–31.7, wordmark x44–171, icons 44pt apart */
+.fb-hdr .wm { height: 24.6px; width: 127px; color: var(--fb-fg); margin-left: 0; flex: none; }
 .fb:not(.dark) .fb-hdr .wm { color: #0866FF; }
 .fb-hdr .sp { flex: 1; }
 .fb-hdr .ic { position: relative; width: 36px; height: 36px; }
 .fb-hdr .ic svg { width: 28px; height: 28px; }
 .fb-hdr .ic .fb-bdg { top: -4px; left: auto; right: -6px; margin: 0; }
-.fb-hdr .menu svg { width: 22px; height: 22px; }
+.fb-hdr .menu { width: 28px; height: 28px; } .fb-hdr .menu svg { width: 28px; height: 28px; }
+.fb-hdr .ic:not(.menu) svg { width: 27px; height: 27px; }
 /* post header (2026): 40px avatar, name 16/600, "Ad · 🌐" 13px */
-.fb-ph .nm { font-size: 16px; font-weight: 600; }
+.fb-ph .nm { font-size: 15px; font-weight: 600; }
 .fb-ph .nm .vf { width: 16px; height: 16px; color: #0866FF; }
 .fb-ph .mt { font-size: 13px; }
 .fb-tx { font-size: 16px; line-height: 1.3; padding: 8px 12px 10px; }
 .fb-tx.one { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .fb-tx .more { font-weight: 400; }
 /* link/CTA bar under media */
-.fb-link { background: var(--fb-link); padding: 0 12px; height: 54px; }
+.fb-link { background: var(--fb-link); padding: 0 12px; height: 48px; }
 .fb-link .d { text-transform: none; font-size: 13px; }
-.fb-link .t { font-size: 16px; font-weight: 600; max-width: 250px; }
-.fb-link .b { height: 34px; line-height: 34px; padding: 0 12px; border-radius: 8px; background: var(--fb-chip); font-size: 15px; font-weight: 600; }
+.fb-link .t { font-size: 15px; font-weight: 400; max-width: 250px; } .fb-link .d + .t { font-weight: 600; }
+.fb-link .b { height: 30px; line-height: 30px; padding: 0 8px; border-radius: 6px; background: var(--fb-chip); font-size: 14px; font-weight: 600; }
 /* action row with counts, no labels (2026) */
 .fb-cnt { height: 44px; display: flex; align-items: center; gap: 20px; padding: 0 12px; color: var(--fb-sub); font-size: 15px; }
 .fb-cnt span { display: flex; align-items: center; gap: 6px; }
@@ -503,10 +515,10 @@ svg.wt { filter: invert(1) brightness(.12); }
 .fb-cnt .rx { margin-left: auto; width: 20px; height: 20px; }
 .fb-ctx { display: flex; align-items: center; gap: 8px; padding: 0 12px 10px; font-size: 14px; color: var(--fb-sub); }
 .fb-ctx i { width: 20px; height: 20px; border-radius: 50%; flex: none; background: linear-gradient(135deg, #F0B37E, #C46A6A); }
-.fb-div { height: 4px; background: var(--fb-gap); }
-.fb.dark .fb-div { background: #18191A; }
+.fb-div { height: 2px; background: var(--fb-gap); } /* [V] 2pt between feed units */
+.fb.dark .fb-div { background: #101011; }
 /* iOS 26 floating glass tab bar */
-.fb-capsule { position: absolute; left: 12px; right: 12px; bottom: 16px; height: 54px; border-radius: 27px; z-index: 20; display: grid; grid-template-columns: repeat(6, 1fr); align-items: center; padding: 0 6px;
+.fb-capsule { position: absolute; left: 14px; right: 13px; bottom: 21px; height: 51px; border-radius: 26px; z-index: 20; display: grid; grid-template-columns: repeat(6, 1fr); align-items: center; padding: 0 6px;
   background: rgba(37,39,40,.82); box-shadow: inset 0 0 0 .7px rgba(255,255,255,.18), 0 6px 20px rgba(0,0,0,.35); backdrop-filter: blur(18px) saturate(1.6); -webkit-backdrop-filter: blur(18px) saturate(1.6); color: var(--fb-fg); }
 .fb:not(.dark) .fb-capsule { background: rgba(255,255,255,.82); box-shadow: inset 0 0 0 .7px rgba(0,0,0,.1), 0 6px 20px rgba(0,0,0,.15); color: #050505; }
 .fb-capsule span { height: 42px; display: flex; align-items: center; justify-content: center; position: relative; border-radius: 21px; }
@@ -519,58 +531,97 @@ svg.wt { filter: invert(1) brightness(.12); }
 .fb.dark .fb-capsule .on { color: #F2F4F7; }
 
 /* ---------- TikTok app 2026 (TH) · measured from iPhone 17 Pro captures IMG_0906/0907 [V] ---------- */
-.tt-top { gap: 16px; font-size: 16.5px; }
+.tt-top { gap: 18px; font-size: 16px; } .tt-top span:not(.on) { font-weight: 500; } /* [V] IMG_0906: "For You" 16px/700 (TikTok Sans App), centre y≈84pt; gap 18pt */
+.ios .tt-top { top: 62px; }
+.tt-top .on::after { width: 23px; margin-left: -11.5px; height: 1.7px; bottom: -11px; }
+.tt-top .se svg { width: 22px; height: 22px; }
 .tt-ad { display: inline-block; align-self: flex-start; background: rgba(255,255,255,.2); color: rgba(255,255,255,.9); font: 600 11px/16px var(--f-tiktok); padding: 0 5px; border-radius: 3px; text-shadow: none; }
 .tt-cap .nm.plain { font-weight: 600; font-size: 17px; }
 .tt-ctalink { align-self: center; display: flex; align-items: center; gap: 6px; margin-top: 6px; font: 600 15.5px var(--f-tiktok); color: rgba(255,255,255,.92); }
 .tt-ctalink svg { width: 14px; height: 14px; transform: rotate(-90deg); }
 /* product/LIVE shopping card that sits above the nav (replaces caption) */
-.tt-pcard { position: absolute; left: 8px; right: 70px; z-index: 5; display: flex; gap: 10px; padding: 8px; border-radius: 6px; background: rgba(43,40,39,.86); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
-.ios .tt-pcard { bottom: 96px; } .android .tt-pcard { bottom: 84px; }
+.tt-pcard { position: absolute; left: 10px; width: 270px; /* [V] IMG_0906: x10–280, h116, ends before the rail */ z-index: 5; display: flex; gap: 10px; padding: 8px; border-radius: 6px; background: rgba(43,40,39,.86); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+.ios .tt-pcard { bottom: 97px; } .android .tt-pcard { bottom: 84px; }
 .tt-pcard .im { width: 92px; height: 92px; border-radius: 4px; overflow: hidden; flex: none; position: relative; background: #fff; }
 .tt-pcard .im > * { width: 100%; height: 100%; object-fit: cover; }
 .tt-pcard .bd { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; font-size: 14px; }
-.tt-pcard .t { font-weight: 600; font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-right: 18px; }
+.tt-pcard .t { font-weight: 600; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-right: 18px; }
 .tt-pcard .x { position: absolute; right: 8px; top: 6px; width: 16px; height: 16px; opacity: .8; }
-.tt-pcard .fl { align-self: flex-start; background: rgba(254,44,85,.85); color: #fff; font-size: 12px; font-weight: 600; padding: 1px 6px; border-radius: 3px; }
+.tt-pcard .fl { align-self: flex-start; max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; background: rgba(254,44,85,.85); color: #fff; font-size: 12px; font-weight: 600; padding: 1px 6px; border-radius: 3px; }
 .tt-pcard .rt { color: rgba(255,255,255,.75); font-size: 12px; }
 .tt-pcard .row { display: flex; align-items: center; justify-content: space-between; margin-top: auto; }
-.tt-pcard .pr { color: #FE2C55; font-weight: 700; font-size: 17px; }
-.tt-pcard .btn { height: 30px; padding: 0 12px; border-radius: 4px; background: #FE2C55; color: #fff; font: 600 14px/30px var(--f-tiktok); }
-.tt-pcard + .tt-adtag { position: absolute; left: 12px; z-index: 5; }
-.ios .tt-adtag { bottom: 212px; } .android .tt-adtag { bottom: 200px; }
+.tt-pcard .pr { color: #FE2C55; font-weight: 600; font-size: 14.5px; }
+.tt-pcard .btn { height: 23px; padding: 0 8px; border-radius: 3px; background: #FE2C55; color: #fff; font: 500 12.5px/23px var(--f-tiktok); }
+.tt-adtag { position: absolute; left: 12px; z-index: 5; } /* "Ad" pill above the product card [V] x12.7, bottom 208pt */
+.ios .tt-adtag { bottom: 208px; } .android .tt-adtag { bottom: 196px; }
 /* brand avatar replaces the spinning disc on ads */
 .tt-disc.av2 { border: 0; width: 40px; height: 40px; background: var(--brand-primary) var(--brand-logo) center / 60% no-repeat; box-shadow: 0 0 0 1.5px rgba(255,255,255,.9); }
 .tt-disc.av2::after { display: none; }
 .tt-rail .live { box-shadow: 0 0 0 2px #000, 0 0 0 4px #FE2C55, 0 0 0 6px rgba(254,44,85,.35); }
-.tt-nav { font-size: 12px; }
+.tt-nav { font-size: 10.5px; font-weight: 600; } .tt-nav svg { width: 26px; height: 26px; } /* [V] icon ~20pt, label 10.5 */
 
-/* ---------- LINE iOS light · 2026 · measured from iPhone 17 Pro capture IMG_0910 [V] (theme-dependent) ----------
-   .line-light   = 2026 device look: grey header, blue controls, white chat, bordered white bubbles
-   .line-classic = LINE Developers doc look: blue wallpaper #8BABD7, header on wallpaper */
+/* ---------- LINE iOS light · 2026 · measured px-by-px from iPhone 17 Pro capture IMG_0910 [V] ----------
+   .line-light   = 2026 device look (Thai/EN, default light theme): grey header, blue controls, white patterned
+                   wallpaper, bordered white bubbles, slate-blue message text, rich-menu bar "Menu ▾".
+   .line-classic = LINE Developers doc look: blue wallpaper #8BABD7, header on wallpaper.
+   All sizes in pt (= CSS px at 402pt width). Fonts: system (SF Pro + Thonburi), never the brand font. */
 .line-classic { --ln-bg: #8BABD7; --ln-head: transparent; --ln-head-fg: #111; --ln-sub: #324B6B; --ln-bub: #FFFFFF; --ln-bub-fg: #111; --ln-me: #6CE67B; --ln-me-fg: #111; --ln-tm: #324B6B; --ln-date: #7892B6; --ln-bar: #FFFFFF; --ln-bar-fg: #111; --ln-qr: #fff; --ln-qr-b: #D4D6DA; background: var(--ln-bg); color: #111; }
 .line-classic .sb { background: transparent; }
-.line-light { --ln-bg: #FFFFFF; --ln-head: #EBEEF0; --ln-head-fg: #1175BD; --ln-sub: #1175BD; --ln-bub: #FFFFFF; --ln-bub-b: #DAE9F5; --ln-me: #6CE67B; --ln-tm: #9AA3AB; --ln-date: #B7D5EB; --ln-bar: #FFFFFF; --ln-bar-fg: #0F82C5; --ln-qr-b: #DAE9F5; }
+.line-light { --ln-bg: #FFFFFF; --ln-head: #EBEEF0; --ln-head-fg: #1175BD; --ln-sub: #1175BD; --ln-bub: #FFFFFF; --ln-bub-fg: #35556D; --ln-bub-b: #DAE9F5;
+  --ln-me: #6CE67B; --ln-me-fg: #111; --ln-tm: #BCD6E9; --ln-date: #B7D5EB; --ln-bar: #FFFFFF; --ln-bar-fg: #0F82C5; --ln-qr: #fff; --ln-qr-b: #DAE9F5; --ln-link: #047BFD;
+  background: #fff; color: #35556D; }
 .line-light .sb { background: var(--ln-head); color: #000; }
-.line-light .ln-head { height: 48px; }
-.line-light .ln-head .nm { color: #1175BD; font-size: 19px; font-weight: 600; }
-.line-light .ln-head .nm svg.shield { width: 18px; height: 18px; color: #06C755; }
-.line-light .ln-head .sub { color: #1175BD; font-size: 12px; margin-top: 0; }
-.line-light .ln-head .back { width: auto; padding: 0 6px 0 4px; display: flex; align-items: center; gap: 2px; font-size: 19px; color: #1175BD; }
+/* header 48pt: "‹ 99+" · shield + OA name 17/600 · subtitle 10/400 (all #1175BD) · search-clock + ☰ */
+.line-light .ln-head { height: 48px; padding: 4px 0 0; gap: 0; }
+.line-light .ln-head .back { width: auto; padding: 0 0 0 9px; display: flex; align-items: center; gap: 1px; font-size: 18px; font-weight: 500; letter-spacing: -.2px; color: #1175BD; }
+.line-light .ln-head .back svg { width: 24px; height: 24px; }
+.line-light .ln-head .ti { text-align: left; margin-left: 20px; }
+.ios .line-light .ln-head .ti { text-align: left; } .ios .line-light .ln-head .nm { justify-content: flex-start; }
+.line-light .ln-head .nm { color: #1175BD; font-size: 17px; font-weight: 600; gap: 8px; line-height: 21px; }
+.line-light .ln-head .nm svg.shield { width: 15px; height: 17px; color: #06C755; flex: none; }
+.line-light .ln-head .sub { color: #1175BD; font-size: 10px; line-height: 12px; margin-top: 1px; letter-spacing: .1px; }
+.line-light .ln-head .acts { gap: 14px; padding-right: 18px; }
 .line-light .ln-head .acts svg { width: 26px; height: 26px; color: #1175BD; }
-.line-light .ln-head + * { box-shadow: inset 0 .5px 0 #D5DADF; }
-.line-light .ln-bub { box-shadow: inset 0 0 0 1px var(--ln-bub-b); font-size: 16px; }
-.line-light .ln-bub.tail::before { background: #fff; box-shadow: none; }
-.line-light .ln-row.me .ln-bub { box-shadow: none; }
-.line-light .ln-date { font-size: 13px; padding: 4px 12px; }
-.line-light .ln-bar { color: #0F82C5; font-size: 16px; border-top: .5px solid #E3E7EA; }
-.line-light .ln-bar .kb svg { color: #3495CE; }
-.line-light .flex { box-shadow: 0 0 0 1px #DAE9F5; }
+/* chat area: white with LINE's faint character-blob wallpaper (#F5F7F8 on white) */
+.line-light .ln-msgs { background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='300' viewBox='0 0 260 300'%3E%3Cg fill='%23F5F7F8'%3E%3Cpath d='M40 30c22-14 52-8 64 14 10 18 6 42-10 54-20 15-52 12-66-8-12-18-8-46 12-60z'/%3E%3Cpath d='M182 118c18-6 40 4 46 22 6 20-6 40-26 44-22 4-40-12-40-32 0-16 8-28 20-34z'/%3E%3Cpath d='M30 190c26-6 54 10 58 36 4 24-14 46-38 48-26 2-46-20-44-44 2-20 10-36 24-40z'/%3E%3Cpath d='M150 238c14-10 34-8 44 6 8 12 4 28-8 36-14 8-32 4-40-8-6-12-4-26 4-34z'/%3E%3Cpath d='M196 18c10-4 22 2 24 12 2 12-6 20-16 20-12 0-18-10-16-20 1-6 4-10 8-12z'/%3E%3C/g%3E%3Cg fill='%23fff'%3E%3Ccircle cx='60' cy='58' r='6'/%3E%3Ccircle cx='86' cy='56' r='6'/%3E%3Ccircle cx='196' cy='146' r='5'/%3E%3Ccircle cx='214' cy='144' r='5'/%3E%3Ccircle cx='46' cy='226' r='6'/%3E%3Ccircle cx='70' cy='224' r='6'/%3E%3C/g%3E%3C/svg%3E") 0 0 / 260px 300px repeat; padding-top: 10px; }
+.line-light .ln-date { background: #B7D5EB; color: #fff; font-size: 12px; line-height: 14px; padding: 5px 10px; border-radius: 12px; margin-bottom: 9px; }
+.line-light .ln-row { padding: 0 10px 0 7px; gap: 9px; margin-bottom: 10px; }
+.line-light .ln-av { width: 32px; height: 32px; margin-top: -1px; }
+.line-light .ln-bub { background: #fff; color: #35556D; box-shadow: inset 0 0 0 .75px var(--ln-bub-b); border-radius: 15px; padding: 9px 14px 8px; font-size: 16px; line-height: 19.2px; max-width: 267px; font-family: "LINE Emoji", var(--f-ios); }
+.line-light .ln-bub a, .line-light .ln-bub .lk { color: var(--ln-link); text-decoration: underline; text-underline-offset: 2px; word-break: break-all; }
+.line-light .ln-bub.tail { border-top-left-radius: 4px; }
+.line-light .ln-bub.tail::before { left: -6.3px; top: 0; width: 12px; height: 12px; clip-path: none; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M12 .5C8 1.6 3.6 2.6.6 2.2 3.2 4 5.6 7.4 6.5 12H12Z' fill='%23fff'/%3E%3Cpath d='M12 .5C8 1.6 3.6 2.6.6 2.2 3.2 4 5.6 7.4 6.5 12' fill='none' stroke='%23DAE9F5' stroke-width='.9'/%3E%3C/svg%3E") 0 0 / 12px 12px no-repeat; }
+.line-light .ln-row.me .ln-bub { box-shadow: none; background: var(--ln-me); color: #111; border-top-left-radius: 15px; border-top-right-radius: 4px; }
+.line-light .ln-row.me .ln-bub.tail::before { background: none; clip-path: path("M12 0 C 8 3, 4 4, 0 2 C 3 5, 5 9, 6 12 Z"); background-color: var(--ln-me); left: auto; right: -5px; }
+.line-light .ln-tm { color: #BCD6E9; font-size: 11px; }
+.line-light .ln-row.me .ln-tm { color: #9FB3C4; }
+/* quoted reply inside a bubble (OA "reply" style): blue bar + bold name + grey text */
+.ln-quote { border-left: 2px solid #4191CA; padding: 0 0 0 9px; margin-top: 10px; line-height: 17px; }
+.ln-quote b { display: block; font-weight: 600; color: #35556D; }
+.ln-quote span { color: #8B949B; font-size: 14px; line-height: 15.6px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+/* rich message / imagemap (1040px base, any ratio, usually 1:1): edge-to-edge, no avatar, no radius, no bubble */
+.ln-imap { position: relative; width: 100%; margin: 4px 0 10px; }
+.ln-imap > img { display: block; width: 100%; height: auto; aspect-ratio: var(--r, 1); object-fit: cover; }
+.ln-imap .ln-tm { position: absolute; right: 9px; bottom: -15px; }
+/* "jump to latest" button (shows when scrolled up) */
+.ln-down { position: absolute; right: 8px; width: 36px; height: 36px; border-radius: 8px; background: #D2E5F3; color: #35556D; display: flex; align-items: center; justify-content: center; box-shadow: 0 1px 3px rgba(0,0,0,.12); z-index: 3; }
+.ln-down svg { width: 22px; height: 22px; }
+.line-light .ln-msgs { position: relative; }
+/* rich-menu bar (collapsed): 50pt, keyboard icon left, bold "Menu ▾" (chatBarText ≤14 chars) */
+.line-light .ln-bar { height: 50px; color: #0F82C5; font-size: 16px; font-weight: 700; border-top: 0; gap: 6px; padding-left: 44px; }
+.line-light .ln-bar .kb { left: 15px; top: 13px; }
+.line-light .ln-bar .kb svg { width: 24px; height: 24px; color: #0F82C5; }
+.ln-bar .tri { width: 0; height: 0; border-left: 3.6px solid transparent; border-right: 3.6px solid transparent; border-top: 5px solid currentColor; margin-top: 0; }
+.ln-bar .tri.up { border-top: 0; border-bottom: 5px solid currentColor; }
+.line-light .flex { box-shadow: 0 0 0 .75px #DAE9F5; }
+.line-light .flex .fx-t1, .line-light .flex .fx-kv b { color: #111; }
 .line-light .sysnav { background: #fff; }
+.line-light .ln-input { background: #fff; }
+
 /* FB desktop measured (references/screens/facebook/SPEC.md): card 500, radius 8, shadow 0 1px 2px rgba(0,0,0,.2) [V] */
 .fbd-feed .fb-post { border-radius: 8px; }
 .fbd-feed .fb-ph .nm { font-size: 15px; } .fbd-feed .fb-ph .mt { font-size: 13px; }
 .fbd-body { grid-template-columns: 340px 1fr 340px; }
 .fbd-side { overflow: hidden; }
 /* narrow Android screens: the 2026 tab row compresses */
-.android .tt-top { gap: 11px; font-size: 15px; } .android .tt-top .lv { left: 10px; } .android .tt-top .se { right: 10px; }
+.android .tt-top { gap: 14px; font-size: 15px; } .android .tt-top .lv { left: 10px; } .android .tt-top .se { right: 10px; }

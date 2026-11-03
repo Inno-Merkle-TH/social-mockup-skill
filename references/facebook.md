@@ -8,7 +8,7 @@
 | Feed (iOS) | same but `.fb-tabbar` at the bottom (above `.sysnav`) | **tab bar at the bottom** on iOS, with labels |
 | Post header | `.fb-ph` → `.av` `.nm` `.mt` ("Sponsored · 🌐") `.ac` (… ✕) | ads always show "Sponsored"/"ได้รับการสนับสนุน" |
 | Primary text | `.fb-tx` (+ `.more` "See more") | |
-| Single image/video | `.fb-media` (1:1 = 360 px tall on Android, 4:5 = 450 px) + `.fb-link` | |
+| Single image/video | `.fb-media` (default **4:5**; `.r11` 1:1, `.r191` link ad) + `.fb-link` | never a fixed height |
 | Carousel | `.fb-car > .fb-cc` | show 1.3 cards |
 | Reactions/actions | `.fb-rx` + `.fb-act` | |
 | Stories / Reels ad | `.screen.dark` → `.fb-full` + `.fb-prog` `.fb-who` `.fb-swipe` | 9:16 |

@@ -17,6 +17,7 @@ Each of these came from a real client round. They are the difference between "ni
 0. **Real photos, real ad craft.** Ad creative = a real photo + small brand mark (+ maybe a price/offer tag). Not big headline text on a gradient. TikTok frames look like video stills, with text in TikTok's native sticker style (`.tt-sticker`). Find photos online if the user didn't provide them (`references/image-sourcing.md`).
 8. **Legible at phone size.** Body text ≥13 px CSS, product thumbnails ≥60 px, no logos smaller than the OA avatar. Open every PNG at 100%.
 9. **High-res assets.** Use images ≥2× their displayed size (≥3× for heroes). Upscaled or JPEG-crunched product shots read as fake immediately.
-10. **Brand CI correct.** Brand font (licensed) for brand content, correct logo lockup, CTA shape from the brand's own site.
+10. **Brand CI correct, but only where the brand controls it.** Use the brand font (licensed) only *inside images*: the creative, rich-menu art, rich-message art, video text. Text the app draws itself (bubbles, Flex, post copy, CTA buttons, captions) is always the platform font. Flex buttons are always radius 8 and never outlined. Use the correct logo lockup. See `typography-and-ratios.md`.
+13. **Right ratios.** FB feed is 4:5, carousel 1:1, Stories/Reels/TikTok 9:16, LINE rich message 1:1 edge to edge, Flex hero 20:13. Never give media boxes a fixed px height.
 11. **Copy fits the platform.** FB primary text hook in first 125 chars; TikTok caption 1–2 lines; LINE bubble ≤3 lines; Flex title ≤2 lines.
 12. **Captures are deliverables.** Transparent background, consistent scale (3× phones), no stray labels, no placeholder stripes left unless agreed.

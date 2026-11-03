@@ -2,6 +2,8 @@
 
 Automatic (export.cjs prints these, details in `captures/qa.json`):
 - [ ] 0 failed requests (fonts, images, sprite)
+- [ ] App-drawn text is in the platform font (no brand font in bubbles, Flex, post copy or CTAs); Flex buttons radius 8, filled or link
+- [ ] Media ratios: FB feed 4:5 / carousel 1:1 / Stories 9:16, LINE rich message 1:1 full-width, Flex hero 20:13
 - [ ] 0 broken images
 - [ ] 0 `placeholder` issues, or each one is listed as open in notes.md
 - [ ] 0 `overflow-x` / `tiny-img` issues

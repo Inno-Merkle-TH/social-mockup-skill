@@ -4,6 +4,7 @@
 |---|---|---|
 | assets/fonts/Inter-* | Google Fonts (rsms/inter) | SIL Open Font License 1.1 |
 | assets/fonts/NotoSansThai-* | Google Fonts (Noto) | SIL Open Font License 1.1 |
+| assets/fonts/NotoSansThaiLooped-* | Google Fonts (Noto) | SIL Open Font License 1.1 |
 | assets/fonts/Roboto-* | Google Fonts | SIL Open Font License 1.1 (Roboto ≥3.0) |
 | assets/fonts/TikTokSans-* | Google Fonts / github.com/tiktok/TikTokSans | SIL Open Font License 1.1 |
 | assets/icons.svg | drawn for this kit (UI glyph approximations) | internal use |
