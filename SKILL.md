@@ -14,7 +14,7 @@ Swapping brands = swapping `brand.css` + images + copy. That is what makes resul
 
 ## Workflow
 
-1. **Intake (ask, don't guess).** Read `references/intake.md` and ask the questions in rounds with AskUserQuestion. Only skip a question if the user already answered it or a sensible default is listed. Never invent offers, prices, dates, loyalty programs or product claims. Ask, or mark them as placeholders.
+1. **Intake (ask, don't guess).** Read `references/intake.md` and ask the questions in rounds with AskUserQuestion. For every LINE chat screen, always ask whether the rich menu is open (open / collapsed / none) and whether to show only the new message or the previous messages too. Only skip a question if the user already answered it or a sensible default is listed. Never invent offers, prices, dates, loyalty programs or product claims. Ask, or mark them as placeholders.
 2. **Scaffold.** `bash scripts/new_project.sh <path/to/project-name>` → copies the kit, a starter `index.html`, `brand.css` and `notes.md`.
 3. **Brand + images.** Fill `brand.css` from the intake. Put licensed fonts in `brand/fonts/` and the logo (one-colour mark for avatars) in `brand/`.
    Every image slot gets a **real photo**. CSS gradients or placeholder text in place of photography is what makes a mockup look fake. Follow `references/image-sourcing.md`:

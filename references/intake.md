@@ -8,7 +8,7 @@ Ask in rounds with AskUserQuestion (max 4 questions per call, multiple-choice wi
 |---|---|---|
 | 1 | Which platforms? (multi-select) | LINE · Facebook · TikTok |
 | 2 | Which devices? (multi-select) | Android (Galaxy, default for TH market) · iOS (iPhone) · Desktop |
-| 3 | Which surfaces? (multi-select, depends on 1) | LINE: OA chat · Flex message · rich menu · push/lock screen. FB: feed single image · carousel · video · Stories/Reels. TikTok: in-feed ad · Spark Ad (creator) · organic post · desktop web |
+| 3 | Which surfaces? (multi-select, depends on 1). For any LINE chat, also ask Round 3a (rich menu open? previous messages?) | LINE: OA chat · Flex message · rich menu · push/lock screen. FB: feed single image · carousel · video · Stories/Reels. TikTok: in-feed ad · Spark Ad (creator) · organic post · desktop web |
 | 4 | How many screens and in what order? Is it a journey (CRM stages / campaign phases) or standalone ads? | free text; offer "I'll propose a storyboard" |
 
 ## Round 2: Brand
@@ -28,6 +28,15 @@ Ask in rounds with AskUserQuestion (max 4 questions per call, multiple-choice wi
 | 10 | Offer details: product, price, discount, dates, conditions, legal line | never invent. Unknown → placeholder in notes.md |
 | 11 | Campaign timeline (teaser / launch / pre-order / on-sale / sustain dates) | all screens must agree. Check weekdays |
 | 12 | Persona(s): name, segment, what they own/did (for personalised CRM screens) | default: plausible local first name, no real people |
+
+## Round 3a: LINE chat screen state (ask for EVERY LINE chat mockup)
+
+| # | Question | Options / default | Kit |
+|---|---|---|---|
+| L1 | **Rich menu: open or not?** | **Open** (menu shown under the chat; most OAs set "Shown") · Collapsed (bar only: "⌨ Menu ▾") · No rich menu (normal input bar "+ 📷 🖼 Aa") | open: `.rm` + `.ln-bar` with `.tri.up` · collapsed: `.ln-bar` with `.tri` · none: `.ln-input` (+ `.ln-qrs` quick replies if any) |
+| L2 | **Only the new message(s), or with previous messages too?** | **With previous messages** (realistic: older broadcasts/Flex scroll under the header, newest at the bottom) · Only the new message(s) (fresh chat: "Today" + message at the top, rest of the screen empty wallpaper) | with history: `.ln-msgs.bottom` + 1–3 older messages above "Today" (a past broadcast, Flex or rich message) · fresh: `.ln-msgs` (top-anchored) |
+
+If L1 = open and L2 = previous messages, the visible chat area is small (~250 pt on iPhone with a large menu). Keep the new message short, or suggest a compact menu (Round 3b) so the message isn't hidden. Write both answers in notes.md → Brief.
 
 ## Round 3b: LINE rich menu (only if "rich menu" was picked in Q3)
 
@@ -83,4 +92,4 @@ tabbed (API)                custom (API, any ≤20 areas)
 
 ## Defaults when the user says "just go"
 
-Android Galaxy frame, LINE dark mode, rich menu Large L6 shown with label "Menu", FB light, TikTok dark; Thai copy; kit OFL fonts; **real photos found online for every image slot** (placeholders only for offers/prices); one storyboard screen per stage in the brief; overview board on.
+Android Galaxy frame, LINE dark mode, rich menu Large L6 shown with label "Menu", LINE chats with previous messages (bottom-anchored), FB light, TikTok dark; Thai copy; kit OFL fonts; **real photos found online for every image slot** (placeholders only for offers/prices); one storyboard screen per stage in the brief; overview board on.

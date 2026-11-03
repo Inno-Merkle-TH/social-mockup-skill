@@ -19,7 +19,9 @@
 - **Rich menu image**: 2500×1686 (large) or 2500×843 (compact); also 1200×810/1200×405/800×540/800×270. JPEG/PNG, ≤1 MB. Up to 20 tap areas. Chat-bar label ≤14 characters ("เมนู", "Menu", "แตะเพื่อดูเมนู").
 - **Flex**: bubble width depends on device and size keyword (nano → giga). Carousel ≤12 bubbles. altText ≤1,500 chars and is what shows in the push and chat list, so write it.
 - **Message order**: an OA push usually = 1 short text + 1 Flex (or image). More than 3 bubbles per push looks spammy.
-- **Chat start**: a new conversation is top-anchored (date chip "Today/วันนี้" then messages). Only long threads fill from the bottom.
+- **Chat state (always ask, intake Round 3a)**:
+  - **Rich menu:** open (`.rm` + bar `.tri.up`), collapsed (bar `.tri`) or none (`.ln-input`).
+  - **Thread:** with history, the thread is bottom-anchored (`.ln-msgs.bottom`, older messages scroll under the header; fill with real past content, never a sliver of empty card). A fresh chat is top-anchored (`.ln-msgs`: "Today" + message at the top, wallpaper below).
 - **Timestamps**: right of the last bubble in a group (left for user's own). Use "Read" (อ่านแล้ว) on user bubbles.
 
 ## Themes (verified)
