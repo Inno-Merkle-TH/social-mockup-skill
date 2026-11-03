@@ -86,6 +86,21 @@
     document.querySelectorAll(".sb").forEach(fillStatus);
     document.querySelectorAll(".sysnav").forEach(fillNav);
     document.querySelectorAll(".dev.ios .screen, .dev.android .screen").forEach(s => { if (!s.parentElement.querySelector(".cam")) { const c = document.createElement("div"); c.className = "cam"; s.parentElement.appendChild(c); } });
+    // rich menu: custom areas (data-area in 2500-px image space) + area letters; ?areas=1 shows tap areas
+    document.querySelectorAll(".rm-art").forEach(r => {
+      const H = getComputedStyle(r).aspectRatio.includes("843") || /\bC[123]|compact\b/.test(r.className) ? 843 : 1686;
+      let n = 0;
+      r.querySelectorAll(":scope > .rm-t, :scope > [data-area]").forEach(el => { el.dataset.l = String.fromCharCode(65 + n++);
+        if (el.dataset.area) { const [x, y, w, h] = el.dataset.area.split(",").map(Number);
+          Object.assign(el.style, { left: x / 25 + "%", top: y / H * 100 + "%", width: w / 25 + "%", height: h / H * 100 + "%" }); } });
+      if (n > 20) (window.__kitIssues = window.__kitIssues || []).push({ type: "richmenu-areas", msg: "rich menu has " + n + " areas (max 20)" });
+      if (q.get("areas")) r.classList.add("show-areas");
+    });
+    // hardware side buttons at their real positions (mm from body top → px from screen top)
+    const HW = { ios: [["l", 141, 42], ["l", 220, 78], ["l", 322, 79], ["r", 232, 114], ["r cc", 516, 96]],   // action, vol+, vol−, side, camera control
+                 android: [["r", 214, 118], ["r", 364, 65]] };                                              // volume rocker, side key
+    document.querySelectorAll(".dev.ios, .dev.android").forEach(d => { if (d.querySelector(":scope > .hw")) return;
+      (HW[d.classList.contains("ios") ? "ios" : "android"]).forEach(([c, y, h]) => { const i = document.createElement("i"); i.className = "hw " + c; i.style.top = y + "px"; i.style.height = h + "px"; d.appendChild(i); }); });
     ready();
   });
 })();

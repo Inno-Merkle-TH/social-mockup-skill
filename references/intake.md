@@ -29,6 +29,49 @@ Ask in rounds with AskUserQuestion (max 4 questions per call, multiple-choice wi
 | 11 | Campaign timeline (teaser / launch / pre-order / on-sale / sustain dates) | all screens must agree. Check weekdays |
 | 12 | Persona(s): name, segment, what they own/did (for personalised CRM screens) | default: plausible local first name, no real people |
 
+## Round 3b: LINE rich menu (only if "rich menu" was picked in Q3)
+
+Ask these with AskUserQuestion. Use the **ASCII previews** below as option `preview`s so the user can see the layouts side by side, and/or show them `templates/captures/*-line-richmenu-templates.png`.
+
+| # | Question | Options / default |
+|---|---|---|
+| R1 | Size? | **Large 2500×1686** (default, half the chat) · Compact 2500×843 (keeps more chat visible) |
+| R2 | Layout? (show the previews) | Large: **L6** 3×2 (default) · L4 2×2 · L4b wide top + 3 · L3 big left + 2 · L2r 2 rows · L2c 2 columns · L1 full. Compact: **C3** 3 columns (default) · C2 halves · C2l ⅔+⅓ · C2r ⅓+⅔ · C1 full. Advanced (Messaging API, the client's dev team must build it): **custom** areas (≤20) · **tabbed** (tab strip, one menu per tab) |
+| R3 | What goes in each area (A, B, C…)? Label + action (link / coupon / text / reward card / switch tab) | default: propose from the brief (order, coupons, stamps, store finder, help) and confirm |
+| R4 | Look? | **Photo + type** (default, most realistic) · icons + labels on brand colour · mixed (photo hero + icon tiles) |
+| R5 | Chat-bar label + default state | label **"Menu"/"เมนู"** (default) or custom ≤14 chars · default **Shown** (menu open) or Collapsed (bar only) |
+
+Rules to remember: OA Manager allows **only** the 12 templates (no 5-area option; ≤6 areas). Custom and tabbed menus need the Messaging API (say so in notes.md). Rich menus never show on LINE for PC/Mac. Area action labels are ≤20 chars (accessibility only, not displayed).
+
+ASCII previews (copy into AskUserQuestion `preview`):
+
+```
+L6  3×2            L4  2×2            L4b wide top + 3   L3  big left + 2
+┌───┬───┬───┐      ┌─────┬─────┐      ┌───────────┐      ┌───────┬───┐
+│ A │ B │ C │      │  A  │  B  │      │     A     │      │       │ B │
+├───┼───┼───┤      ├─────┼─────┤      ├───┬───┬───┤      │   A   ├───┤
+│ D │ E │ F │      │  C  │  D  │      │ B │ C │ D │      │       │ C │
+└───┴───┴───┘      └─────┴─────┘      └───┴───┴───┘      └───────┴───┘
+L2r 2 rows         L2c 2 columns      L1  full
+┌───────────┐      ┌─────┬─────┐      ┌───────────┐
+│     A     │      │     │     │      │           │
+├───────────┤      │  A  │  B  │      │     A     │
+│     B     │      │     │     │      │           │
+└───────────┘      └─────┴─────┘      └───────────┘
+C3  3 columns      C2  halves         C2l ⅔ + ⅓          C2r ⅓ + ⅔          C1  full
+┌───┬───┬───┐      ┌─────┬─────┐      ┌───────┬───┐      ┌───┬───────┐      ┌───────────┐
+│ A │ B │ C │      │  A  │  B  │      │   A   │ B │      │ A │   B   │      │     A     │
+└───┴───┴───┘      └─────┴─────┘      └───────┴───┘      └───┴───────┘      └───────────┘
+tabbed (API)                custom (API, any ≤20 areas)
+┌─────┬─────┬─────┐         ┌───────┬───┐
+│Menu▔│Rewds│Store│         │       │ B │
+├───┬─┴─┬───┴─────┤         │   A   ├───┤
+│ A │ B │ C │               │       │ C │
+├───┼───┼───┤               │       ├───┤
+│ D │ E │ F │               │       │ D │
+└───┴───┴───┘               └───────┴───┘
+```
+
 ## Round 4: Output
 
 | # | Question | Default |
@@ -40,4 +83,4 @@ Ask in rounds with AskUserQuestion (max 4 questions per call, multiple-choice wi
 
 ## Defaults when the user says "just go"
 
-Android Galaxy frame, LINE dark mode, FB light, TikTok dark; Thai copy; kit OFL fonts; **real photos found online for every image slot** (placeholders only for offers/prices); one storyboard screen per stage in the brief; overview board on.
+Android Galaxy frame, LINE dark mode, rich menu Large L6 shown with label "Menu", FB light, TikTok dark; Thai copy; kit OFL fonts; **real photos found online for every image slot** (placeholders only for offers/prices); one storyboard screen per stage in the brief; overview board on.

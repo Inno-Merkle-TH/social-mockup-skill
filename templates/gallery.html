@@ -27,6 +27,14 @@
   .story-hl { position: absolute; left: 22px; right: 22px; bottom: 150px; color: #fff; font: 700 34px/1.08 var(--brand-head); letter-spacing: -.5px; text-shadow: 0 2px 12px rgba(0,0,0,.45); }
   .fb-peek-img > img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .fb-peek-img::after { display: none; }
+  /* rich menu template sheet */
+  .rmboard { background: #fff; padding: 22px 24px 8px; width: 1180px; font-family: var(--f-desktop); --brand-surface: #F2F4F7; }
+  .rmb-h { font: 700 13px/1 var(--f-desktop); letter-spacing: 1.2px; text-transform: uppercase; color: #6B7280; margin: 6px 0 12px; }
+  .rmb-g { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px 22px; margin-bottom: 22px; }
+  .rmb .rm-art { border-radius: 4px; box-shadow: 0 0 0 1px #DADDE1; }
+  .rmb .rm-art .rm-t { font: 700 18px var(--f-desktop); color: #9AA3AE; }
+  .rmb-n { font: 400 13px/1.3 var(--f-desktop); margin-top: 8px; color: #111; } .rmb-n b { font-weight: 700; margin-right: 4px; }
+  .rmb-d { font: 400 12px/1.3 var(--f-desktop); color: #6B7280; }
   /* TikTok native text sticker (classic style: white text on black rounded box / plain with shadow) */
   .tt-sticker { position: absolute; left: 50%; transform: translateX(-50%); z-index: 2; text-align: center; white-space: nowrap; font: 700 19px/1.35 var(--f-tiktok); color: #fff; background: rgba(0,0,0,.78); padding: 4px 10px; border-radius: 6px; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
   .tt-sticker.plain { background: none; text-shadow: 0 0 3px rgba(0,0,0,.9), 0 1px 2px rgba(0,0,0,.8); font-size: 21px; }
@@ -101,7 +109,7 @@
         <div class="ln-date">Today</div>
         <div class="ln-row"><div class="ln-av"></div><div class="ln-col"><div class="ln-line"><div class="ln-bub tail">Hi! Tap the menu below to order ahead, check your stamps or find a store.</div><div class="ln-tm">12:28</div></div></div></div>
       </div>
-      <div class="rm"><div class="rm-art g6">
+      <div class="rm"><div class="rm-art L6">
         <div class="rm-t hl"><svg viewBox="0 0 24 24"><use href="#i-cart"/></svg>Order ahead<small>skip the queue</small><span class="rm-pill">NEW</span></div>
         <div class="rm-t"><svg viewBox="0 0 24 24"><use href="#i-gift"/></svg>My stamps<small>7 / 10</small></div>
         <div class="rm-t"><svg viewBox="0 0 24 24"><use href="#i-tag"/></svg>Coupons</div>
@@ -109,6 +117,75 @@
         <div class="rm-t"><svg viewBox="0 0 24 24"><use href="#i-tips"/></svg>Menu</div>
         <div class="rm-t"><svg viewBox="0 0 24 24"><use href="#i-help"/></svg>Help</div>
       </div></div>
+      <div class="ln-bar"><span class="kb"><svg class="i"><use href="#kbd"/></svg></span>Menu <i class="tri up"></i></div>
+      <div class="sysnav"></div>
+    </div></div></div>
+  </figure>
+
+  <!-- ============ LINE · rich menu template sheet (for intake + review) ============ -->
+  <figure class="shot wide" data-shot="line-richmenu-templates">
+    <figcaption class="label"><div class="k">LINE · rich menu</div><div class="h">All 12 OA Manager templates + API options</div><div class="d">Pick by code in the intake (L6, C2l …). Large = 2500×1686, compact = 2500×843. Letters = tap areas as OA Manager names them.</div></figcaption>
+    <div class="frame"><div class="rmboard">
+      <div class="rmb-h">Large · 2500 × 1686</div><div class="rmb-g"><div class="rmb"><div class="rm-art L6 show-areas"><div class="rm-t">A</div><div class="rm-t">B</div><div class="rm-t">C</div><div class="rm-t">D</div><div class="rm-t">E</div><div class="rm-t">F</div></div><div class="rmb-n"><b>L6</b> 3 × 2</div><div class="rmb-d">6 equal areas</div></div><div class="rmb"><div class="rm-art L4 show-areas"><div class="rm-t">A</div><div class="rm-t">B</div><div class="rm-t">C</div><div class="rm-t">D</div></div><div class="rmb-n"><b>L4</b> 2 × 2</div><div class="rmb-d">4 equal areas</div></div><div class="rmb"><div class="rm-art L4b show-areas"><div class="rm-t">A</div><div class="rm-t">B</div><div class="rm-t">C</div><div class="rm-t">D</div></div><div class="rmb-n"><b>L4b</b> Wide top + 3</div><div class="rmb-d">banner + 3 shortcuts</div></div><div class="rmb"><div class="rm-art L3 show-areas"><div class="rm-t">A</div><div class="rm-t">B</div><div class="rm-t">C</div></div><div class="rmb-n"><b>L3</b> Big left + 2</div><div class="rmb-d">hero ⅔ + 2 stacked</div></div><div class="rmb"><div class="rm-art L2r show-areas"><div class="rm-t">A</div><div class="rm-t">B</div></div><div class="rmb-n"><b>L2r</b> 2 rows</div><div class="rmb-d">stacked halves</div></div><div class="rmb"><div class="rm-art L2c show-areas"><div class="rm-t">A</div><div class="rm-t">B</div></div><div class="rmb-n"><b>L2c</b> 2 columns</div><div class="rmb-d">side-by-side halves</div></div><div class="rmb"><div class="rm-art L1 show-areas"><div class="rm-t">A</div></div><div class="rmb-n"><b>L1</b> Full</div><div class="rmb-d">one tap area</div></div></div>
+      <div class="rmb-h">Compact · 2500 × 843</div><div class="rmb-g"><div class="rmb"><div class="rm-art C3 show-areas"><div class="rm-t">A</div><div class="rm-t">B</div><div class="rm-t">C</div></div><div class="rmb-n"><b>C3</b> 3 columns</div><div class="rmb-d">compact</div></div><div class="rmb"><div class="rm-art C2 show-areas"><div class="rm-t">A</div><div class="rm-t">B</div></div><div class="rmb-n"><b>C2</b> 2 halves</div><div class="rmb-d">compact</div></div><div class="rmb"><div class="rm-art C2l show-areas"><div class="rm-t">A</div><div class="rm-t">B</div></div><div class="rmb-n"><b>C2l</b> ⅔ + ⅓</div><div class="rmb-d">compact</div></div><div class="rmb"><div class="rm-art C2r show-areas"><div class="rm-t">A</div><div class="rm-t">B</div></div><div class="rmb-n"><b>C2r</b> ⅓ + ⅔</div><div class="rmb-d">compact</div></div><div class="rmb"><div class="rm-art C1 show-areas"><div class="rm-t">A</div></div><div class="rmb-n"><b>C1</b> Full</div><div class="rmb-d">compact</div></div></div>
+      <div class="rmb-h">Messaging API only</div><div class="rmb-g">
+        <div class="rmb"><div class="rm-art custom show-areas"><div class="rm-t" data-area="0,0,1666,1686">A</div><div class="rm-t" data-area="1666,0,834,562">B</div><div class="rm-t" data-area="1666,562,834,562">C</div><div class="rm-t" data-area="1666,1124,834,562">D</div></div><div class="rmb-n"><b>custom</b> any areas</div><div class="rmb-d">up to 20, data-area="x,y,w,h"</div></div>
+        <div class="rmb"><div class="rm-art L6 tabbed show-areas"><div class="rm-tabs"><span class="on">Menu</span><span>Rewards</span></div><div class="rm-t">A</div><div class="rm-t">B</div><div class="rm-t">C</div><div class="rm-t">D</div><div class="rm-t">E</div><div class="rm-t">F</div></div><div class="rmb-n"><b>tabbed</b> tab-style</div><div class="rmb-d">tab strip in the image, one menu per tab</div></div>
+      </div>
+    </div></div>
+  </figure>
+
+  <!-- ============ LINE · iOS · rich menu open (large L4b, photo) ============ -->
+  <figure class="shot" data-shot="line-ios-richmenu-large">
+    <figcaption class="label"><div class="k">LINE · iOS · light</div><div class="h">Rich menu open · large L4b (wide top + 3)</div><div class="d">Default behaviour "Shown". Photo banner + 3 shortcuts, designed as one 2500×1686 image.</div></figcaption>
+    <div class="frame"><div class="dev ios"><div class="screen line-light">
+      <div class="sb" data-time="12:30"></div>
+      <div class="ln-head"><span class="back"><svg class="i"><use href="#back"/></svg>3</span>
+        <div class="ti"><div class="nm"><svg class="shield" viewBox="2.5 1 19 22"><use href="#shield"/></svg>Morrow Coffee</div><div class="sub">Automated responses</div></div>
+        <div class="acts"><svg class="i"><use href="#searchclock"/></svg><svg class="i"><use href="#burger"/></svg></div></div>
+      <div class="ln-msgs bottom">
+        <div class="ln-imap"><img src="stock/story-latte.jpg" alt="" style="--r:1;object-position:50% 40%"><span class="ad-logo lg" style="top:14px;right:14px"></span><span class="ad-tag" style="left:14px;bottom:14px;font-size:13px;padding:8px 12px">WEEKEND · 2 FOR 1</span><div class="ln-tm" style="bottom:-15px">Yesterday 11:00</div></div><div style="height:20px"></div><div class="ln-date">Today</div>
+        <div class="ln-row"><div class="ln-av"></div><div class="ln-col"><div class="ln-line"><div class="ln-bub tail">Hi! Tap the menu below to order ahead, collect stamps or find your nearest store ☕</div><div class="ln-tm">12:28</div></div></div></div>
+      </div>
+      <div class="rm"><div class="rm-art L4b"><div class="rm-t ph"><img src="stock/flex-mocha.jpg" alt=""><b>Autumn menu is here</b><span>Maple Cold Brew · Chestnut Mocha</span></div><div class="rm-t hl"><svg viewBox="0 0 24 24"><use href="#i-cart"/></svg>Order ahead<small>skip the queue</small></div><div class="rm-t"><svg viewBox="0 0 24 24"><use href="#i-gift"/></svg>My stamps<small>7 / 10</small></div><div class="rm-t"><svg viewBox="0 0 24 24"><use href="#i-store"/></svg>Find a store</div></div></div>
+      <div class="ln-bar"><span class="kb"><svg class="i"><use href="#kbd"/></svg></span>Menu <i class="tri up"></i></div>
+      <div class="sysnav"></div>
+    </div></div></div>
+  </figure>
+
+  <!-- ============ LINE · iOS · rich menu compact (C2l) ============ -->
+  <figure class="shot" data-shot="line-ios-richmenu-compact">
+    <figcaption class="label"><div class="k">LINE · iOS · light</div><div class="h">Rich menu open · compact C2l (⅔ + ⅓), custom bar label</div><div class="d">Compact = 2500×843. Bar label is custom text (≤14 chars).</div></figcaption>
+    <div class="frame"><div class="dev ios"><div class="screen line-light">
+      <div class="sb" data-time="17:45"></div>
+      <div class="ln-head"><span class="back"><svg class="i"><use href="#back"/></svg>3</span>
+        <div class="ti"><div class="nm"><svg class="shield" viewBox="2.5 1 19 22"><use href="#shield"/></svg>Morrow Coffee</div><div class="sub">Automated responses</div></div>
+        <div class="acts"><svg class="i"><use href="#searchclock"/></svg><svg class="i"><use href="#burger"/></svg></div></div>
+      <div class="ln-msgs bottom">
+        <div class="ln-row"><div class="ln-av"></div><div class="ln-line"><div class="flex kilo"><div class="fx-hero" style="aspect-ratio:20/13"><img src="stock/card-mocha.jpg" alt=""></div><div class="fx-bd"><div class="fx-t1">Chestnut Mocha</div><div class="fx-t2">฿110 · new this week</div></div><div class="fx-ft" style="gap:0"><div class="cta link">Order ahead</div></div></div><div class="ln-tm">Yesterday</div></div></div><div class="ln-date">Today</div>
+        <div class="ln-row"><div class="ln-av"></div><div class="ln-col"><div class="ln-line"><div class="ln-bub tail">Your Maple Cold Brew is ready for pickup at Morrow Siam 🍁<br>Show this chat at the counter.</div><div class="ln-tm">17:41</div></div></div></div>
+        <div class="ln-row me"><div class="ln-line"><div class="ln-bub tail">On my way, thanks!</div><div class="ln-tm">Read<br>17:42</div></div></div>
+        <div class="ln-row"><div class="ln-av"></div><div class="ln-col"><div class="ln-line"><div class="ln-bub tail">See you soon! Earn 1 stamp with every pickup ⭐</div><div class="ln-tm">17:42</div></div></div></div>
+      </div>
+      <div class="rm"><div class="rm-art C2l"><div class="rm-t ph"><img src="stock/card-iced.jpg" alt=""><b>Order ahead</b><span>pick up in 5 min</span></div><div class="rm-t hl"><svg viewBox="0 0 24 24"><use href="#i-gift"/></svg>My stamps<small>7 / 10</small></div></div></div>
+      <div class="ln-bar"><span class="kb"><svg class="i"><use href="#kbd"/></svg></span>Order &amp; stamps <i class="tri up"></i></div>
+      <div class="sysnav"></div>
+    </div></div></div>
+  </figure>
+
+  <!-- ============ LINE · Android · tab-style rich menu ============ -->
+  <figure class="shot" data-shot="line-android-richmenu-tabs">
+    <figcaption class="label"><div class="k">LINE · Android · dark</div><div class="h">Tab-style rich menu (Messaging API)</div><div class="d">The tab strip is drawn into each menu image; tapping a tab switches to another rich menu (richmenuswitch).</div></figcaption>
+    <div class="frame"><div class="dev android"><div class="screen line-dark">
+      <div class="sb" data-time="12:30" data-bat="64"></div>
+      <div class="ln-head"><span class="back"><svg class="i"><use href="#back"/></svg></span>
+        <div class="ti"><div class="nm">Morrow Coffee <svg width="14" height="14"><use href="#minibadge"/></svg></div></div>
+        <div class="acts"><svg class="i"><use href="#searchclock"/></svg><svg class="i"><use href="#burger"/></svg></div></div>
+      <div class="ln-msgs bottom">
+        <div class="ln-row"><div class="ln-av"></div><div class="ln-col"><div class="ln-line"><div class="ln-bub tail">New: Rewards tab 🎉 Collect 10 stamps for a free drink.</div><div class="ln-tm">Yesterday</div></div></div></div><div class="ln-row"><div class="ln-av"></div><div class="ln-line"><div class="flex kilo"><div class="fx-hero" style="aspect-ratio:20/13"><img src="stock/card-mocha.jpg" alt=""></div><div class="fx-bd"><div class="fx-t1">Chestnut Mocha</div><div class="fx-t2">฿110 · new this week</div></div><div class="fx-ft" style="gap:0"><div class="cta link">Order ahead</div></div></div><div class="ln-tm">Yesterday</div></div></div><div class="ln-date">Today</div>
+        <div class="ln-row"><div class="ln-av"></div><div class="ln-col"><div class="ln-line"><div class="ln-bub tail">Switch tabs in the menu to see your rewards 🎁</div><div class="ln-tm">12:28</div></div></div></div>
+      </div>
+      <div class="rm"><div class="rm-art L6 tabbed"><div class="rm-tabs"><span class="on">Menu</span><span>Rewards</span><span>Stores</span></div><div class="rm-t hl"><svg viewBox="0 0 24 24"><use href="#i-cart"/></svg>Order ahead<small>skip the queue</small></div><div class="rm-t"><svg viewBox="0 0 24 24"><use href="#i-tag"/></svg>Coupons</div><div class="rm-t ph"><img src="stock/thumb-frappe.jpg" alt=""><span>New drinks</span></div><div class="rm-t"><svg viewBox="0 0 24 24"><use href="#i-store"/></svg>Find a store</div><div class="rm-t"><svg viewBox="0 0 24 24"><use href="#i-tips"/></svg>Menu</div><div class="rm-t"><svg viewBox="0 0 24 24"><use href="#i-help"/></svg>Help</div></div></div>
       <div class="ln-bar"><span class="kb"><svg class="i"><use href="#kbd"/></svg></span>Menu <i class="tri up"></i></div>
       <div class="sysnav"></div>
     </div></div></div>
@@ -261,32 +338,56 @@
   </figure>
 
   <!-- ============ Facebook · Desktop ============ -->
-  <figure class="shot wide" data-shot="fb-desktop-feed">
-    <figcaption class="label"><div class="k">Facebook · Desktop · Chrome</div><div class="h">News Feed ad (590px feed column)</div></figcaption>
+  <figure class="shot wide" data-shot="fb-desktop-home">
+    <figcaption class="label"><div class="k">Facebook · Desktop · Chrome (facebook.com, logged in)</div><div class="h">Home feed, top: Stories, composer, ad as first post</div><div class="d">What a user sees on arrival. Rails are sticky; only the centre column scrolls. 1:1 creative on desktop.</div></figcaption>
     <div class="frame desk"><div class="dev desktop" style="width:1440px;height:900px"><div class="screen">
-      <div class="chrome-tabs"><div class="tl"><i></i><i></i><i></i></div><div class="tab"><span class="fav" style="background:#0866FF"></span>Facebook</div></div>
+      <div class="chrome-tabs"><div class="tl"><i></i><i></i><i></i></div><div class="tab"><span class="fav" style="background:#0866FF;border-radius:50%"></span>Facebook</div></div>
       <div class="chrome-bar"><svg class="i" style="width:18px"><use href="#back"/></svg><div class="url"><svg width="14" height="14"><use href="#lock"/></svg>facebook.com</div></div>
-      <div class="fbd grow">
-        <div class="fbd-nav"><div class="l"><div class="fbd-logo">f</div><div class="fbd-search"><svg width="16" height="16"><use href="#fb-search"/></svg>Search Facebook</div></div>
-          <div class="c"><span class="on"><svg width="28" height="28" viewBox="0 0 28 28"><use href="#fbt-home"/></svg></span><span><svg width="28" height="28" viewBox="0 0 28 28"><use href="#fbt-video"/></svg></span><span><svg width="28" height="28" viewBox="0 0 28 28"><use href="#fbt-market"/></svg></span><span><svg width="28" height="28" viewBox="0 0 28 28"><use href="#fbt-friends"/></svg></span></div>
-          <div class="r"><span class="fb-round"><svg><use href="#burger"/></svg></span><span class="fb-round"><svg><use href="#fb-msgr"/></svg></span><span class="fb-round"><svg width="20" height="20" viewBox="0 0 28 28"><use href="#fbt-bell"/></svg></span><span class="fb-round ph-av" style="background:#8B9DC3">A</span></div></div>
-        <div class="fbd-body">
-          <div class="fbd-side"><div><i class="ph-av" style="background:#8B9DC3;color:#fff">A</i>Alex Kim</div><div><i class="c" style="background:#1877F2"><svg viewBox="0 0 28 28"><use href="#fbt-friends"/></svg></i>Friends</div><div><i class="c" style="background:#F7B928"><svg viewBox="0 0 24 24"><use href="#cal"/></svg></i>Memories</div><div><i class="c" style="background:#A033FF"><svg viewBox="0 0 24 24"><use href="#tag"/></svg></i>Saved</div><div><i class="c" style="background:#1877F2"><svg viewBox="0 0 28 28"><use href="#fbt-friends"/></svg></i>Groups</div><div><i class="c" style="background:#0B9BE3"><svg viewBox="0 0 28 28"><use href="#fbt-video"/></svg></i>Video</div><div><i class="c" style="background:#0866FF"><svg viewBox="0 0 28 28"><use href="#fbt-market"/></svg></i>Marketplace</div><div><i class="c" style="background:#F3425F"><svg viewBox="0 0 24 24"><use href="#cal"/></svg></i>Events</div><div><i style="background:#E4E6EB"></i>See more</div>
-            <hr><div class="h">Your shortcuts</div><div><i style="border-radius:8px;background:linear-gradient(135deg,#9FD3C7,#4E8D9C)"></i>Bangkok Coffee Lovers</div><div><i style="border-radius:8px;background:linear-gradient(135deg,#F0B37E,#C46A6A)"></i>Weekend Cafe Hopping</div></div>
-          <div class="fbd-feed" style="width:500px">
-            <div class="fbd-compose"><i class="ph-av" style="width:40px;height:40px;border-radius:50%;background:#8B9DC3;color:#fff">A</i><div class="in">What's on your mind, Alex?</div></div>
-            <div class="fb-post fb">
-            <div class="fb-ph"><div class="av"></div><div><div class="nm">Morrow Coffee <svg class="vf" viewBox="0 0 16 16"><use href="#fb-verified"/></svg></div><div class="mt">Sponsored · <svg width="12" height="12"><use href="#fb-globe"/></svg></div></div><div class="ac"><svg><use href="#fb-dots"/></svg><svg><use href="#fb-x"/></svg></div></div>
-            <div class="fb-tx" style="font-size:15px;line-height:20px">Autumn is here 🍂 Three new drinks, and your first one this week is on us.</div>
-            <div class="fb-media"><img src="stock/feed-latte.jpg" alt="" style="object-position:50% 50%"><span class="ad-logo"></span><span class="ad-tag">NEW · AUTUMN MENU</span></div>
-            <div class="fb-link"><div><div class="d">morrowcoffee.example</div><div class="t" style="font-size:17px;max-width:360px">Try the autumn menu</div></div><span class="b" style="height:36px;line-height:36px;border-radius:6px">Order now</span></div>
-          </div></div>
-          <div class="fbd-rail"><div class="h">Sponsored</div>
-            <div class="fbd-ad"><div class="im"><img src="stock/card-mocha.jpg" alt="" style="object-position:50% 50%"></div><div><b>Your first cup is on us</b><br><small>morrowcoffee.example</small></div></div>
-            <div class="fbd-ad"><div class="im"><img src="stock/peek-khaoyai.jpg" alt="" style="width:100%;height:100%;object-fit:cover"></div><div><b>Weekend stays in Hua Hin</b><br><small>example-travel.example</small></div></div>
-            <hr><div class="h">Contacts</div>
-            <div class="fbd-contact"><i class="on"></i>Ploy Charoen</div><div class="fbd-contact"><i class="on" style="background:linear-gradient(135deg,#F3B4C8,#9C7BE0)"></i>Nong Cafehop</div><div class="fbd-contact"><i style="background:linear-gradient(135deg,#9FD3C7,#4E8D9C)"></i>Tan Wattana</div><div class="fbd-contact"><i class="on" style="background:linear-gradient(135deg,#F0B37E,#C46A6A)"></i>Mint Sirikul</div></div>
-        </div>
+      <div class="fbw">
+        <div class="fbw-top"><svg class="lg"><use href="#fb-f"/></svg><div class="sr"><svg><use href="#fb-search"/></svg>Search Facebook</div>
+          <div class="fbw-tabs"><span class="on"><svg viewBox="0 0 28 28"><use href="#fbt-home"/></svg></span><span><svg viewBox="0 0 28 28"><use href="#fbt-video"/></svg><i class="bd">9+</i></span><span><svg viewBox="0 0 28 28"><use href="#fbt-market"/></svg></span><span><svg viewBox="0 0 28 28"><use href="#fbt-friends"/></svg></span><span><svg viewBox="0 0 28 28"><use href="#fbd-game"/></svg></span></div>
+          <div class="fbw-btns"><span><svg viewBox="0 0 20 20"><use href="#fbd-grid"/></svg></span><span><svg viewBox="0 0 24 24"><use href="#fb-msgr"/></svg></span><span><svg viewBox="0 0 28 28"><use href="#fbt-bell"/></svg><i class="bd">3</i></span><span class="fbw-av" style="background:linear-gradient(135deg,#8B9DC3,#5B6E96)"></span></div></div>
+        <div class="fbw-left"><div class="fbw-it"><i class="fbw-av" style="background:linear-gradient(135deg,#8B9DC3,#5B6E96)"></i>Alex Kim</div><div class="fbw-it"><svg viewBox="0 0 36 36"><use href="#fbd-metaai"/></svg>Meta AI</div><div class="fbw-it"><svg viewBox="0 0 36 36"><use href="#fbd-friends"/></svg>Friends</div><div class="fbw-it"><svg viewBox="0 0 36 36"><use href="#fbd-memories"/></svg>Memories</div><div class="fbw-it"><svg viewBox="0 0 36 36"><use href="#fbd-saved"/></svg>Saved</div><div class="fbw-it"><svg viewBox="0 0 36 36"><use href="#fbd-groups"/></svg>Groups</div><div class="fbw-it"><svg viewBox="0 0 36 36"><use href="#fbd-video"/></svg>Video</div><div class="fbw-it"><svg viewBox="0 0 36 36"><use href="#fbd-market"/></svg>Marketplace</div><div class="fbw-it"><svg viewBox="0 0 36 36"><use href="#fbd-feeds"/></svg>Feeds</div><div class="fbw-it"><svg viewBox="0 0 36 36"><use href="#fbd-events"/></svg>Events</div><div class="fbw-it"><svg viewBox="0 0 36 36"><use href="#fbd-ads"/></svg>Ads Manager</div><div class="fbw-it"><span class="more"><svg viewBox="0 0 20 20"><use href="#fbd-down"/></svg></span>See more</div>
+          <div class="fbw-hr"></div><div class="fbw-h">Your shortcuts</div><div class="fbw-it"><i class="sq"></i>Bangkok Coffee Lovers</div><div class="fbw-it"><i class="sq" style="background:linear-gradient(135deg,#F0B37E,#C46A6A)"></i>Weekend Cafe Hopping</div></div>
+        <div class="fbw-feed"><div class="fbw-col" style="--scroll:0px"><div class="fbw-stories"><div class="mine"><div class="ph"></div><span class="pl"><svg viewBox="0 0 20 20"><use href="#fbd-plus"/></svg></span><b>Create story</b></div><div><img src="stock/tt-iced.jpg" alt=""><i class="who fbw-av" style="background:linear-gradient(135deg,#F0B37E,#C46A6A)"></i><span class="nm">Ploy Charoen</span></div><div><img src="stock/peek-khaoyai.jpg" alt=""><i class="who fbw-av" style="background:linear-gradient(135deg,#9FD3C7,#4E8D9C)"></i><span class="nm">Tan Wattana</span></div><div><img src="stock/spark-hand.jpg" alt=""><i class="who fbw-av" style="background:linear-gradient(135deg,#F3B4C8,#9C7BE0)"></i><span class="nm">Nong Cafehop</span></div></div><div class="fbw-card fbw-compose"><div class="row"><i class="fbw-av" style="background:linear-gradient(135deg,#8B9DC3,#5B6E96)"></i><div class="in">What's on your mind, Alex?</div></div><div class="acts"><span><svg viewBox="0 0 24 24"><use href="#fbd-live"/></svg>Live video</span><span><svg viewBox="0 0 24 24"><use href="#fbd-photo"/></svg>Photo/video</span><span><svg viewBox="0 0 24 24"><use href="#fbd-feeling"/></svg>Feeling/activity</span></div></div><div class="fbw-card"><div class="fbw-ph"><i class="fbw-av" style="background:var(--brand-primary) var(--brand-logo) center / 62% no-repeat"></i><div><div class="nm">Morrow Coffee <svg viewBox="0 0 16 16"><use href="#fb-verified"/></svg></div><div class="mt">Sponsored · <svg><use href="#fb-globe"/></svg></div></div><div class="ac"><svg><use href="#fb-dots"/></svg><svg><use href="#fb-x"/></svg></div></div>
+              <div class="fbw-tx">Autumn is here 🍂 Three new drinks, and your first one this week is on us. Order ahead in the app and skip the queue.</div>
+              <div class="fbw-media r11"><img src="stock/feed-latte.jpg" alt="" style="object-position:50% 50%"><span class="ad-logo"></span><span class="ad-tag">NEW · AUTUMN MENU</span></div>
+              <div class="fbw-link"><div><div class="d">morrowcoffee.example</div><div class="t">Try the autumn menu</div></div><span class="b">Order now</span></div>
+              <div class="fbw-rx"><span class="ic"><svg viewBox="0 0 18 18"><use href="#fb-r-like"/></svg><svg viewBox="0 0 18 18"><use href="#fb-r-love"/></svg>1.2K</span><span>86 comments&nbsp;&nbsp;41 shares</span></div>
+              <div class="fbw-acts"><span><svg viewBox="0 0 24 24"><use href="#fb-like"/></svg>Like</span><span><svg viewBox="0 0 24 24"><use href="#fb-comment"/></svg>Comment</span><span><svg viewBox="0 0 24 24"><use href="#fb-share"/></svg>Share</span></div></div></div></div>
+        <div class="fbw-right"><div class="fbw-h">Sponsored</div>
+          <div class="fbw-ad"><div class="im"><img src="stock/card-mocha.jpg" alt=""></div><div><b>Chestnut Mocha is back. Your first cup is on us</b><small>morrowcoffee.example</small></div></div>
+          <div class="fbw-ad"><div class="im"><img src="stock/peek-khaoyai.jpg" alt=""></div><div><b>Weekend stays in Khao Yai from ฿1,990</b><small>example-travel.example</small></div></div>
+          <div class="fbw-hr"></div><div class="fbw-h">Birthdays</div><div class="fbw-bday"><svg viewBox="0 0 36 36"><use href="#fbd-gift"/></svg><span><b>Ploy Charoen</b>'s birthday is today.</span></div>
+          <div class="fbw-hr"></div><div class="fbw-h">Contacts<span class="ic"><svg viewBox="0 0 20 20"><use href="#fbd-vcall"/></svg><svg viewBox="0 0 24 24"><use href="#fb-search"/></svg><svg viewBox="0 0 24 24"><use href="#fb-dots"/></svg></span></div><div class="fbw-ct"><i class="fbw-av on" style="background:linear-gradient(135deg,#F0B37E,#C46A6A)"></i>Ploy Charoen</div><div class="fbw-ct"><i class="fbw-av on" style="background:linear-gradient(135deg,#F3B4C8,#9C7BE0)"></i>Nong Cafehop</div><div class="fbw-ct"><i class="fbw-av" style="background:linear-gradient(135deg,#9FD3C7,#4E8D9C)"></i>Tan Wattana</div><div class="fbw-ct"><i class="fbw-av on" style="background:linear-gradient(135deg,#FFD08A,#E58E3C)"></i>Mint Sirikul</div><div class="fbw-ct"><i class="fbw-av on" style="background:linear-gradient(135deg,#A9C1F5,#5B79C9)"></i>Beam Rattana</div><div class="fbw-ct"><i class="fbw-av" style="background:linear-gradient(135deg,#C9E3A1,#6FA35B)"></i>Fah Somsri</div><div class="fbw-ct"><i class="fbw-av on" style="background:linear-gradient(135deg,#D7C3F3,#8B6BC9)"></i>Pete Anan</div></div>
+        <div class="fbw-fab"><svg viewBox="0 0 24 24"><use href="#fbd-compose"/></svg></div>
+      </div>
+    </div></div></div>
+  </figure>
+
+  <figure class="shot wide" data-shot="fb-desktop-feed">
+    <figcaption class="label"><div class="k">Facebook · Desktop · Chrome (facebook.com, logged in)</div><div class="h">Feed ad in view (scrolled)</div><div class="d">Same page scrolled so the whole ad incl. CTA is visible. Use for ad-focused slides.</div></figcaption>
+    <div class="frame desk"><div class="dev desktop" style="width:1440px;height:900px"><div class="screen">
+      <div class="chrome-tabs"><div class="tl"><i></i><i></i><i></i></div><div class="tab"><span class="fav" style="background:#0866FF;border-radius:50%"></span>Facebook</div></div>
+      <div class="chrome-bar"><svg class="i" style="width:18px"><use href="#back"/></svg><div class="url"><svg width="14" height="14"><use href="#lock"/></svg>facebook.com</div></div>
+      <div class="fbw">
+        <div class="fbw-top"><svg class="lg"><use href="#fb-f"/></svg><div class="sr"><svg><use href="#fb-search"/></svg>Search Facebook</div>
+          <div class="fbw-tabs"><span class="on"><svg viewBox="0 0 28 28"><use href="#fbt-home"/></svg></span><span><svg viewBox="0 0 28 28"><use href="#fbt-video"/></svg><i class="bd">9+</i></span><span><svg viewBox="0 0 28 28"><use href="#fbt-market"/></svg></span><span><svg viewBox="0 0 28 28"><use href="#fbt-friends"/></svg></span><span><svg viewBox="0 0 28 28"><use href="#fbd-game"/></svg></span></div>
+          <div class="fbw-btns"><span><svg viewBox="0 0 20 20"><use href="#fbd-grid"/></svg></span><span><svg viewBox="0 0 24 24"><use href="#fb-msgr"/></svg></span><span><svg viewBox="0 0 28 28"><use href="#fbt-bell"/></svg><i class="bd">3</i></span><span class="fbw-av" style="background:linear-gradient(135deg,#8B9DC3,#5B6E96)"></span></div></div>
+        <div class="fbw-left"><div class="fbw-it"><i class="fbw-av" style="background:linear-gradient(135deg,#8B9DC3,#5B6E96)"></i>Alex Kim</div><div class="fbw-it"><svg viewBox="0 0 36 36"><use href="#fbd-metaai"/></svg>Meta AI</div><div class="fbw-it"><svg viewBox="0 0 36 36"><use href="#fbd-friends"/></svg>Friends</div><div class="fbw-it"><svg viewBox="0 0 36 36"><use href="#fbd-memories"/></svg>Memories</div><div class="fbw-it"><svg viewBox="0 0 36 36"><use href="#fbd-saved"/></svg>Saved</div><div class="fbw-it"><svg viewBox="0 0 36 36"><use href="#fbd-groups"/></svg>Groups</div><div class="fbw-it"><svg viewBox="0 0 36 36"><use href="#fbd-video"/></svg>Video</div><div class="fbw-it"><svg viewBox="0 0 36 36"><use href="#fbd-market"/></svg>Marketplace</div><div class="fbw-it"><svg viewBox="0 0 36 36"><use href="#fbd-feeds"/></svg>Feeds</div><div class="fbw-it"><svg viewBox="0 0 36 36"><use href="#fbd-events"/></svg>Events</div><div class="fbw-it"><svg viewBox="0 0 36 36"><use href="#fbd-ads"/></svg>Ads Manager</div><div class="fbw-it"><span class="more"><svg viewBox="0 0 20 20"><use href="#fbd-down"/></svg></span>See more</div>
+          <div class="fbw-hr"></div><div class="fbw-h">Your shortcuts</div><div class="fbw-it"><i class="sq"></i>Bangkok Coffee Lovers</div><div class="fbw-it"><i class="sq" style="background:linear-gradient(135deg,#F0B37E,#C46A6A)"></i>Weekend Cafe Hopping</div></div>
+        <div class="fbw-feed"><div class="fbw-col" style="--scroll:470px"><div class="fbw-stories"><div class="mine"><div class="ph"></div><span class="pl"><svg viewBox="0 0 20 20"><use href="#fbd-plus"/></svg></span><b>Create story</b></div><div><img src="stock/tt-iced.jpg" alt=""><i class="who fbw-av" style="background:linear-gradient(135deg,#F0B37E,#C46A6A)"></i><span class="nm">Ploy Charoen</span></div><div><img src="stock/peek-khaoyai.jpg" alt=""><i class="who fbw-av" style="background:linear-gradient(135deg,#9FD3C7,#4E8D9C)"></i><span class="nm">Tan Wattana</span></div><div><img src="stock/spark-hand.jpg" alt=""><i class="who fbw-av" style="background:linear-gradient(135deg,#F3B4C8,#9C7BE0)"></i><span class="nm">Nong Cafehop</span></div></div><div class="fbw-card fbw-compose"><div class="row"><i class="fbw-av" style="background:linear-gradient(135deg,#8B9DC3,#5B6E96)"></i><div class="in">What's on your mind, Alex?</div></div><div class="acts"><span><svg viewBox="0 0 24 24"><use href="#fbd-live"/></svg>Live video</span><span><svg viewBox="0 0 24 24"><use href="#fbd-photo"/></svg>Photo/video</span><span><svg viewBox="0 0 24 24"><use href="#fbd-feeling"/></svg>Feeling/activity</span></div></div><div class="fbw-card"><div class="fbw-ph"><i class="fbw-av" style="background:var(--brand-primary) var(--brand-logo) center / 62% no-repeat"></i><div><div class="nm">Morrow Coffee <svg viewBox="0 0 16 16"><use href="#fb-verified"/></svg></div><div class="mt">Sponsored · <svg><use href="#fb-globe"/></svg></div></div><div class="ac"><svg><use href="#fb-dots"/></svg><svg><use href="#fb-x"/></svg></div></div>
+              <div class="fbw-tx">Autumn is here 🍂 Three new drinks, and your first one this week is on us. Order ahead in the app and skip the queue.</div>
+              <div class="fbw-media r11"><img src="stock/feed-latte.jpg" alt="" style="object-position:50% 50%"><span class="ad-logo"></span><span class="ad-tag">NEW · AUTUMN MENU</span></div>
+              <div class="fbw-link"><div><div class="d">morrowcoffee.example</div><div class="t">Try the autumn menu</div></div><span class="b">Order now</span></div>
+              <div class="fbw-rx"><span class="ic"><svg viewBox="0 0 18 18"><use href="#fb-r-like"/></svg><svg viewBox="0 0 18 18"><use href="#fb-r-love"/></svg>1.2K</span><span>86 comments&nbsp;&nbsp;41 shares</span></div>
+              <div class="fbw-acts"><span><svg viewBox="0 0 24 24"><use href="#fb-like"/></svg>Like</span><span><svg viewBox="0 0 24 24"><use href="#fb-comment"/></svg>Comment</span><span><svg viewBox="0 0 24 24"><use href="#fb-share"/></svg>Share</span></div></div></div></div>
+        <div class="fbw-right"><div class="fbw-h">Sponsored</div>
+          <div class="fbw-ad"><div class="im"><img src="stock/card-mocha.jpg" alt=""></div><div><b>Chestnut Mocha is back. Your first cup is on us</b><small>morrowcoffee.example</small></div></div>
+          <div class="fbw-ad"><div class="im"><img src="stock/peek-khaoyai.jpg" alt=""></div><div><b>Weekend stays in Khao Yai from ฿1,990</b><small>example-travel.example</small></div></div>
+          <div class="fbw-hr"></div><div class="fbw-h">Birthdays</div><div class="fbw-bday"><svg viewBox="0 0 36 36"><use href="#fbd-gift"/></svg><span><b>Ploy Charoen</b>'s birthday is today.</span></div>
+          <div class="fbw-hr"></div><div class="fbw-h">Contacts<span class="ic"><svg viewBox="0 0 20 20"><use href="#fbd-vcall"/></svg><svg viewBox="0 0 24 24"><use href="#fb-search"/></svg><svg viewBox="0 0 24 24"><use href="#fb-dots"/></svg></span></div><div class="fbw-ct"><i class="fbw-av on" style="background:linear-gradient(135deg,#F0B37E,#C46A6A)"></i>Ploy Charoen</div><div class="fbw-ct"><i class="fbw-av on" style="background:linear-gradient(135deg,#F3B4C8,#9C7BE0)"></i>Nong Cafehop</div><div class="fbw-ct"><i class="fbw-av" style="background:linear-gradient(135deg,#9FD3C7,#4E8D9C)"></i>Tan Wattana</div><div class="fbw-ct"><i class="fbw-av on" style="background:linear-gradient(135deg,#FFD08A,#E58E3C)"></i>Mint Sirikul</div><div class="fbw-ct"><i class="fbw-av on" style="background:linear-gradient(135deg,#A9C1F5,#5B79C9)"></i>Beam Rattana</div><div class="fbw-ct"><i class="fbw-av" style="background:linear-gradient(135deg,#C9E3A1,#6FA35B)"></i>Fah Somsri</div><div class="fbw-ct"><i class="fbw-av on" style="background:linear-gradient(135deg,#D7C3F3,#8B6BC9)"></i>Pete Anan</div></div>
+        <div class="fbw-fab"><svg viewBox="0 0 24 24"><use href="#fbd-compose"/></svg></div>
       </div>
     </div></div></div>
   </figure>

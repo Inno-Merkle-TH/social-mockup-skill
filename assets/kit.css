@@ -64,27 +64,38 @@ body.capture .board { padding: 0; }
 /* =====================================================================
    DEVICE FRAMES · the export script screenshots `.frame` (incl. bezel)
    ===================================================================== */
-.frame { padding: 10px; display: inline-block; }
+.frame { padding: 10px; display: inline-block; }  /* phone frames override padding below */
 .dev { position: relative; background: #000; }
 .screen { position: absolute; inset: 0; overflow: hidden; display: flex; flex-direction: column; }
 .screen > * { flex: none; }
 .screen > .grow, .screen > .app { flex: 1; min-height: 0; }
 
-/* Android · Galaxy S-class (360×780 CSS px) [V] */
-.dev.android { width: 360px; height: 780px; border-radius: 27px;
-  box-shadow: 0 0 0 4.5px #0A0A0B, 0 0 0 6px #CDD6E2, 0 0 0 6.6px #8E9AAB; }
-.dev.android::before, .dev.android::after { content: ""; position: absolute; right: -9.5px; width: 2.5px; border-radius: 0 2px 2px 0; background: #B9C4D2; }
-.dev.android::before { top: 150px; height: 88px; } .dev.android::after { top: 262px; height: 52px; }
-.dev.android .screen { border-radius: 27px; font-family: var(--f-android); --f-tiktok: "TikTok Sans App", "Roboto", "Noto Sans Thai", sans-serif; }
-.dev.android .cam { position: absolute; top: 13px; left: 50%; margin-left: -5px; width: 10px; height: 10px; border-radius: 50%; background: #050505; z-index: 60; box-shadow: inset 0 0 0 2px #151515; }
+/* Device frames are built to the REAL hardware proportions (manufacturer mm specs → CSS px):
+   body = screen + bezel on each side; outer corner radius = display radius + bezel.
+   The export screenshots .frame (padding leaves room for the side buttons). */
 
-/* iOS · iPhone 17 Pro class (402×874 pt) [~] */
+/* Android · Samsung Galaxy S26: body 71.7 × 149.6 mm, 6.3" 1080×2340 (360×780 dp @3x, ≈5.37 dp/mm)
+   → bezel ≈12.4 dp sides / 11.5 dp top+bottom (incl. the aluminium rail), display radius ≈30 dp */
+.frame:has(.dev.android) { padding: 14px 18px; }
+.dev.android { width: 360px; height: 780px; border-radius: 30px;
+  box-shadow: 0 0 0 7.5px #050506, 0 0 0 11px #2B2E33, 0 0 0 11.8px #6E737C, 0 0 0 12.4px #3A3D42;
+  margin: 0 0.9px; outline: none; }
+.dev.android .screen { border-radius: 30px; font-family: var(--f-android); --f-tiktok: "TikTok Sans App", "Roboto", "Noto Sans Thai", sans-serif; }
+.dev.android .cam { position: absolute; top: 12px; left: 50%; margin-left: -5.5px; width: 11px; height: 11px; border-radius: 50%; background: #050505; z-index: 60; box-shadow: inset 0 0 0 2px #151515; }
+
+/* hardware buttons (injected by kit.js at real positions, y in screen px) */
+.dev > .hw { position: absolute; width: 3px; border-radius: 2px; background: linear-gradient(90deg, #5A5D63, #2C2E32); }
+.dev.ios > .hw.l { left: -19px; border-radius: 2px 0 0 2px; } .dev.ios > .hw.r { right: -19px; border-radius: 0 2px 2px 0; }
+.dev.ios > .hw.cc { width: 1.6px; right: -17.6px; opacity: .8; } /* camera control: almost flush */
+.dev.android > .hw.r { right: -15px; width: 2.6px; border-radius: 0 2px 2px 0; }
+
+/* iOS · iPhone 17 Pro: body 71.9 × 150.0 mm, 6.3" 1206×2622 (402×874 pt @3x, ≈6.04 pt/mm)
+   → bezel ≈16 pt on every side (black border + titanium/aluminium band), display radius 62 pt */
+.frame:has(.dev.ios) { padding: 16px 20px; }
 .dev.ios { width: 402px; height: 874px; border-radius: 62px;
-  box-shadow: 0 0 0 10px #050506, 0 0 0 11.5px #9A9CA3, 0 0 0 12.5px #5E6066; }
-.dev.ios::before { content: ""; position: absolute; left: -15px; top: 190px; width: 3px; height: 62px; border-radius: 2px 0 0 2px; background: #8B8D94; box-shadow: 0 78px 0 #8B8D94, 0 -64px 0 #8B8D94; }
-.dev.ios::after { content: ""; position: absolute; right: -15px; top: 250px; width: 3px; height: 100px; border-radius: 0 2px 2px 0; background: #8B8D94; }
+  box-shadow: 0 0 0 9.5px #050506, 0 0 0 14px #34363A, 0 0 0 15.2px #8D9097, 0 0 0 16px #46484D; }
 .dev.ios .screen { border-radius: 62px; font-family: var(--f-ios); --f-tiktok: "TikTok Sans App", system-ui, "Thonburi", "Noto Sans Thai Looped", sans-serif; }
-.dev.ios .cam { position: absolute; top: 11px; left: 50%; width: 124px; height: 36px; margin-left: -62px; border-radius: 18px; background: #000; z-index: 60; }
+.dev.ios .cam { position: absolute; top: 11px; left: 50%; width: 126px; height: 37px; margin-left: -63px; border-radius: 19px; background: #000; z-index: 60; }
 
 /* Desktop · macOS window (set width/height inline) */
 .dev.desktop { border-radius: 12px; background: #fff; overflow: hidden; font-family: var(--f-desktop);
@@ -248,11 +259,43 @@ body.capture .board { padding: 0; }
 .rm { background: var(--ln-bar); }
 .rm-art { width: 100%; aspect-ratio: 2500 / 1686; position: relative; overflow: hidden; display: grid; background: var(--brand-surface); }
 .rm-art.compact { aspect-ratio: 2500 / 843; }
+/* ---- OA Manager templates (the 12 you can pick in manager.line.biz → Rich menus → Select template) ----
+   Large 2500×1686:  L6 3×2 · L4 2×2 · L4b wide top + 3 below · L3 big left (⅔) + 2 stacked right · L2r 2 rows · L2c 2 columns · L1 full
+   Compact 2500×843: C3 3 columns · C2 halves · C2l ⅔ + ⅓ · C2r ⅓ + ⅔ · C1 full     (compact classes set the 2500:843 ratio themselves)
+   Messaging API only: .custom (any ≤20 areas via data-area="x,y,w,h" in image px) · .tabbed (tab strip drawn in the image, menus switch via richmenu alias) */
+.rm-art.L6 { grid-template-columns: repeat(3,1fr); grid-template-rows: repeat(2,1fr); }
+.rm-art.L4 { grid-template-columns: repeat(2,1fr); grid-template-rows: repeat(2,1fr); }
+.rm-art.L4b { grid-template-columns: repeat(3,1fr); grid-template-rows: 1fr 1fr; } .rm-art.L4b > .rm-t:first-of-type { grid-column: 1 / -1; }
+.rm-art.L3 { grid-template-columns: 2fr 1fr; grid-template-rows: 1fr 1fr; } .rm-art.L3 > .rm-t:first-of-type { grid-row: span 2; }
+.rm-art.L2r { grid-template-rows: 1fr 1fr; }
+.rm-art.L2c { grid-template-columns: 1fr 1fr; }
+.rm-art.L1 { grid-template-columns: 1fr; }
+.rm-art.C3, .rm-art.C2, .rm-art.C2l, .rm-art.C2r, .rm-art.C1 { aspect-ratio: 2500 / 843; }
+.rm-art.C3 { grid-template-columns: repeat(3,1fr); } .rm-art.C2 { grid-template-columns: 1fr 1fr; }
+.rm-art.C2l { grid-template-columns: 2fr 1fr; } .rm-art.C2r { grid-template-columns: 1fr 2fr; } .rm-art.C1 { grid-template-columns: 1fr; }
+/* legacy aliases */
 .rm-art.g6 { grid-template-columns: repeat(3,1fr); grid-template-rows: repeat(2,1fr); }
 .rm-art.g4 { grid-template-columns: repeat(2,1fr); grid-template-rows: repeat(2,1fr); }
 .rm-art.g3 { grid-template-columns: repeat(3,1fr); }
-.rm-art.big-left { grid-template-columns: 2fr 1fr 1fr; grid-template-rows: repeat(2,1fr); } .rm-art.big-left > :first-child { grid-row: span 2; }
 .rm-art.banner-top { grid-template-columns: repeat(3,1fr); grid-template-rows: 1fr 1fr; } .rm-art.banner-top > :first-child { grid-column: span 3; }
+.rm-art.big-left { grid-template-columns: 2fr 1fr 1fr; grid-template-rows: repeat(2,1fr); } .rm-art.big-left > :first-child { grid-row: span 2; } /* 5 areas: API only */
+/* custom (Messaging API): children carry data-area="x,y,w,h" in image pixels; kit.js converts to % */
+.rm-art.custom { display: block; } .rm-art.custom > [data-area] { position: absolute; }
+/* tab-style rich menu: the tab strip is part of the image; each tab = a different rich menu (richmenuswitch action) */
+.rm-art.tabbed { grid-template-rows: var(--rm-tab-h, 14.8%) repeat(var(--rm-rows, 2), 1fr); }
+.rm-art.tabbed.L4b > .rm-t:first-of-type, .rm-art.tabbed.L4b > .rm-t:first-of-type { grid-column: 1 / -1; }
+.rm-tabs { grid-column: 1 / -1; display: flex; background: var(--rm-tab-bg, rgba(0,0,0,.06)); }
+.rm-tabs span { flex: 1; display: flex; align-items: center; justify-content: center; font: 600 12px/1 var(--brand-body); color: var(--brand-primary); opacity: .6; }
+.rm-tabs span.on { opacity: 1; background: var(--rm-tab-on, #fff); color: var(--brand-primary); box-shadow: inset 0 -3px 0 var(--brand-primary); font-weight: 700; }
+/* photo tiles: real rich menus are usually photography + type. <div class="rm-t ph"><img …><span>Label</span></div> */
+.rm-t.ph { padding: 0; justify-content: flex-end; align-items: flex-start; overflow: hidden; color: #fff; }
+.rm-t.ph > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.rm-t.ph::after { content: ""; position: absolute; inset: 40% 0 0; background: linear-gradient(180deg, transparent, rgba(0,0,0,.55)); }
+.rm-t.ph > span, .rm-t.ph > b { position: relative; z-index: 1; margin: 0 0 10px 12px; text-align: left; text-shadow: 0 1px 4px rgba(0,0,0,.35); }
+.rm-t.ph > b { font: 800 22px/1.05 var(--brand-head); margin-bottom: 4px; } .rm-t.ph > b + span { margin-top: 0; font: 600 12px/1.2 var(--brand-body); }
+/* review aid: ?areas=1 outlines tap areas and letters them A, B, C… like OA Manager */
+.rm-art.show-areas > .rm-t, .rm-art.show-areas > [data-area] { outline: 1.5px dashed #00C3FF; outline-offset: -1.5px; }
+.rm-art.show-areas > .rm-t::before, .rm-art.show-areas > [data-area]::before { content: attr(data-l); position: absolute; left: 4px; top: 4px; z-index: 3; font: 700 10px/16px var(--f-desktop); width: 16px; text-align: center; border-radius: 3px; background: #00C3FF; color: #fff; }
 .rm-t { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; text-align: center; padding: 8px; font: 700 13px/1.25 var(--brand-head); color: var(--brand-primary); }
 .rm-t + .rm-t { box-shadow: -1px 0 0 rgba(0,0,0,.06); }
 .rm-t svg { width: 30px; height: 30px; }
@@ -625,3 +668,78 @@ svg.wt { filter: invert(1) brightness(.12); }
 .fbd-side { overflow: hidden; }
 /* narrow Android screens: the 2026 tab row compresses */
 .android .tt-top { gap: 14px; font-size: 15px; } .android .tt-top .lv { left: 10px; } .android .tt-top .se { right: 10px; }
+
+/* =====================================================================
+   FACEBOOK.COM DESKTOP · logged-in home (2026)  · .fbw
+   Fixed 56px top bar · left nav 360 · right rail 360 · feed column 590 centred between them.
+   Rails are sticky in the real site, so only the feed scrolls: set --scroll on .fbw-col to show the ad.
+   Calibrate with a real desktop screenshot when you have one (references/screens/device/).
+   ===================================================================== */
+.fbw { position: relative; flex: 1; min-height: 0; overflow: hidden; background: #F0F2F5; color: #050505; font-family: var(--f-desktop); font-size: 15px; }
+.fbw-top { position: absolute; left: 0; right: 0; top: 0; height: 56px; z-index: 5; background: #fff; box-shadow: 0 1px 2px rgba(0,0,0,.1), 0 2px 4px rgba(0,0,0,.04); display: flex; align-items: center; padding: 0 16px; }
+.fbw-top .lg { width: 40px; height: 40px; flex: none; }
+.fbw-top .sr { margin-left: 8px; width: 240px; height: 40px; border-radius: 20px; background: #F0F2F5; display: flex; align-items: center; gap: 8px; padding: 0 12px; color: #65676B; font-size: 15px; }
+.fbw-top .sr svg { width: 16px; height: 16px; }
+.fbw-tabs { position: absolute; left: 50%; top: 0; transform: translateX(-50%); display: flex; height: 56px; }
+.fbw-tabs span { width: 112px; height: 56px; display: flex; align-items: center; justify-content: center; color: #65676B; position: relative; }
+.fbw-tabs span svg { width: 28px; height: 28px; }
+.fbw-tabs .on { color: #0866FF; } .fbw-tabs .on::after { content: ""; position: absolute; left: 4px; right: 4px; bottom: 0; height: 3px; border-radius: 3px 3px 0 0; background: #0866FF; }
+.fbw-tabs .bd { position: absolute; top: 8px; left: 58px; min-width: 19px; height: 19px; border-radius: 10px; background: #E41E3F; color: #fff; font: 600 12px/19px var(--f-desktop); text-align: center; padding: 0 5px; }
+.fbw-btns { margin-left: auto; display: flex; gap: 8px; }
+.fbw-btns > span { position: relative; width: 40px; height: 40px; border-radius: 50%; background: #E4E6EB; display: flex; align-items: center; justify-content: center; color: #050505; }
+.fbw-btns > span svg { width: 20px; height: 20px; }
+.fbw-btns .bd { position: absolute; top: -4px; right: -4px; min-width: 19px; height: 19px; border-radius: 10px; background: #E41E3F; color: #fff; font: 600 12px/19px var(--f-desktop); text-align: center; padding: 0 5px; }
+.fbw-av { border-radius: 50%; flex: none; background: linear-gradient(135deg, #B9C6DA, #7D90B1) center / cover; position: relative; }
+.fbw-av.on::after { content: ""; position: absolute; right: -1px; bottom: -1px; width: 12px; height: 12px; border-radius: 50%; background: #31A24C; box-shadow: 0 0 0 2.5px #F0F2F5; }
+/* left nav */
+.fbw-left { position: absolute; left: 0; top: 56px; bottom: 0; width: 360px; padding: 16px 8px 0; overflow: hidden; }
+.fbw-it { height: 52px; display: flex; align-items: center; gap: 12px; padding: 0 8px; border-radius: 8px; font-size: 15px; font-weight: 500; }
+.fbw-it > svg, .fbw-it > .fbw-av, .fbw-it > .sq { width: 36px; height: 36px; flex: none; }
+.fbw-it .sq { border-radius: 8px; background: linear-gradient(135deg, #9FD3C7, #4E8D9C) center / cover; }
+.fbw-it .more { width: 36px; height: 36px; border-radius: 50%; background: #E4E6EB; display: flex; align-items: center; justify-content: center; } .fbw-it .more svg { width: 20px; height: 20px; }
+.fbw-hr { height: 1px; background: #CED0D4; margin: 8px 8px; }
+.fbw-h { display: flex; align-items: center; justify-content: space-between; color: #65676B; font-size: 17px; font-weight: 600; padding: 8px 8px 4px; }
+.fbw-h .ic { display: flex; gap: 14px; } .fbw-h .ic svg { width: 18px; height: 18px; }
+.fbw-foot { color: #65676B; font-size: 13px; line-height: 1.5; padding: 12px 8px; }
+/* right rail */
+.fbw-right { position: absolute; right: 0; top: 56px; bottom: 0; width: 360px; padding: 16px 16px 0 8px; overflow: hidden; }
+.fbw-ad { display: flex; align-items: center; gap: 12px; padding: 8px; border-radius: 8px; }
+.fbw-ad .im { width: 130px; height: 130px; border-radius: 8px; overflow: hidden; flex: none; } .fbw-ad .im img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.fbw-ad b { display: block; font-size: 15px; font-weight: 500; line-height: 20px; } .fbw-ad small { display: block; color: #65676B; font-size: 13px; margin-top: 2px; }
+.fbw-bday { display: flex; gap: 12px; align-items: center; padding: 8px; font-size: 15px; line-height: 20px; } .fbw-bday svg { width: 36px; height: 36px; flex: none; }
+.fbw-ct { height: 44px; display: flex; align-items: center; gap: 12px; padding: 0 8px; font-size: 15px; font-weight: 500; } .fbw-ct .fbw-av { width: 36px; height: 36px; }
+.fbw-fab { position: absolute; right: 16px; bottom: 16px; z-index: 6; width: 48px; height: 48px; border-radius: 50%; background: #fff; box-shadow: 0 2px 12px rgba(0,0,0,.2), 0 0 0 .5px rgba(0,0,0,.06); display: flex; align-items: center; justify-content: center; color: #050505; } .fbw-fab svg { width: 20px; height: 20px; }
+/* feed */
+.fbw-feed { position: absolute; left: 360px; right: 360px; top: 56px; bottom: 0; overflow: hidden; }
+.fbw-col { width: 590px; margin: 0 auto; padding-top: 16px; transform: translateY(calc(-1 * var(--scroll, 0px))); }
+.fbw-card { background: #fff; border-radius: 8px; box-shadow: 0 1px 2px rgba(0,0,0,.2); margin-bottom: 16px; overflow: hidden; }
+.fbw-compose { padding: 12px 16px 10px; } .fbw-compose .row { display: flex; gap: 8px; align-items: center; } .fbw-compose .fbw-av { width: 40px; height: 40px; }
+.fbw-compose .in { flex: 1; height: 40px; border-radius: 20px; background: #F0F2F5; display: flex; align-items: center; padding: 0 12px; color: #65676B; font-size: 17px; }
+.fbw-compose .acts { display: flex; border-top: 1px solid #CED0D4; margin-top: 12px; padding-top: 8px; }
+.fbw-compose .acts span { flex: 1; height: 40px; display: flex; align-items: center; justify-content: center; gap: 8px; color: #65676B; font-weight: 600; } .fbw-compose .acts svg { width: 24px; height: 24px; }
+.fbw-stories { display: flex; gap: 8px; margin-bottom: 16px; }
+.fbw-stories > div { width: 140px; height: 250px; border-radius: 8px; overflow: hidden; position: relative; flex: none; background: #ccc center / cover; box-shadow: 0 1px 2px rgba(0,0,0,.2); }
+.fbw-stories > div img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.fbw-stories > div::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.35), transparent 30%, transparent 70%, rgba(0,0,0,.45)); }
+.fbw-stories .who { position: absolute; left: 12px; top: 12px; z-index: 1; width: 40px; height: 40px; border-radius: 50%; box-shadow: 0 0 0 4px #0866FF; }
+.fbw-stories .nm { position: absolute; left: 12px; right: 12px; bottom: 10px; z-index: 1; color: #fff; font-size: 13px; font-weight: 600; }
+.fbw-stories .mine { background: #fff; } .fbw-stories .mine::after { display: none; }
+.fbw-stories .mine .ph { height: 190px; background: linear-gradient(135deg, #B9C6DA, #7D90B1) center / cover; }
+.fbw-stories .mine .pl { position: absolute; left: 50%; top: 172px; margin-left: -18px; width: 36px; height: 36px; border-radius: 50%; background: #0866FF; color: #fff; box-shadow: 0 0 0 4px #fff; display: flex; align-items: center; justify-content: center; } .fbw-stories .mine .pl svg { width: 18px; height: 18px; }
+.fbw-stories .mine b { position: absolute; left: 0; right: 0; bottom: 14px; text-align: center; font-size: 13px; font-weight: 600; }
+.fbw-ph { display: flex; gap: 8px; padding: 12px 16px 0; align-items: center; }
+.fbw-ph .fbw-av { width: 40px; height: 40px; }
+.fbw-ph .nm { font-size: 15px; font-weight: 600; display: flex; align-items: center; gap: 4px; line-height: 20px; } .fbw-ph .nm svg { width: 16px; height: 16px; color: #0866FF; }
+.fbw-ph .mt { font-size: 13px; color: #65676B; display: flex; align-items: center; gap: 4px; line-height: 16px; } .fbw-ph .mt svg { width: 12px; height: 12px; }
+.fbw-ph .ac { margin-left: auto; align-self: flex-start; display: flex; gap: 8px; color: #65676B; } .fbw-ph .ac svg { width: 20px; height: 20px; }
+.fbw-tx { padding: 4px 16px 16px; font-size: 15px; line-height: 20px; } .fbw-tx .more { font-weight: 600; }
+.fbw-media { position: relative; overflow: hidden; background: #000; aspect-ratio: 4 / 5; } .fbw-media.r11 { aspect-ratio: 1; } .fbw-media.r191 { aspect-ratio: 1.91; }
+.fbw-media > img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.fbw-link { display: flex; align-items: center; gap: 12px; background: #F0F2F5; padding: 12px 16px; }
+.fbw-link .d { font-size: 13px; color: #65676B; text-transform: uppercase; line-height: 16px; } .fbw-link .t { font-size: 17px; font-weight: 600; line-height: 22px; }
+.fbw-link .b { margin-left: auto; flex: none; height: 36px; padding: 0 12px; border-radius: 6px; background: #E2E5E9; font-weight: 600; display: flex; align-items: center; }
+.fbw-rx { display: flex; align-items: center; justify-content: space-between; padding: 10px 16px; color: #65676B; font-size: 15px; }
+.fbw-rx .ic { display: flex; align-items: center; gap: 6px; } .fbw-rx .ic svg { width: 18px; height: 18px; border-radius: 50%; box-shadow: 0 0 0 2px #fff; }
+.fbw-rx .ic svg + svg { margin-left: -8px; }
+.fbw-acts { display: flex; margin: 0 16px; border-top: 1px solid #CED0D4; height: 44px; padding: 4px 0; }
+.fbw-acts span { flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; color: #65676B; font-weight: 600; border-radius: 4px; } .fbw-acts svg { width: 20px; height: 20px; }

@@ -43,3 +43,18 @@
 - Plausible engagement: reactions in the hundreds to low thousands for brand ads; comments roughly 3–10% of reactions.
 - The FB wordmark/glyphs in `icons.svg` may appear in internal reviews **and** pitch/presentation mockups, where they depict the platform. Never place them inside the brand's own creative or deliverable ad assets.
 - Viewer avatar (tab bar "me", desktop top-right): use the user-supplied photo or an initial; never a real third party.
+
+## Desktop (facebook.com, logged-in home) · `.fbw`
+
+- **Structure:** a fixed 56 px top bar holds the blue "f" (40 px), a 240 px "Search Facebook" pill, 5 centred tabs and 4 round 40 px buttons (grid, Messenger, bell, avatar). Below it are the left nav (360 px), the feed column (590 px, centred between the rails) and the right rail (360 px). Both rails are sticky; only the feed scrolls (`.fbw-col` `--scroll`).
+- **Left nav:**
+  - Items: you, Meta AI, Friends, Memories, Saved, Groups, Video, Marketplace, Feeds, Events, Ads Manager, See more.
+  - Item style: 52 px rows with 36 px coloured glyphs.
+  - Below the items: "Your shortcuts".
+- **Feed:** the Stories tray (140×250 cards, "Create story" first), then the composer ("What's on your mind, …?" with Live video / Photo/video / Feeling/activity), then posts.
+  - **Post:** radius 8. Header: 40 px avatar, name 15/600, "Sponsored · 🌐" 13 px.
+  - **Text and link footer:** text 15/20 with padding 4 16 16. The link footer is `#F0F2F5` with an UPPERCASE domain, a 17/600 headline and a grey CTA.
+  - **Engagement:** a reactions row, then **labelled** Like / Comment / Share.
+- **Right rail:** Sponsored (130 px square thumbnail + headline + domain), Birthdays, Contacts (with video, search and ••• icons, plus online dots). A floating new-message button sits bottom right.
+- **Creative ratio:** use 1:1 on desktop so the whole ad fits in a 1440×900 window. A 4:5 creative is about 737 px tall in the 590 column; show it with `.fbw-media` (default 4:5) and the `fb-desktop-home` composition if needed.
+- **Status:** built from the live site's structure; widths are not yet pixel-calibrated. Add a desktop screenshot to `references/screens/device/` and copy `screens/calibrate/` to tune it.

@@ -33,7 +33,7 @@ Swapping brands = swapping `brand.css` + images + copy. That is what makes resul
 | Surface | Android | iOS | Desktop |
 |---|---|---|---|
 | LINE OA chat + Flex | ✓ dark | ✓ light | – (not in kit yet) |
-| LINE rich menu | ✓ | adapt | – |
+| LINE rich menu (12 OA Manager templates + custom + tabs) | ✓ dark L6, ✓ tabbed | ✓ large L4b, ✓ compact C2l | – (not shown on LINE PC) |
 | LINE push / lock screen | adapt (`.android .notif`) | ✓ | – |
 | FB feed single image | ✓ light | ✓ dark | ✓ |
 | FB carousel | adapt | ✓ light | adapt |

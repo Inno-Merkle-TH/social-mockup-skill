@@ -30,3 +30,14 @@ Need another device (Pixel 412×915, iPhone Pro Max 440×956, Galaxy Z Fold)? Co
 | Facebook tabs | top | bottom tab bar with labels |
 | Bottom | gesture pill 24 px or 3-button bar 48 px | home indicator, 34 px safe area |
 | Push | One UI heads-up card, dark, rounded 24 | frosted lock-screen card, rounded 22 |
+
+## Frame proportions (hardware-accurate, 2026-11)
+
+Frames are drawn from the manufacturers' mm specs, not from screenshots. The outer body has the same ratio as the real phone:
+
+| Device | Body (mm) | Screen (CSS px) | Bezel per side | Display radius | Body ratio |
+|---|---|---|---|---|---|
+| iPhone 17 Pro (`.dev.ios`) | 71.9 × 150.0 | 402 × 874 pt (1206×2622 @3x, ≈6.04 pt/mm) | 16 pt | 62 pt | 0.479 |
+| Galaxy S26 (`.dev.android`) | 71.7 × 149.6 | 360 × 780 dp (1080×2340 @3x, ≈5.37 dp/mm) | 12.4 dp | 30 dp | 0.479 |
+
+Side buttons are injected by kit.js at their real positions: on the iPhone, Action, volume ± and Camera Control on the left/right; on the Galaxy, the volume rocker and side key on the right. Device screenshots (`references/screens/device/`) only show *what the app looks like*. They are never used to size the frame.

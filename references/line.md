@@ -9,7 +9,7 @@
 | Flex bubble | `.flex` (`.micro` / `.kilo` / `.mega` widths) → `.fx-hero` `.fx-bd` (`.fx-t1` `.fx-t2` `.fx-sep` `.fx-kv`) `.fx-ft` | brand colours allowed (button/text/bg colours, images); text is ALWAYS the system font (Flex has no custom fonts); buttons radius 8, filled or link only |
 | Flex carousel | `.ln-car > .flex…` | max 12 bubbles; show 1.5 cards so it reads as swipeable |
 | Quick replies | `.ln-qrs > .ln-qr` | sit above the input bar |
-| Rich menu | `.rm > .rm-art.g6` (`g4`, `g3`, `big-left`, `banner-top`, `.compact`) + `.ln-bar` with `<i class="tri up">` | ONE image in reality |
+| Rich menu | `.rm > .rm-art.<template>` + `.ln-bar` with `<i class="tri up">` (open) / `<i class="tri">` (collapsed: omit `.rm`) | ONE image in reality. Templates: large `L6 L4 L4b L3 L2r L2c L1`, compact `C3 C2 C2l C2r C1` (= the 12 in OA Manager); API: `.custom` (children `data-area="x,y,w,h"` in 2500-px image space, ≤20) and `.tabbed` (first child `.rm-tabs`). Tiles: `.rm-t` (icon + label), `.rm-t.hl` (brand fill), `.rm-t.ph` (photo + `<b>` title + `<span>` sub). `?areas=1` outlines tap areas A, B, C… Template sheet: `templates/gallery.html#line-richmenu-templates` |
 | Rich message (imagemap) | `.ln-imap > img` (`style="--r:1"`) | full width, no avatar, no radius: the most common OA broadcast format |
 | Quoted reply / link / jump button | `.ln-quote > b + span`, `.lk`, `.ln-down` | 2026 iOS details |
 | Push / lock screen | `.lock > .date + .clk + .qa.l + .qa.r` and `.notif` (iOS: card in the lower half; add `.top` for the old top position. Android: heads-up card at top) | title = OA name, body = message text or Flex altText |
