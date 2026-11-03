@@ -56,5 +56,5 @@
   - **Text and link footer:** text 15/20 with padding 4 16 16. The link footer is `#F0F2F5` with an UPPERCASE domain, a 17/600 headline and a grey CTA.
   - **Engagement:** a reactions row, then **labelled** Like / Comment / Share.
 - **Right rail:** Sponsored (130 px square thumbnail + headline + domain), Birthdays, Contacts (with video, search and ••• icons, plus online dots). A floating new-message button sits bottom right.
-- **Creative ratio:** use 1:1 on desktop so the whole ad fits in a 1440×900 window. A 4:5 creative is about 737 px tall in the 590 column; show it with `.fbw-media` (default 4:5) and the `fb-desktop-home` composition if needed.
+- **Window and creative:** desktop shots are **1920×1080 (Full HD)**, the most common desktop size, so one whole ad fits in one screen. Never split an ad across two shots. Use a 1:1 creative on desktop (about 850 px for the full ad). A 4:5 creative is about 737 px tall in the 590 column and then pushes the CTA and actions off-screen.
 - **Status:** built from the live site's structure; widths are not yet pixel-calibrated. Add a desktop screenshot to `references/screens/device/` and copy `screens/calibrate/` to tune it.
