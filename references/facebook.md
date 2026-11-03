@@ -1,0 +1,30 @@
+# Facebook
+
+## Surfaces and kit classes
+
+| Surface | Markup | Notes |
+|---|---|---|
+| Feed (Android) | `.screen.light.fb` → `.sb` `.fb-top` `.fb-tabs` `.fb-gap` `.fb-post.grow` `.sysnav` | **tabs on top** on Android |
+| Feed (iOS) | same but `.fb-tabbar` at the bottom (above `.sysnav`) | **tab bar at the bottom** on iOS, with labels |
+| Post header | `.fb-ph` → `.av` `.nm` `.mt` ("Sponsored · 🌐") `.ac` (… ✕) | ads always show "Sponsored"/"ได้รับการสนับสนุน" |
+| Primary text | `.fb-tx` (+ `.more` "See more") | |
+| Single image/video | `.fb-media` (1:1 = 360 px tall on Android, 4:5 = 450 px) + `.fb-link` | |
+| Carousel | `.fb-car > .fb-cc` | show 1.3 cards |
+| Reactions/actions | `.fb-rx` + `.fb-act` | |
+| Stories / Reels ad | `.screen.dark` → `.fb-full` + `.fb-prog` `.fb-who` `.fb-swipe` | 9:16 |
+| Desktop | `.dev.desktop` → `.chrome-tabs` `.chrome-bar` `.fbd` (`.fbd-nav` `.fbd-body` 3 cols, feed 590 px) | |
+| Dark mode | add `.dark` next to `.fb` | |
+
+## Real-platform constraints (Meta Ads)
+
+- Primary text: ~125 characters show before "See more" in feed. Put the hook first.
+- Headline (link bar `.fb-link .t`): ≤40 chars recommended, truncates with ellipsis on mobile around 25–30.
+- CTA button: must be one of Meta's fixed CTA options (Shop now, Learn more, Sign up, Book now, Get offer, Order now, Contact us, Download, Subscribe, Apply now, Send message, Watch more…). In Thai UI these are Meta's own translations (e.g. ซื้อเลย, ดูข้อมูลเพิ่มเติม). Don't write custom CTA labels on the native button; custom CTAs belong inside the creative.
+- Creative ratios: feed 1:1 or 4:5; Stories/Reels 9:16 with ~14% top and ~20% bottom kept free of key text.
+- Carousel: 2–10 cards, 1:1, each with its own headline + link.
+
+## Realism
+
+- Plausible engagement: reactions in the hundreds to low thousands for brand ads; comments roughly 3–10% of reactions.
+- The FB wordmark/glyphs in `icons.svg` may appear in internal reviews **and** pitch/presentation mockups, where they depict the platform. Never place them inside the brand's own creative or deliverable ad assets.
+- Viewer avatar (tab bar "me", desktop top-right): use the user-supplied photo or an initial; never a real third party.

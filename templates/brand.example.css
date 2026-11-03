@@ -1,0 +1,21 @@
+/* brand.css · the ONLY file that changes per brand.
+   Copy to <project>/brand.css and fill from the brand intake (references/intake.md).
+   Rule: these variables are used only inside brand-authored content
+   (Flex messages, rich menu art, ad creatives, avatars). Platform chrome ignores them. */
+
+/* 1. brand fonts: drop licensed files in <project>/brand/fonts/ (never commit unlicensed fonts) */
+/* @font-face { font-family: "BrandHead"; font-weight: 700; src: url("brand/fonts/BrandHead-Bold.woff2") format("woff2"); } */
+
+:root {
+  --brand-name: "Morrow Coffee";              /* fictional demo brand */
+  --brand-primary: #2E1F1A;                   /* main CTA / logo background */
+  --brand-on-primary: #FFF8EE;                /* text on primary */
+  --brand-accent: #E8743B;                    /* badges, highlights, links */
+  --brand-surface: #F6EFE6;                   /* light card / tile background */
+  --brand-grad: linear-gradient(150deg, #5A3A2C 0%, #2E1F1A 100%);
+  --brand-head: "Inter", "Noto Sans Thai", sans-serif;   /* headline font in brand content */
+  --brand-body: "Inter", "Noto Sans Thai", sans-serif;
+  --brand-radius: 22px;                       /* CTA shape: 22px = pill, 8px = rounded, 0 = square */
+  --brand-logo-src: "demo-brand/logo.svg";    /* white/one-colour mark for avatars; path relative to the HTML page */
+  --tt-cta: #E8743B;                          /* TikTok CTA bar colour after it "lights up" */
+}
