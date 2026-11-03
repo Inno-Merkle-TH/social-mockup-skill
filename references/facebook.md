@@ -15,7 +15,22 @@
 | Desktop | `.dev.desktop` → `.chrome-tabs` `.chrome-bar` `.fbd` (`.fbd-nav` `.fbd-body` 3 cols, feed 590 px) | |
 | Dark mode | add `.dark` next to `.fb` | |
 
+## 2026 app anatomy (verified on iPhone 17 Pro captures, Nov 2026, and Meta Help Center)
+
+- **Label**: "**Ad** · 🌐" under the page name. Meta is replacing "Sponsored" with "Ad" (Instagram done Mar 2026; Facebook rolling out, already live on the captured device). Default to "Ad"; use "Sponsored" only if the client asks for the older look. Desktop still shows "Sponsored" in our measurements.
+- **iOS header**: ☰ · facebook wordmark … + · search · Messenger (badge). Classes `.fb-hdr`.
+- **iOS tab bar**: floating glass capsule (iOS 26), icons only, 54 px tall, 16 px above the bottom, selected tab on a grey pill. Feed scrolls underneath. Class `.fb-capsule`.
+- **Android tabs**: top row is still the majority; some accounts got bottom tabs in May 2026. Ask which, default top.
+- **Primary text**: often a single line ending "… See more" (`.fb-tx.one`).
+- **Link bar**: domain (13 px, grey) + title (16 px, 600) + grey CTA button radius 8 (`.fb-link`).
+- **Actions**: icons with counts, no labels (👍 822 💬 40 ↗ 231) + blue like-reaction at right (`.fb-cnt`).
+- **Social context** line on organic posts: "Name reacted" (`.fb-ctx`).
+- **Dark mode**: bg `#252728`, text `#F2F4F7`, secondary `#B0B3B8`, link bar `#333334`, button `#474748`.
+- **Desktop (measured)**: card 500 px, radius 8, shadow `0 1px 2px rgba(0,0,0,.2)`, name 15/600, body 15/20, page bg `#F0F2F5`, top bar 56 px.
+
 ## Real-platform constraints (Meta Ads)
+
+- Ads Guide 2026: feed image/video 4:5 (1440×1800), primary text 50–150, headline 27; carousel 1:1, 2–10 cards, primary 80, headline 20, description 18; Stories 9:16, primary 125, headline 40, keep 14% top / 35% bottom / 6% sides clear; Reels primary 40, headline 55. Full CTA list (54 options) in `references/screens/facebook/SPEC.md`.
 
 - Primary text: ~125 characters show before "See more" in feed. Put the hook first.
 - Headline (link bar `.fb-link .t`): ≤40 chars recommended, truncates with ellipsis on mobile around 25–30.

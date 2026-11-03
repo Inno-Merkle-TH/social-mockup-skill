@@ -11,6 +11,16 @@
 | Safe-zone guide | `.tt-safe` inside `.tt`, visible with `?safe=1` or `export.cjs --safe` | approximate, internal only |
 | Desktop web | `.dev.desktop` → `.ttd` (`.ttd-side`, `.ttd-main > .ttd-vid + .ttd-rail`) | white UI; add `class="wt"` to white sprite icons |
 
+## 2026 app anatomy (verified on iPhone 17 Pro captures, TH, Nov 2026)
+
+- **Top tabs**: LIVE icon · <city> (e.g. Bangkok) · Friends · Following · **For You** · search.
+- **Ad label**: small grey "**Ad**" pill (`.tt-ad`), under the caption, or above a product card. "Sponsored" is the older label (`.tt-sp`).
+- **Name**: plain display name, no "@", 17 px semibold.
+- **CTA**: one of: CTA bar (`.tt-ctab`, translucent → `.lit`), text link like "Watch LIVE ›" (`.tt-ctalink`), or a product/LIVE-shopping card (`.tt-pcard`: thumbnail, title, flash tag, rating, price, red Learn more, ✕).
+- **Rail**: avatar with + (pink ring `.live` when the account is live), like, comment ("Add 1st" when 0), bookmark, share labelled "Share"; brand avatar (`.tt-disc.av2`) replaces the music disc on ads.
+- **Bottom nav**: Home · Shop (red dot) · + · Inbox · Profile, black, 84 px incl. home indicator on iOS.
+- **Desktop web (measured)**: 240 px sidebar + dark rounded "cinema" card; rail and arrows inside the card; 4 px red progress bar + controls row.
+
 ## Real-platform constraints
 
 - Video 9:16 (1080×1920). TikTok publishes downloadable safe-zone templates rather than pixel values. Practical guide: keep key text/logo out of the right ~14% (rail), bottom ~25% (caption + CTA), top ~13% (tabs). Longer captions shrink the safe area.

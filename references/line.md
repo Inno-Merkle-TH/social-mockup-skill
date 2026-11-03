@@ -20,6 +20,13 @@
 - **Chat start**: a new conversation is top-anchored (date chip "Today/วันนี้" then messages). Only long threads fill from the bottom.
 - **Timestamps**: right of the last bubble in a group (left for user's own). Use "Read" (อ่านแล้ว) on user bubbles.
 
+## Themes (verified)
+
+- `.line-light`: **2026 iOS app** (iPhone capture, Nov 2026): grey header `#EBEEF0` incl. status bar, "‹ 99+" + icons `#1175BD`, green shield + OA name in blue, "Automated responses" subtitle; white chat; white bubbles with `#DAE9F5` hairline; "Today" pill `#B7D5EB`; rich-menu bar white with blue "เมนู ▾". The user's LINE theme can change header/wallpaper.
+- `.line-classic`: the look in LINE Developers docs (blue wallpaper `#8BABD7`, header on wallpaper, green sent bubble `#6CE67B`).
+- `.line-dark`: Android dark, verified on earlier client projects.
+- Flex geometry from the Flex Simulator renderer: mega 300 px max (80% of chat width) radius 17; kilo 260 / micro 160 radius 10; carousel starts 7 px from the edge, 9 px gap; text xs 13, sm 14, md 16, lg 19, xl 22; button md 52 px / sm 40 px, radius 8, primary `#17C950`, secondary `#DCDFE5`, link `#42659A`; separator `#D4D6DA`.
+
 ## Theme notes
 
 - `.line-dark` values were verified against Android screenshots [V]. `.line-light` is an estimate [~]. Calibrate with `references/screens/` before shipping light-mode work. The chat wallpaper is user-themable, so `--ln-bg` can be any plain colour.

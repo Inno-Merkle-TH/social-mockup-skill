@@ -1,6 +1,6 @@
 # Reference screenshots (calibration)
 
-Currently empty. Until someone adds screenshots, treat [~] values as estimates and say so if a client asks about pixel-accuracy.
+Calibrated Nov 2026 from: `device/` (real iPhone 17 Pro captures: TikTok ×2, Facebook ×2, LINE OA ×1), `tiktok/`, `facebook/`, `line/` (official docs/help images + live web DOM measurements; each folder has a SPEC.md with sources). Images are git-ignored (third-party UI/content); SPEC.md files are committed. Android app captures are still missing; add them when you can.
 
 Apps change their UI every few months. Kit values marked [~] in kit.css are estimates; [V] were matched to real screenshots.
 

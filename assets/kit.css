@@ -165,7 +165,7 @@ body.capture .board { padding: 0; }
    theme: .screen.line-dark | .screen.line-light
    ===================================================================== */
 .line-dark { --ln-bg: #111111; --ln-head: #111111; --ln-head-fg: #fff; --ln-sub: #949494; --ln-bub: #2A2A2A; --ln-bub-fg: #fff; --ln-me: #3BBF5B; --ln-me-fg: #000; --ln-tm: #868686; --ln-date: #0F0F0F; --ln-bar: #1F1F1F; --ln-bar-fg: #fff; --ln-qr: #262626; --ln-qr-b: #3C3C3C; background: var(--ln-bg); color: #fff; } /* [V] */
-.line-light { --ln-bg: #FFFFFF; --ln-head: #FFFFFF; --ln-head-fg: #111; --ln-sub: #8A8A8A; --ln-bub: #F1F2F4; --ln-bub-fg: #111; --ln-me: #A3EB7E; --ln-me-fg: #111; --ln-tm: #9A9A9A; --ln-date: rgba(0,0,0,.28); --ln-bar: #FFFFFF; --ln-bar-fg: #111; --ln-qr: #fff; --ln-qr-b: #DADADA; background: var(--ln-bg); color: #111; } /* [~] chat wallpaper is user-themable: set --ln-bg */
+.line-light { --ln-bg: #8BABD7; --ln-head: transparent; --ln-head-fg: #111; --ln-sub: #324B6B; --ln-bub: #FFFFFF; --ln-bub-fg: #111; --ln-me: #6CE67B; --ln-me-fg: #111; --ln-tm: #324B6B; --ln-date: #7892B6; --ln-bar: #FFFFFF; --ln-bar-fg: #111; --ln-qr: #fff; --ln-qr-b: #D4D6DA; background: var(--ln-bg); color: #111; } /* [V] LINE Developers iOS screenshots 2024–26: default OA wallpaper #8BABD7, header sits on the wallpaper */
 .line-light .sb, .line-dark .sb { background: var(--ln-head); }
 .line-dark .sysnav { background: #000; } .line-light .sysnav { background: var(--ln-bar); }
 
@@ -178,7 +178,7 @@ body.capture .board { padding: 0; }
 .ln-head .sub { font-size: 10.5px; color: var(--ln-sub); margin-top: 1px; }
 .ln-head .acts { display: flex; gap: 14px; padding-right: 6px; }
 .ln-head .acts svg { width: 22px; height: 22px; }
-.line-light .ln-head { border-bottom: .5px solid #E5E5E5; }
+.line-light .sb { background: transparent; }
 
 .ln-msgs { flex: 1; min-height: 0; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-start; padding: 12px 0 10px; }
 .ln-msgs.bottom { justify-content: flex-end; }   /* use when the thread is long */
@@ -203,29 +203,35 @@ body.capture .board { padding: 0; }
 
 /* bottom bar: input or rich-menu toggle */
 .ln-bar { height: 46px; background: var(--ln-bar); color: var(--ln-bar-fg); display: flex; align-items: center; justify-content: center; gap: 5px; position: relative; font-size: 15px; }
-.line-light .ln-bar { border-top: .5px solid #E5E5E5; }
+.line-light .ln-bar { border-top: .5px solid #D4D6DA; font-size: 13px; }
 .ln-bar .kb { position: absolute; left: 14px; top: 11px; }
 .ln-bar .cv { width: 12px; height: 12px; }
 .ln-input { height: 50px; background: var(--ln-bar); display: flex; align-items: center; gap: 12px; padding: 0 12px; color: var(--ln-sub); }
 .ln-input .fld { flex: 1; height: 36px; border-radius: 18px; background: rgba(127,127,127,.16); padding: 0 14px; display: flex; align-items: center; font-size: 15px; }
 
 /* Flex message · brand-authored → brand vars allowed here */
-.flex { width: 252px; background: #fff; border-radius: 18px; overflow: hidden; color: #111; }
-.flex.mega { width: 280px; } .flex.kilo { width: 252px; } .flex.micro { width: 172px; }
+.flex { width: min(300px, calc(80vw)); max-width: 80%; background: #fff; border-radius: 17px; overflow: hidden; color: #111; flex: none; } /* default = mega (300 max, 80% of chat width) */
+.ln-line .flex { width: 270px; } .ios .ln-line .flex { width: 296px; }
+.flex.kilo, .ln-line .flex.kilo { width: 260px; border-radius: 10px; } .flex.hecto { width: 241px; border-radius: 10px; } .flex.deca { width: 220px; border-radius: 10px; } .flex.micro, .ln-line .flex.micro { width: 160px; border-radius: 10px; }
 .flex .fx-hero { position: relative; overflow: hidden; background: var(--brand-surface); }
 .flex .fx-hero > img { width: 100%; height: 100%; object-fit: cover; }
-.flex .fx-bd { padding: 16px 16px 4px; }
-.flex .fx-t1 { font: 700 17px/1.35 var(--brand-head); }
-.flex .fx-t2 { font-size: 13px; line-height: 1.5; color: #555; margin-top: 6px; font-family: var(--brand-body); }
-.flex .fx-sep { height: 1px; background: #EBEBEB; margin: 14px 0 4px; }
-.flex .fx-kv { display: flex; justify-content: space-between; gap: 10px; font-size: 13px; color: #666; margin-top: 8px; }
+.flex .fx-bd { padding: 20px 20px 4px; }
+.flex .fx-t1 { font: 700 19px/1.3 var(--brand-head); } /* lg */
+.flex .fx-t2 { font-size: 14px; line-height: 1.45; color: #666; margin-top: 8px; font-family: var(--brand-body); } /* sm */
+.flex .fx-sep { height: .5px; background: #D4D6DA; margin: 16px 0 4px; }
+.flex .fx-kv { display: flex; justify-content: space-between; gap: 10px; font-size: 14px; color: #888; margin-top: 8px; }
 .flex .fx-kv b { color: #111; text-align: right; }
-.flex .fx-ft { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 8px; }
-.cta { height: 44px; border-radius: var(--brand-radius); display: flex; align-items: center; justify-content: center; text-align: center; font: 700 14px var(--brand-body); padding: 0 12px; }
+.flex .fx-ft { padding: 10px; display: flex; flex-direction: column; gap: 8px; }
+.cta { height: 52px; border-radius: var(--brand-radius); display: flex; align-items: center; justify-content: center; text-align: center; font: 700 14px var(--brand-body); padding: 0 12px; }
 .cta.pri { background: var(--brand-primary); color: var(--brand-on-primary); }
 .cta.sec { box-shadow: inset 0 0 0 1.5px var(--brand-primary); color: var(--brand-primary); background: #fff; }
-.cta.link { color: var(--brand-accent); height: 36px; }
-.ln-car { display: flex; gap: 8px; padding-left: 52px; overflow: hidden; margin-bottom: 8px; }
+.cta.sm { height: 40px; }
+.cta.link { color: #42659A; height: 52px; font-weight: 400; font-size: 16px; } /* LINE default link button */
+.cta.line-pri { background: #17C950; color: #fff; border-radius: 8px; } .cta.line-sec { background: #DCDFE5; color: #111; border-radius: 8px; } /* LINE default button styles */
+.ln-car { display: flex; gap: 9px; padding-left: 7px; overflow: hidden; margin-bottom: 4px; align-items: flex-start; } /* [V] carousel starts at the screen edge, under the avatar row */
+.ln-car .flex { width: 260px; border-radius: 10px; }
+.ln-input svg { width: 24px; height: 24px; color: #111; }
+.line-dark .ln-input svg { color: #fff; }
 
 /* Rich menu · ONE designed image in real life (2500×1686 / 2500×843).
    Build the artwork inside .rm-art; tiles are just layout for the artwork. */
@@ -324,52 +330,101 @@ body.capture .board { padding: 0; }
 .fbd-rail .h { color: #65676B; font-weight: 600; font-size: 17px; margin: 6px 0 12px; }
 
 /* =====================================================================
-   TIKTOK · For You in-feed ad / Spark Ad / organic, desktop web
+   TIKTOK · calibrated 2026-11 against official TikTok Ads Help mocks + live tiktok.com
+   (references/screens/tiktok/SPEC.md). App values scaled from 375pt mocks [V≈]; desktop measured [V].
    ===================================================================== */
 .tt { position: relative; flex: 1; overflow: hidden; background: #000; color: #fff; font-family: var(--f-tiktok); }
 .tt .vid { position: absolute; inset: 0; }
 .tt .vid > img, .tt .vid > .ph-img { width: 100%; height: 100%; object-fit: cover; }
-.tt .vid::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 40%; background: linear-gradient(180deg, transparent, rgba(0,0,0,.55)); }
-.tt-top { position: absolute; left: 0; right: 0; height: 44px; z-index: 5; display: flex; align-items: center; justify-content: center; gap: 18px; font: 600 16.5px var(--f-tiktok); text-shadow: 0 1px 2px rgba(0,0,0,.35); }
-.android .tt-top { top: 38px; } .ios .tt-top { top: 56px; }
-.tt-top span { color: rgba(255,255,255,.7); }
+.tt .vid::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 38%; background: linear-gradient(180deg, transparent, rgba(0,0,0,.45)); }
+.tt .vid::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 18%; background: linear-gradient(180deg, rgba(0,0,0,.28), transparent); z-index: 1; }
+/* top tabs: LIVE icon · Explore · Following · For You · search */
+.tt-top { position: absolute; left: 0; right: 0; height: 44px; z-index: 5; display: flex; align-items: center; justify-content: center; gap: 20px; font: 600 17px var(--f-tiktok); text-shadow: 0 1px 2px rgba(0,0,0,.3); }
+.android .tt-top { top: 36px; } .ios .tt-top { top: 54px; }
+.tt-top span { color: rgba(255,255,255,.72); }
 .tt-top .on { color: #fff; font-weight: 700; position: relative; }
-.tt-top .on::after { content: ""; position: absolute; left: 50%; margin-left: -14px; bottom: -8px; width: 28px; height: 3px; border-radius: 2px; background: #fff; }
+.tt-top .on::after { content: ""; position: absolute; left: 50%; margin-left: -15px; bottom: -8px; width: 30px; height: 2.5px; border-radius: 2px; background: #fff; }
 .tt-top .lv { position: absolute; left: 14px; } .tt-top .se { position: absolute; right: 14px; }
-.tt-rail { position: absolute; right: 6px; width: 54px; z-index: 5; display: flex; flex-direction: column; align-items: center; gap: 14px; font: 600 12.5px var(--f-tiktok); text-shadow: 0 1px 2px rgba(0,0,0,.4); bottom: 112px; }
-.tt-rail .it { display: flex; flex-direction: column; align-items: center; gap: 2px; }
-.tt-rail .it svg { width: 34px; height: 34px; filter: drop-shadow(0 1px 2px rgba(0,0,0,.3)); }
-.tt-rail .av { width: 46px; height: 46px; border-radius: 50%; border: 1.5px solid #fff; position: relative; margin-bottom: 8px; background: var(--brand-primary) var(--brand-logo) center / 62% no-repeat; }
+/* right rail: avatar(+), like, comment, bookmark, share, music disc */
+.tt-rail { position: absolute; right: 8px; width: 52px; z-index: 5; display: flex; flex-direction: column; align-items: center; gap: 16px; font: 600 12.5px var(--f-tiktok); text-shadow: 0 1px 1.5px rgba(0,0,0,.35); }
+.android .tt-rail { bottom: 158px; } .ios .tt-rail { bottom: 176px; }
+.tt-rail .it { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+.tt-rail .it svg { width: 38px; height: 38px; filter: drop-shadow(0 1px 1.5px rgba(0,0,0,.25)); opacity: .97; }
+.tt-rail .av { width: 48px; height: 48px; border-radius: 50%; border: 1px solid #fff; position: relative; margin-bottom: 8px; background: var(--brand-primary) var(--brand-logo) center / 62% no-repeat; }
 .tt-rail .av img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
-.tt-rail .av b { position: absolute; left: 50%; bottom: -9px; margin-left: -10px; width: 20px; height: 20px; border-radius: 50%; background: #FE2C55; color: #fff; font: 700 15px/19px var(--f-tiktok); text-align: center; }
-.tt-rail .disc { width: 44px; height: 44px; border-radius: 50%; background: radial-gradient(circle, #555 0 28%, #1A1A1A 30% 100%); border: 8px solid #222; margin-top: 4px; }
-.tt-cap { position: absolute; left: 12px; right: 76px; z-index: 5; bottom: 70px; font-size: 14.5px; line-height: 1.38; text-shadow: 0 1px 2px rgba(0,0,0,.35); }
-.tt-cap .nm { font-weight: 700; font-size: 16px; display: flex; align-items: center; gap: 4px; }
-.tt-cap .tx { margin-top: 6px; }
-.tt-cap .more { font-weight: 700; }
-.tt-cap .sp { display: inline-block; margin-top: 6px; background: rgba(255,255,255,.18); color: rgba(255,255,255,.9); font-size: 11.5px; font-weight: 600; padding: 2px 6px; border-radius: 3px; }
-.tt-cap .snd { display: flex; align-items: center; gap: 6px; margin-top: 6px; font-size: 13.5px; }
-.tt-ctab { margin-top: 10px; height: 40px; border-radius: 4px; display: flex; align-items: center; justify-content: space-between; padding: 0 12px; font: 600 15px var(--f-tiktok); background: rgba(255,255,255,.22); color: #fff; backdrop-filter: blur(6px); }
+.tt-rail .av b { position: absolute; left: 50%; bottom: -10px; margin-left: -10px; width: 20px; height: 20px; border-radius: 50%; background: #FE2C55; color: #fff; font: 700 15px/19px var(--f-tiktok); text-align: center; }
+.tt-disc { position: absolute; right: 10px; z-index: 5; width: 46px; height: 46px; border-radius: 50%; background: radial-gradient(circle, var(--brand-primary) 0 30%, #2A2A2A 31% 100%); border: 7px solid #1E1E1E; box-shadow: 0 0 0 1px rgba(255,255,255,.08); }
+.tt-disc::after { content: ""; position: absolute; inset: 9px; border-radius: 50%; background: var(--brand-logo) center / 70% no-repeat; }
+.android .tt-disc { bottom: 84px; } .ios .tt-disc { bottom: 96px; }
+/* caption stack: [product chip] · @name · caption + Sponsored pill · ♫ music · CTA */
+.tt-cap { position: absolute; left: 12px; right: 84px; z-index: 5; font-size: 15px; line-height: 1.3; text-shadow: 0 1px 1.5px rgba(0,0,0,.3); display: flex; flex-direction: column; gap: 6px; }
+.android .tt-cap { bottom: 86px; } .ios .tt-cap { bottom: 98px; }
+.tt-cap .nm { font-weight: 600; font-size: 17px; display: flex; align-items: center; gap: 4px; }
+.tt-cap .tx { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.tt-cap .tx.l4 { -webkit-line-clamp: 4; }
+.tt-cap .more { font-weight: 600; }
+.tt-sp { display: inline-block; vertical-align: 1px; margin-left: 4px; background: rgba(255,255,255,.2); color: rgba(255,255,255,.85); font: 500 10.5px/16px var(--f-tiktok); padding: 0 4px; border-radius: 2px; text-shadow: none; }
+.tt-cap .snd { display: flex; align-items: center; gap: 6px; font-size: 14px; }
+.tt-cap .snd svg { width: 14px; height: 14px; flex: none; }
+.tt-chip { align-self: flex-start; display: flex; align-items: center; gap: 6px; max-width: 100%; height: 28px; padding: 0 8px; border-radius: 4px; background: rgba(0,0,0,.35); font-size: 13.5px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+/* CTA bar: translucent (first seconds) → .lit = filled colour. Centred label + › */
+.tt-ctab { margin-top: 4px; height: 36px; border-radius: 4px; display: flex; align-items: center; justify-content: center; gap: 4px; font: 600 14.5px var(--f-tiktok); background: rgba(255,255,255,.2); color: #fff; text-shadow: none; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
+.tt-ctab svg { width: 15px; height: 15px; transform: rotate(-90deg); }
 .tt-ctab.lit { background: var(--tt-cta, #FE2C55); }
-.tt-nav { position: absolute; left: 0; right: 0; bottom: 0; z-index: 6; background: #000; display: grid; grid-template-columns: repeat(5,1fr); font: 500 10.5px var(--f-tiktok); color: rgba(255,255,255,.85); }
-.android .tt-nav { height: 74px; padding-bottom: 24px; } .ios .tt-nav { height: 84px; padding-bottom: 32px; }
-.tt-nav span { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; }
-.tt-nav svg { width: 25px; height: 25px; }
-.tt-nav .on { color: #fff; font-weight: 700; }
-.tt-plus { width: 44px; height: 29px; border-radius: 8px; background: #fff; position: relative; box-shadow: -3px 0 0 #25F4EE, 3px 0 0 #FE2C55; color: #000; font: 700 22px/29px var(--f-tiktok); text-align: center; }
-/* safe-zone guide overlay (approximate, TikTok publishes template files, not px). Toggle with ?safe=1 */
-.tt-safe { display: none; position: absolute; z-index: 9; pointer-events: none; border: 2px dashed #00E5FF; left: 6%; right: 14%; top: 13%; bottom: 25%; }
+/* bottom tab bar: black, 49 + system inset */
+.tt-nav { position: absolute; left: 0; right: 0; bottom: 0; z-index: 6; background: #000; display: grid; grid-template-columns: repeat(5,1fr); font: 600 10px var(--f-tiktok); color: rgba(255,255,255,.75); }
+.android .tt-nav { height: 73px; padding-bottom: 24px; } .ios .tt-nav { height: 83px; padding-bottom: 34px; }
+.tt-nav span { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; position: relative; }
+.tt-nav svg { width: 26px; height: 26px; }
+.tt-nav .on { color: #fff; }
+.tt-nav .bdg { position: absolute; top: 2px; left: 50%; margin-left: 4px; min-width: 17px; height: 17px; border-radius: 9px; background: #FE2C55; color: #fff; font: 700 11px/17px var(--f-tiktok); text-align: center; padding: 0 4px; }
+.tt-plus { width: 44px; height: 30px; border-radius: 9px; background: #fff; position: relative; box-shadow: -3.5px 0 0 #25F4EE, 3.5px 0 0 #FE2C55; color: #000; font: 700 22px/30px var(--f-tiktok); text-align: center; }
+/* official safe zone (720×1280 template → %): top 12.5%, sides 11%, bottom 34%, rail x≥72% for bottom 56% */
+.tt-safe { display: none; position: absolute; inset: 0; z-index: 9; pointer-events: none; }
+.tt-safe::before { content: ""; position: absolute; left: 11.1%; right: 11.1%; top: 12.5%; bottom: 34.4%; outline: 2px dashed #00E5FF; }
+.tt-safe::after { content: ""; position: absolute; left: 72.2%; right: 0; top: 43.8%; bottom: 0; background: rgba(255,0,80,.18); }
 body.safe .tt-safe { display: block; }
-/* desktop web */
-.ttd { display: flex; height: 100%; background: #fff; color: #161823; font-family: var(--f-tiktok); }
-.ttd-side { width: 240px; padding: 16px 12px; display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 17px; }
-.ttd-side .it { height: 44px; display: flex; align-items: center; gap: 12px; padding: 0 8px; border-radius: 6px; }
-.ttd-side .on { color: #FE2C55; }
-.ttd-main { flex: 1; display: flex; justify-content: center; align-items: center; gap: 18px; padding: 20px; }
-.ttd-vid { height: calc(100% - 8px); aspect-ratio: 9/16; border-radius: 16px; overflow: hidden; position: relative; background: #000; color: #fff; }
-.ttd-vid > img, .ttd-vid > .ph-img { width: 100%; height: 100%; object-fit: cover; }
-.ttd-rail { display: flex; flex-direction: column; gap: 16px; align-self: flex-end; padding-bottom: 20px; font: 700 12px var(--f-tiktok); color: #161823; text-align: center; }
-.ttd-rail i { width: 48px; height: 48px; border-radius: 50%; background: #F1F1F2; display: flex; align-items: center; justify-content: center; margin-bottom: 4px; color: #161823; }
+
+/* ---------- TikTok web (2026 "cinema" layout, measured at 1440×900) [V] ---------- */
+.ttd { display: flex; height: 100%; background: #fff; color: #000; font-family: var(--f-tiktok); }
+.ttd-side { width: 240px; flex: none; padding: 16px 16px 16px; display: flex; flex-direction: column; overflow: hidden; }
+.ttd-logo { display: flex; align-items: center; gap: 4px; height: 28px; margin: 4px 8px 16px; font: 800 24px/1 var(--f-tiktok); letter-spacing: -.6px; }
+.ttd-logo svg { width: 24px; height: 26px; }
+.ttd-search { height: 40px; border-radius: 20px; background: rgba(0,0,0,.05); display: flex; align-items: center; gap: 10px; padding: 0 14px; color: rgba(0,0,0,.34); font-size: 14px; margin-bottom: 8px; }
+.ttd-search svg { width: 20px; height: 20px; color: rgba(0,0,0,.6); }
+.ttd-side .it { height: 40px; margin-top: 4px; display: flex; align-items: center; gap: 16px; padding: 0 8px; font: 500 16px var(--f-tiktok); color: #000; }
+.ttd-side .it svg { width: 24px; height: 24px; }
+.ttd-side .on { color: #FE2C55; font-weight: 600; }
+.ttd-side hr { border: 0; border-top: 1px solid rgba(0,0,0,.08); margin: 14px 8px; }
+.ttd-side .sec { color: rgba(0,0,0,.5); font: 600 13px var(--f-tiktok); margin: 0 8px 6px; }
+.ttd-acc { display: flex; align-items: center; gap: 10px; height: 44px; padding: 0 8px; font: 600 14px var(--f-tiktok); }
+.ttd-acc i { width: 32px; height: 32px; border-radius: 50%; flex: none; background: linear-gradient(135deg, #F3B4C8, #9C7BE0); }
+.ttd-acc small { display: block; color: rgba(0,0,0,.5); font-weight: 400; font-size: 12px; }
+.ttd-foot { margin: 0 8px; font: 700 15px/27px var(--f-tiktok); color: rgba(0,0,0,.5); }
+.ttd-foot small { display: block; font: 600 12px/20px var(--f-tiktok); }
+.ttd-pills { margin-top: auto; display: flex; gap: 8px; }
+.ttd-pills span { height: 30px; padding: 0 10px; border-radius: 15px; background: rgba(0,0,0,.05); font: 600 13px/30px var(--f-tiktok); display: flex; align-items: center; gap: 5px; }
+.ttd-main { flex: 1; padding: 16px 16px 16px 0; min-width: 0; }
+.ttd-card { position: relative; height: 100%; border-radius: 16px; overflow: hidden; background: radial-gradient(ellipse at 50% 45%, rgba(255,255,255,.07), transparent 60%), #0D0D0D; color: #fff; }
+.ttd-vid { position: absolute; top: 0; bottom: 0; left: 50%; transform: translateX(-50%); aspect-ratio: 9 / 16; overflow: hidden; background: #000; }
+.ttd-vid > img, .ttd-vid > .ph-img, .ttd-vid > .art { width: 100%; height: 100%; object-fit: cover; }
+.ttd-cap { position: absolute; left: 20px; bottom: 72px; max-width: 480px; z-index: 3; display: flex; flex-direction: column; gap: 8px; text-shadow: 0 1px 1px rgba(0,0,0,.3); }
+.ttd-cap .who { display: flex; align-items: center; gap: 8px; font: 500 17px var(--f-tiktok); color: #F6F6F6; }
+.ttd-cap .who i { width: 24px; height: 24px; border-radius: 50%; background: var(--brand-primary) var(--brand-logo) center / 62% no-repeat; }
+.ttd-cap .who b { height: 28px; padding: 0 8px; border-radius: 14px; background: #FE2C55; color: #fff; font: 600 13px/28px var(--f-tiktok); text-shadow: none; }
+.ttd-cap .tx { font: 400 14px/18.2px var(--f-tiktok); color: #F6F6F6; }
+.ttd-cap .tt-ctab { width: 320px; }
+.ttd-rail { position: absolute; right: 26px; bottom: 76px; z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 14px; font: 700 12px var(--f-tiktok); color: rgba(255,255,255,.75); }
+.ttd-rail div { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.ttd-rail svg { width: 22px; height: 22px; opacity: .9; }
+.ttd-arrows { position: absolute; right: 24px; top: 50%; transform: translateY(-60%); z-index: 3; display: flex; flex-direction: column; gap: 16px; }
+.ttd-arrows i { width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,.19); display: flex; align-items: center; justify-content: center; color: #fff; }
+.ttd-arrows i:first-child { opacity: .45; }
+.ttd-arrows svg { width: 18px; height: 18px; }
+.ttd-prog { position: absolute; left: 8px; right: 8px; bottom: 52px; height: 4px; border-radius: 2px; background: rgba(255,255,255,.4); z-index: 3; }
+.ttd-prog i { display: block; height: 100%; width: var(--p, 40%); border-radius: 2px; background: #FE2C55; }
+.ttd-ctrl { position: absolute; left: 20px; right: 20px; bottom: 14px; height: 24px; z-index: 3; display: flex; align-items: center; gap: 18px; color: rgba(255,255,255,.28); font: 500 14px var(--f-tiktok); }
+.ttd-ctrl .sp { flex: 1; }
 
 /* =====================================================================
    PLACEHOLDERS (never ship to client with these visible)
@@ -382,3 +437,138 @@ body.safe .tt-safe { display: block; }
 .screen.fb, .screen.tt { position: absolute; }
 /* sprite icons drawn in white (tt-heart/comment/save/share/live/search) → add class "wt" on light UIs */
 svg.wt { filter: invert(1) brightness(.12); }
+
+/* ---------------------------------------------------------------------
+   FILL RULES: real apps never show blank screen areas.
+   Feeds: the next post always peeks below the ad. Desktop: sidebars/rails are populated.
+   --------------------------------------------------------------------- */
+/* FB: next (organic) post peeking below the ad. Put it inside a .fb-feed wrapper that clips */
+.fb-feed { flex: 1; min-height: 0; overflow: hidden; display: flex; flex-direction: column; }
+.fb-feed > * { flex: none; }
+.fb-friend { width: 40px; height: 40px; border-radius: 50%; flex: none; background: linear-gradient(135deg, #9FB4D6, #6E86B3); }
+.fb-peek-img { height: 300px; background: linear-gradient(160deg, #C9D6E3 0%, #9DB0C4 55%, #7C8FA6 100%); position: relative; overflow: hidden; }
+.fb-peek-img::after { content: ""; position: absolute; left: -10%; right: -10%; bottom: -30%; height: 70%; border-radius: 50%; background: #6F8A6B; opacity: .7; }
+/* FB composer + stories row (top of home feed) */
+.fb-compose { display: flex; align-items: center; gap: 8px; padding: 8px 12px; }
+.fb-compose .in { flex: 1; height: 38px; border-radius: 19px; border: 1px solid var(--fb-sep); display: flex; align-items: center; padding: 0 14px; color: var(--fb-sub); font-size: 15px; }
+/* FB desktop: coloured shortcut icons, contacts */
+.fbd-side i.c { display: flex; align-items: center; justify-content: center; color: #fff; }
+.fbd-side i.c svg { width: 20px; height: 20px; }
+.fbd-side hr, .fbd-rail hr { border: 0; border-top: 1px solid #CED0D4; margin: 8px 8px; }
+.fbd-side .h, .fbd-rail .h { color: #65676B; font-weight: 600; font-size: 17px; margin: 6px 8px 10px; }
+.fbd-ad { display: flex; gap: 12px; align-items: center; margin-bottom: 14px; }
+.fbd-ad .im { width: 130px; height: 130px; border-radius: 8px; overflow: hidden; position: relative; flex: none; }
+.fbd-ad div:last-child { font-size: 14px; line-height: 1.35; }
+.fbd-ad small { color: #65676B; font-size: 13px; }
+.fbd-contact { display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 8px; font-size: 15px; font-weight: 500; }
+.fbd-contact i { width: 36px; height: 36px; border-radius: 50%; position: relative; flex: none; background: linear-gradient(135deg, #B9C6DA, #7D90B1); }
+.fbd-contact i.on::after { content: ""; position: absolute; right: -1px; bottom: -1px; width: 11px; height: 11px; border-radius: 50%; background: #31A24C; border: 2px solid #F0F2F5; }
+.fbd-stories { display: flex; gap: 8px; }
+.fbd-stories div { flex: 1; height: 200px; border-radius: 10px; background: linear-gradient(170deg, #A9B9CC, #67788F); position: relative; overflow: hidden; }
+.fbd-stories div:first-child { background: #fff; box-shadow: 0 1px 2px rgba(0,0,0,.2); }
+.fbd-compose { background: #fff; border-radius: 10px; box-shadow: 0 1px 2px rgba(0,0,0,.2); padding: 12px 16px; display: flex; gap: 8px; align-items: center; }
+.fbd-compose .in { flex: 1; height: 40px; border-radius: 20px; background: #F0F2F5; display: flex; align-items: center; padding: 0 12px; color: #65676B; font-size: 16px; }
+
+
+/* =====================================================================
+   FACEBOOK APP 2026 · measured from iPhone 17 Pro screenshots (references/screens/device/IMG_0908-0909) [V]
+   Use with .fb (light) or .fb.dark. Markup: .fb-hdr · .fb-feed > (.fb-post …) · .fb-capsule (iOS) 
+   ===================================================================== */
+.fb.dark { --fb-bg: #252728; --fb-fg: #F2F4F7; --fb-sub: #B0B3B8; --fb-sep: #3A3B3C; --fb-chip: #474748; --fb-link: #333334; --fb-gap: #18191A; }
+.fb { --fb-link: #F0F2F5; }
+.fb-hdr { height: 56px; display: flex; align-items: center; padding: 0 12px; gap: 12px; background: var(--fb-bg); color: var(--fb-fg); }
+.fb-hdr .wm { height: 23px; width: 128px; color: var(--fb-fg); }
+.fb:not(.dark) .fb-hdr .wm { color: #0866FF; }
+.fb-hdr .sp { flex: 1; }
+.fb-hdr .ic { position: relative; width: 36px; height: 36px; }
+.fb-hdr .ic svg { width: 28px; height: 28px; }
+.fb-hdr .ic .fb-bdg { top: -4px; left: auto; right: -6px; margin: 0; }
+.fb-hdr .menu svg { width: 22px; height: 22px; }
+/* post header (2026): 40px avatar, name 16/600, "Ad · 🌐" 13px */
+.fb-ph .nm { font-size: 16px; font-weight: 600; }
+.fb-ph .nm .vf { width: 16px; height: 16px; color: #0866FF; }
+.fb-ph .mt { font-size: 13px; }
+.fb-tx { font-size: 16px; line-height: 1.3; padding: 8px 12px 10px; }
+.fb-tx.one { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.fb-tx .more { font-weight: 400; }
+/* link/CTA bar under media */
+.fb-link { background: var(--fb-link); padding: 0 12px; height: 54px; }
+.fb-link .d { text-transform: none; font-size: 13px; }
+.fb-link .t { font-size: 16px; font-weight: 600; max-width: 250px; }
+.fb-link .b { height: 34px; line-height: 34px; padding: 0 12px; border-radius: 8px; background: var(--fb-chip); font-size: 15px; font-weight: 600; }
+/* action row with counts, no labels (2026) */
+.fb-cnt { height: 44px; display: flex; align-items: center; gap: 20px; padding: 0 12px; color: var(--fb-sub); font-size: 15px; }
+.fb-cnt span { display: flex; align-items: center; gap: 6px; }
+.fb-cnt svg { width: 24px; height: 24px; }
+.fb-cnt .rx { margin-left: auto; width: 20px; height: 20px; }
+.fb-ctx { display: flex; align-items: center; gap: 8px; padding: 0 12px 10px; font-size: 14px; color: var(--fb-sub); }
+.fb-ctx i { width: 20px; height: 20px; border-radius: 50%; flex: none; background: linear-gradient(135deg, #F0B37E, #C46A6A); }
+.fb-div { height: 4px; background: var(--fb-gap); }
+.fb.dark .fb-div { background: #18191A; }
+/* iOS 26 floating glass tab bar */
+.fb-capsule { position: absolute; left: 12px; right: 12px; bottom: 16px; height: 54px; border-radius: 27px; z-index: 20; display: grid; grid-template-columns: repeat(6, 1fr); align-items: center; padding: 0 6px;
+  background: rgba(37,39,40,.82); box-shadow: inset 0 0 0 .7px rgba(255,255,255,.18), 0 6px 20px rgba(0,0,0,.35); backdrop-filter: blur(18px) saturate(1.6); -webkit-backdrop-filter: blur(18px) saturate(1.6); color: var(--fb-fg); }
+.fb:not(.dark) .fb-capsule { background: rgba(255,255,255,.82); box-shadow: inset 0 0 0 .7px rgba(0,0,0,.1), 0 6px 20px rgba(0,0,0,.15); color: #050505; }
+.fb-capsule span { height: 42px; display: flex; align-items: center; justify-content: center; position: relative; border-radius: 21px; }
+.fb-capsule .on { background: #3A3C3D; }
+.fb:not(.dark) .fb-capsule .on { background: rgba(0,0,0,.07); color: #0866FF; }
+.fb-capsule svg { width: 26px; height: 26px; }
+.fb-capsule .me { width: 30px; height: 30px; border-radius: 50%; background: linear-gradient(135deg, #8B9DC3, #5B6E96); box-shadow: 0 0 0 1.5px var(--fb-fg); }
+.fb-capsule .fb-bdg { top: 0; left: 50%; margin-left: 4px; }
+.fb .fb-feed { position: relative; }
+.fb.dark .fb-capsule .on { color: #F2F4F7; }
+
+/* ---------- TikTok app 2026 (TH) · measured from iPhone 17 Pro captures IMG_0906/0907 [V] ---------- */
+.tt-top { gap: 16px; font-size: 16.5px; }
+.tt-ad { display: inline-block; align-self: flex-start; background: rgba(255,255,255,.2); color: rgba(255,255,255,.9); font: 600 11px/16px var(--f-tiktok); padding: 0 5px; border-radius: 3px; text-shadow: none; }
+.tt-cap .nm.plain { font-weight: 600; font-size: 17px; }
+.tt-ctalink { align-self: center; display: flex; align-items: center; gap: 6px; margin-top: 6px; font: 600 15.5px var(--f-tiktok); color: rgba(255,255,255,.92); }
+.tt-ctalink svg { width: 14px; height: 14px; transform: rotate(-90deg); }
+/* product/LIVE shopping card that sits above the nav (replaces caption) */
+.tt-pcard { position: absolute; left: 8px; right: 70px; z-index: 5; display: flex; gap: 10px; padding: 8px; border-radius: 6px; background: rgba(43,40,39,.86); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+.ios .tt-pcard { bottom: 96px; } .android .tt-pcard { bottom: 84px; }
+.tt-pcard .im { width: 92px; height: 92px; border-radius: 4px; overflow: hidden; flex: none; position: relative; background: #fff; }
+.tt-pcard .im > * { width: 100%; height: 100%; object-fit: cover; }
+.tt-pcard .bd { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; font-size: 14px; }
+.tt-pcard .t { font-weight: 600; font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-right: 18px; }
+.tt-pcard .x { position: absolute; right: 8px; top: 6px; width: 16px; height: 16px; opacity: .8; }
+.tt-pcard .fl { align-self: flex-start; background: rgba(254,44,85,.85); color: #fff; font-size: 12px; font-weight: 600; padding: 1px 6px; border-radius: 3px; }
+.tt-pcard .rt { color: rgba(255,255,255,.75); font-size: 12px; }
+.tt-pcard .row { display: flex; align-items: center; justify-content: space-between; margin-top: auto; }
+.tt-pcard .pr { color: #FE2C55; font-weight: 700; font-size: 17px; }
+.tt-pcard .btn { height: 30px; padding: 0 12px; border-radius: 4px; background: #FE2C55; color: #fff; font: 600 14px/30px var(--f-tiktok); }
+.tt-pcard + .tt-adtag { position: absolute; left: 12px; z-index: 5; }
+.ios .tt-adtag { bottom: 212px; } .android .tt-adtag { bottom: 200px; }
+/* brand avatar replaces the spinning disc on ads */
+.tt-disc.av2 { border: 0; width: 40px; height: 40px; background: var(--brand-primary) var(--brand-logo) center / 60% no-repeat; box-shadow: 0 0 0 1.5px rgba(255,255,255,.9); }
+.tt-disc.av2::after { display: none; }
+.tt-rail .live { box-shadow: 0 0 0 2px #000, 0 0 0 4px #FE2C55, 0 0 0 6px rgba(254,44,85,.35); }
+.tt-nav { font-size: 12px; }
+
+/* ---------- LINE iOS light · 2026 · measured from iPhone 17 Pro capture IMG_0910 [V] (theme-dependent) ----------
+   .line-light   = 2026 device look: grey header, blue controls, white chat, bordered white bubbles
+   .line-classic = LINE Developers doc look: blue wallpaper #8BABD7, header on wallpaper */
+.line-classic { --ln-bg: #8BABD7; --ln-head: transparent; --ln-head-fg: #111; --ln-sub: #324B6B; --ln-bub: #FFFFFF; --ln-bub-fg: #111; --ln-me: #6CE67B; --ln-me-fg: #111; --ln-tm: #324B6B; --ln-date: #7892B6; --ln-bar: #FFFFFF; --ln-bar-fg: #111; --ln-qr: #fff; --ln-qr-b: #D4D6DA; background: var(--ln-bg); color: #111; }
+.line-classic .sb { background: transparent; }
+.line-light { --ln-bg: #FFFFFF; --ln-head: #EBEEF0; --ln-head-fg: #1175BD; --ln-sub: #1175BD; --ln-bub: #FFFFFF; --ln-bub-b: #DAE9F5; --ln-me: #6CE67B; --ln-tm: #9AA3AB; --ln-date: #B7D5EB; --ln-bar: #FFFFFF; --ln-bar-fg: #0F82C5; --ln-qr-b: #DAE9F5; }
+.line-light .sb { background: var(--ln-head); color: #000; }
+.line-light .ln-head { height: 48px; }
+.line-light .ln-head .nm { color: #1175BD; font-size: 19px; font-weight: 600; }
+.line-light .ln-head .nm svg.shield { width: 18px; height: 18px; color: #06C755; }
+.line-light .ln-head .sub { color: #1175BD; font-size: 12px; margin-top: 0; }
+.line-light .ln-head .back { width: auto; padding: 0 6px 0 4px; display: flex; align-items: center; gap: 2px; font-size: 19px; color: #1175BD; }
+.line-light .ln-head .acts svg { width: 26px; height: 26px; color: #1175BD; }
+.line-light .ln-head + * { box-shadow: inset 0 .5px 0 #D5DADF; }
+.line-light .ln-bub { box-shadow: inset 0 0 0 1px var(--ln-bub-b); font-size: 16px; }
+.line-light .ln-bub.tail::before { background: #fff; box-shadow: none; }
+.line-light .ln-row.me .ln-bub { box-shadow: none; }
+.line-light .ln-date { font-size: 13px; padding: 4px 12px; }
+.line-light .ln-bar { color: #0F82C5; font-size: 16px; border-top: .5px solid #E3E7EA; }
+.line-light .ln-bar .kb svg { color: #3495CE; }
+.line-light .flex { box-shadow: 0 0 0 1px #DAE9F5; }
+.line-light .sysnav { background: #fff; }
+/* FB desktop measured (references/screens/facebook/SPEC.md): card 500, radius 8, shadow 0 1px 2px rgba(0,0,0,.2) [V] */
+.fbd-feed .fb-post { border-radius: 8px; }
+.fbd-feed .fb-ph .nm { font-size: 15px; } .fbd-feed .fb-ph .mt { font-size: 13px; }
+.fbd-body { grid-template-columns: 340px 1fr 340px; }
+.fbd-side { overflow: hidden; }

@@ -61,7 +61,7 @@
     const issues = [];
     document.querySelectorAll("img").forEach(i => { if (!i.naturalWidth) issues.push("broken-img " + i.getAttribute("src")); });
     document.querySelectorAll(".ph-img").forEach(p => issues.push("placeholder " + (p.textContent || "").trim().slice(0, 40)));
-    document.querySelectorAll(".flex, .fb-tx, .tt-cap, .rm-t, .fb-link .t").forEach(el => { if (el.scrollWidth > el.clientWidth + 1) issues.push("overflow-x " + el.className + ": " + el.textContent.trim().slice(0, 30)); });
+    document.querySelectorAll(".flex, .fb-tx, .tt-cap, .rm-t, .fb-link .t").forEach(el => { if (!el.classList.contains("one") && el.scrollWidth > el.clientWidth + 1) issues.push("overflow-x " + el.className + ": " + el.textContent.trim().slice(0, 30)); });
     document.querySelectorAll(".flex img, .fb-media img, .rm-t img, .notif img").forEach(i => { const r = i.getBoundingClientRect(); if (r.width && (r.width < 28 || r.height < 28)) issues.push("tiny-img " + i.getAttribute("src")); });
     window.__kitIssues = issues;
     document.documentElement.dataset.ready = "1";

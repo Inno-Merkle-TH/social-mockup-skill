@@ -15,7 +15,7 @@
   .art .h { font: 700 26px/1.08 var(--brand-head); letter-spacing: -.5px; margin-top: 8px; position: relative; }
   .art .s { font: 400 12.5px/1.4 var(--brand-body); opacity: .85; margin-top: 6px; position: relative; }
   .art.tall .h { font-size: 38px; } .art.tall { justify-content: center; padding: 0 22px 18%; }
-  .art.tall::after, .fb-cc .art::after, .flex.micro .art::after { display: none; }
+  .art.tall::after, .fb-cc .art::after, .flex.micro .art::after, .fbd-ad .art::after, .tt-pcard .art::after, .ln-car .art::after { display: none; }
   .chip { display: inline-block; background: var(--brand-accent); color: #fff; font: 700 11px var(--brand-body); padding: 4px 9px; border-radius: 10px; margin-top: 10px; position: relative; width: max-content; }
 </style>
 </head>
@@ -53,23 +53,25 @@
 
   <!-- ============ LINE · iOS · light · chat + carousel ============ -->
   <figure class="shot" data-shot="line-ios-chat">
-    <figcaption class="label"><div class="k">LINE · iOS · light</div><div class="h">OA chat + user reply + Flex carousel</div><div class="d">Light theme; chat wallpaper set by --ln-bg.</div></figcaption>
+    <figcaption class="label"><div class="k">LINE · iOS · light (2026 app)</div><div class="h">OA chat + user reply + Flex carousel</div><div class="d">Matched to a real iPhone capture. Use .line-classic for the blue-wallpaper look from LINE docs.</div></figcaption>
     <div class="frame"><div class="dev ios"><div class="screen line-light">
       <div class="sb" data-time="9:41"></div>
-      <div class="ln-head"><span class="back"><svg class="i"><use href="#back"/></svg></span>
-        <div class="ti"><div class="nm">Morrow Coffee <svg width="14" height="14"><use href="#minibadge"/></svg></div></div>
+      <div class="ln-head"><span class="back"><svg class="i"><use href="#back"/></svg>12</span>
+        <div class="ti"><div class="nm"><svg class="shield" viewBox="2.5 1 19 22"><use href="#shield"/></svg>Morrow Coffee</div><div class="sub">Automated responses</div></div>
         <div class="acts"><svg class="i"><use href="#searchclock"/></svg><svg class="i"><use href="#burger"/></svg></div></div>
       <div class="ln-msgs">
         <div class="ln-date">Today</div>
         <div class="ln-row me"><div class="ln-line"><div class="ln-bub tail">What's new this month?</div><div class="ln-tm">Read<br>9:38</div></div></div>
         <div class="ln-row"><div class="ln-av"></div><div class="ln-col"><div class="ln-line"><div class="ln-bub tail">Three new autumn drinks. Swipe to see them 👇</div><div class="ln-tm">9:38</div></div></div></div>
+        <div class="ln-row" style="margin-bottom:6px"><div class="ln-av"></div></div>
         <div class="ln-car">
-          <div class="flex micro" style="width:200px;box-shadow:0 0 0 .5px #E2E2E2"><div class="fx-hero" style="height:130px"><div class="art"><div class="h" style="font-size:19px">Maple Cold Brew</div></div></div><div class="fx-bd"><div class="fx-t1" style="font-size:15px">Maple Cold Brew</div><div class="fx-t2">฿95 · from 6 Nov</div></div><div class="fx-ft"><div class="cta pri" style="height:38px">Order ahead</div></div></div>
-          <div class="flex micro" style="width:200px;box-shadow:0 0 0 .5px #E2E2E2"><div class="fx-hero" style="height:130px"><div class="art"><div class="h" style="font-size:19px">Chestnut Mocha</div></div></div><div class="fx-bd"><div class="fx-t1" style="font-size:15px">Chestnut Mocha</div><div class="fx-t2">฿110 · from 6 Nov</div></div><div class="fx-ft"><div class="cta pri" style="height:38px">Order ahead</div></div></div>
+          <div class="flex"><div class="fx-hero" style="height:150px"><div class="art"><div class="h" style="font-size:20px">Maple Cold Brew</div></div></div><div class="fx-bd"><div class="fx-t1" style="font-size:16px">Maple Cold Brew</div><div class="fx-t2">฿95 · available from 6 Nov at every Morrow store.</div></div><div class="fx-ft" style="gap:0"><div class="cta link">Order ahead</div><div class="cta link">See menu</div></div></div>
+          <div class="flex"><div class="fx-hero" style="height:150px"><div class="art"><div class="h" style="font-size:20px">Chestnut Mocha</div></div></div><div class="fx-bd"><div class="fx-t1" style="font-size:16px">Chestnut Mocha</div><div class="fx-t2">฿110 · available from 6 Nov at every Morrow store.</div></div><div class="fx-ft" style="gap:0"><div class="cta link">Order ahead</div><div class="cta link">See menu</div></div></div>
         </div>
+        <div class="ln-tm" style="padding:0 12px 0 0">9:38</div>
       </div>
       <div class="ln-qrs"><span class="ln-qr">Menu</span><span class="ln-qr">Nearest store</span><span class="ln-qr">My coupons</span></div>
-      <div class="ln-input"><svg class="i"><use href="#fb-plus"/></svg><div class="fld">Aa</div></div>
+      <div class="ln-input"><svg><use href="#fb-plus"/></svg><svg viewBox="0 0 24 24"><use href="#cam"/></svg><svg viewBox="0 0 24 24"><use href="#i-doc"/></svg><div class="fld">Aa</div></div>
       <div class="sysnav"></div>
     </div></div></div>
   </figure>
@@ -114,43 +116,68 @@
 
   <!-- ============ Facebook · Android · feed single image ============ -->
   <figure class="shot" data-shot="fb-android-feed">
-    <figcaption class="label"><div class="k">Facebook · Android · light</div><div class="h">Feed ad, single image 1:1</div><div class="d">Tabs on top (Android). Primary text ≤125 chars before "See more".</div></figcaption>
+    <figcaption class="label"><div class="k">Facebook · Android · light</div><div class="h">Feed ad, single image</div><div class="d">Tabs on top (still the majority on Android in 2026; some users have bottom tabs). "Ad" label, counts row.</div></figcaption>
     <div class="frame"><div class="dev android"><div class="screen light fb">
       <div class="sb" data-time="19:05" data-bat="58"></div>
       <div class="fb-top"><svg width="118" height="23" style="color:#0866FF"><use href="#fb-wordmark"/></svg><div class="hi"><span class="fb-round"><svg><use href="#fb-plus"/></svg></span><span class="fb-round"><svg><use href="#fb-search"/></svg></span><span class="fb-round"><svg><use href="#fb-msgr"/></svg></span></div></div>
       <div class="fb-tabs"><span class="on"><svg width="26" height="26" viewBox="0 0 28 28"><use href="#fbt-home"/></svg></span><span><svg width="26" height="26" viewBox="0 0 28 28"><use href="#fbt-video"/></svg></span><span><svg width="26" height="26" viewBox="0 0 28 28"><use href="#fbt-friends"/></svg></span><span><svg width="26" height="26" viewBox="0 0 28 28"><use href="#fbt-market"/></svg></span><span><svg width="26" height="26" viewBox="0 0 28 28"><use href="#fbt-bell"/></svg><i class="fb-bdg">3</i></span><span><svg width="26" height="26"><use href="#burger"/></svg></span></div>
-      <div class="fb-gap"></div>
-      <div class="fb-post grow">
-        <div class="fb-ph"><div class="av"></div><div><div class="nm">Morrow Coffee</div><div class="mt">Sponsored · <svg width="12" height="12"><use href="#fb-globe"/></svg></div></div><div class="ac"><svg><use href="#fb-dots"/></svg><svg><use href="#fb-x"/></svg></div></div>
-        <div class="fb-tx">Autumn is here 🍂 Three new drinks, and your first one this week is on us. <span class="more">See more</span></div>
-        <div class="fb-media" style="height:360px"><div class="art"><div class="k">New · Autumn menu</div><div class="h">Maple. Chestnut.<br>Pumpkin spice.</div><div class="s">From 6 Nov at all Morrow stores</div></div></div>
-        <div class="fb-link"><div style="min-width:0"><div class="d">morrowcoffee.example</div><div class="t">Try the autumn menu</div></div><span class="b">Order now</span></div>
-        <div class="fb-rx"><span class="ic"><svg viewBox="0 0 18 18"><use href="#fb-r-like"/></svg><svg viewBox="0 0 18 18"><use href="#fb-r-love"/></svg></span><span style="flex:1">1.2K</span><span>86 comments · 41 shares</span></div>
-        <div class="fb-act"><div><svg><use href="#fb-like"/></svg>Like</div><div><svg><use href="#fb-comment"/></svg>Comment</div><div><svg><use href="#fb-share"/></svg>Share</div></div>
+      <div class="fb-feed">
+          <div class="fb-post"><div class="fb-ph"><div class="av"></div><div><div class="nm">Morrow Coffee <svg class="vf" viewBox="0 0 16 16"><use href="#fb-verified"/></svg></div><div class="mt">Ad · <svg width="12" height="12"><use href="#fb-globe"/></svg></div></div><div class="ac"><svg><use href="#fb-dots"/></svg><svg><use href="#fb-x"/></svg></div></div>
+            <div class="fb-tx">Autumn is here 🍂 Three new drinks, and your first one this week is on us. <span class="more">See more</span></div>
+            <div class="fb-media" style="height:360px"><div class="art"><div class="k">New · Autumn menu</div><div class="h">Maple. Chestnut.<br>Pumpkin spice.</div><div class="s">From 6 Nov at all Morrow stores</div></div></div>
+            <div class="fb-link"><div style="min-width:0"><div class="d">morrowcoffee.example</div><div class="t">Try the autumn menu</div></div><span class="b">Order now</span></div>
+            <div class="fb-cnt"><span><svg viewBox="0 0 24 24"><use href="#fb-like"/></svg>1.2K</span><span><svg viewBox="0 0 24 24"><use href="#fb-comment"/></svg>86</span><span><svg viewBox="0 0 24 24"><use href="#fb-share"/></svg>41</span><svg class="rx" viewBox="0 0 18 18"><use href="#fb-r-like"/></svg></div>
+          </div>
+          <div class="fb-div"></div>
+          <div class="fb-post"><div class="fb-ph"><i class="fb-friend"></i><div><div class="nm">Ploy Charoen</div><div class="mt">2h · <svg width="12" height="12"><use href="#fb-globe"/></svg></div></div><div class="ac"><svg><use href="#fb-dots"/></svg><svg><use href="#fb-x"/></svg></div></div><div class="fb-tx">Weekend at Khao Yai with the girls 🌿</div><div class="fb-peek-img"></div></div>
       </div>
       <div class="sysnav light" style="background:#fff"></div>
     </div></div></div>
   </figure>
 
   <!-- ============ Facebook · iOS · carousel ============ -->
-  <figure class="shot" data-shot="fb-ios-carousel">
-    <figcaption class="label"><div class="k">Facebook · iOS · light</div><div class="h">Feed ad, carousel</div><div class="d">Tab bar at the bottom (iOS). Card headline ~ 1 line.</div></figcaption>
-    <div class="frame"><div class="dev ios"><div class="screen light fb">
-      <div class="sb" data-time="9:41"></div>
-      <div class="fb-top"><svg width="118" height="23" style="color:#0866FF"><use href="#fb-wordmark"/></svg><div class="hi"><span class="fb-round"><svg><use href="#fb-plus"/></svg></span><span class="fb-round"><svg><use href="#fb-search"/></svg></span><span class="fb-round"><svg><use href="#fb-msgr"/></svg></span></div></div>
-      <div class="fb-gap"></div>
-      <div class="fb-post grow">
-        <div class="fb-ph"><div class="av"></div><div><div class="nm">Morrow Coffee</div><div class="mt">Sponsored · <svg width="12" height="12"><use href="#fb-globe"/></svg></div></div><div class="ac"><svg><use href="#fb-dots"/></svg><svg><use href="#fb-x"/></svg></div></div>
-        <div class="fb-tx">Pick your autumn favourite. Order ahead in LINE and skip the queue.</div>
-        <div class="fb-car">
-          <div class="fb-cc"><div class="im"><div class="art"><div class="h">Maple<br>Cold Brew</div></div></div><div class="ft"><b>Maple Cold Brew · ฿95</b><span>Shop now</span></div></div>
-          <div class="fb-cc"><div class="im"><div class="art"><div class="h">Chestnut<br>Mocha</div></div></div><div class="ft"><b>Chestnut Mocha · ฿110</b><span>Shop now</span></div></div>
-        </div>
-        <div class="fb-rx"><span class="ic"><svg viewBox="0 0 18 18"><use href="#fb-r-like"/></svg></span><span style="flex:1">842</span><span>32 comments</span></div>
-        <div class="fb-act"><div><svg><use href="#fb-like"/></svg>Like</div><div><svg><use href="#fb-comment"/></svg>Comment</div><div><svg><use href="#fb-share"/></svg>Share</div></div>
+  <figure class="shot" data-shot="fb-ios-feed-dark">
+    <figcaption class="label"><div class="k">Facebook · iOS · dark (2026 app)</div><div class="h">Feed ad, single image, mid-scroll</div><div class="d">Matched to a real iPhone 17 Pro capture: "Ad" label, counts row, floating glass tab bar, posts above/below.</div></figcaption>
+    <div class="frame"><div class="dev ios"><div class="screen fb dark">
+      <div class="sb" data-time="11:21"></div>
+      <div class="fb-hdr"><span class="ic menu"><svg viewBox="0 0 24 24"><use href="#burger"/></svg></span><svg class="wm" viewBox="0 0 62.488 12.094"><use href="#fb-wordmark"/></svg><span class="sp"></span><span class="ic"><svg viewBox="0 0 24 24"><use href="#fb-plus"/></svg></span><span class="ic"><svg viewBox="0 0 24 24"><use href="#fb-search"/></svg></span><span class="ic"><svg viewBox="0 0 24 24"><use href="#fb-msgr"/></svg><i class="fb-bdg">1</i></span></div>
+      <div class="fb-feed">
+          <div class="fb-post"><div class="fb-peek-img" style="height:150px"></div><div class="fb-cnt"><span><svg viewBox="0 0 24 24"><use href="#fb-like"/></svg>26</span><span><svg viewBox="0 0 24 24"><use href="#fb-comment"/></svg></span><span><svg viewBox="0 0 24 24"><use href="#fb-share"/></svg></span><svg class="rx" viewBox="0 0 18 18"><use href="#fb-r-like"/></svg></div><div class="fb-ctx"><i></i>Ploy Charoen reacted</div></div>
+          <div class="fb-div"></div>
+          <div class="fb-post"><div class="fb-ph"><div class="av"></div><div><div class="nm">Morrow Coffee <svg class="vf" viewBox="0 0 16 16"><use href="#fb-verified"/></svg></div><div class="mt">Ad · <svg width="12" height="12"><use href="#fb-globe"/></svg></div></div><div class="ac"><svg><use href="#fb-dots"/></svg><svg><use href="#fb-x"/></svg></div></div>
+            <div class="fb-tx one">Autumn is here 🍂 Three new drinks, and your first one this week is on us… <span class="more">See more</span></div>
+            <div class="fb-media" style="height:402px"><div class="art"><div class="k">New · Autumn menu</div><div class="h">Maple. Chestnut.<br>Pumpkin spice.</div><div class="s">From 6 Nov at all Morrow stores</div></div></div>
+            <div class="fb-link"><div style="min-width:0"><div class="d">morrowcoffee.example</div><div class="t">Try the autumn menu</div></div><span class="b">Order now</span></div>
+            <div class="fb-cnt"><span><svg viewBox="0 0 24 24"><use href="#fb-like"/></svg>1.2K</span><span><svg viewBox="0 0 24 24"><use href="#fb-comment"/></svg>86</span><span><svg viewBox="0 0 24 24"><use href="#fb-share"/></svg>41</span><svg class="rx" viewBox="0 0 18 18"><use href="#fb-r-like"/></svg></div>
+          </div>
+          <div class="fb-div"></div>
+          <div class="fb-post"><div class="fb-ph"><i class="fb-friend"></i><div><div class="nm">Ploy Charoen</div><div class="mt">2h · <svg width="12" height="12"><use href="#fb-globe"/></svg></div></div><div class="ac"><svg><use href="#fb-dots"/></svg><svg><use href="#fb-x"/></svg></div></div><div class="fb-tx">Weekend at Khao Yai with the girls 🌿</div><div class="fb-peek-img"></div></div>
       </div>
-      <div class="fb-tabbar"><span class="on"><svg width="24" height="24" viewBox="0 0 28 28"><use href="#fbt-home"/></svg>Home</span><span><svg width="24" height="24" viewBox="0 0 28 28"><use href="#fbt-video"/></svg>Video</span><span><svg width="24" height="24" viewBox="0 0 28 28"><use href="#fbt-friends"/></svg>Friends</span><span><svg width="24" height="24" viewBox="0 0 28 28"><use href="#fbt-market"/></svg>Marketplace</span><span style="position:relative"><svg width="24" height="24" viewBox="0 0 28 28"><use href="#fbt-bell"/></svg>Notifications<i class="fb-bdg" style="top:-2px">3</i></span><span><svg width="24" height="24"><use href="#burger"/></svg>Menu</span></div>
-      <div class="sysnav" style="background:#fff"></div>
+      <div class="fb-capsule"><span class="on"><svg viewBox="0 0 28 28"><use href="#fbt-home"/></svg></span><span><svg viewBox="0 0 28 28"><use href="#fbt-video"/></svg></span><span><svg viewBox="0 0 28 28"><use href="#fbt-market"/></svg></span><span><svg viewBox="0 0 28 28"><use href="#fbt-friends"/></svg></span><span><svg viewBox="0 0 28 28"><use href="#fbt-bell"/></svg><i class="fb-bdg">1</i></span><span><i class="me"></i></span></div>
+      <div class="sysnav over"></div>
+    </div></div></div>
+  </figure>
+
+  <figure class="shot" data-shot="fb-ios-carousel">
+    <figcaption class="label"><div class="k">Facebook · iOS · light (2026 app)</div><div class="h">Feed ad, carousel</div><div class="d">Carousel cards 1:1, headline ≤20 chars per Ads Guide; next post peeks under the tab bar.</div></figcaption>
+    <div class="frame"><div class="dev ios"><div class="screen fb light">
+      <div class="sb" data-time="9:41"></div>
+      <div class="fb-hdr"><span class="ic menu"><svg viewBox="0 0 24 24"><use href="#burger"/></svg></span><svg class="wm" viewBox="0 0 62.488 12.094"><use href="#fb-wordmark"/></svg><span class="sp"></span><span class="ic"><svg viewBox="0 0 24 24"><use href="#fb-plus"/></svg></span><span class="ic"><svg viewBox="0 0 24 24"><use href="#fb-search"/></svg></span><span class="ic"><svg viewBox="0 0 24 24"><use href="#fb-msgr"/></svg><i class="fb-bdg">1</i></span></div>
+      <div class="fb-feed">
+          <div class="fb-div"></div>
+          <div class="fb-post"><div class="fb-ph"><div class="av"></div><div><div class="nm">Morrow Coffee <svg class="vf" viewBox="0 0 16 16"><use href="#fb-verified"/></svg></div><div class="mt">Ad · <svg width="12" height="12"><use href="#fb-globe"/></svg></div></div><div class="ac"><svg><use href="#fb-dots"/></svg><svg><use href="#fb-x"/></svg></div></div>
+            <div class="fb-tx">Pick your autumn favourite. Order ahead in LINE and skip the queue.</div>
+            <div class="fb-car">
+              <div class="fb-cc"><div class="im"><div class="art"><div class="h">Maple<br>Cold Brew</div></div></div><div class="ft"><b>Maple Cold Brew</b><span>Shop now</span></div></div>
+              <div class="fb-cc"><div class="im"><div class="art"><div class="h">Chestnut<br>Mocha</div></div></div><div class="ft"><b>Chestnut Mocha</b><span>Shop now</span></div></div>
+            </div>
+            <div class="fb-cnt"><span><svg viewBox="0 0 24 24"><use href="#fb-like"/></svg>842</span><span><svg viewBox="0 0 24 24"><use href="#fb-comment"/></svg>32</span><span><svg viewBox="0 0 24 24"><use href="#fb-share"/></svg>12</span><svg class="rx" viewBox="0 0 18 18"><use href="#fb-r-like"/></svg></div>
+          </div>
+          <div class="fb-div"></div>
+          <div class="fb-post"><div class="fb-ph"><i class="fb-friend"></i><div><div class="nm">Ploy Charoen</div><div class="mt">2h · <svg width="12" height="12"><use href="#fb-globe"/></svg></div></div><div class="ac"><svg><use href="#fb-dots"/></svg><svg><use href="#fb-x"/></svg></div></div><div class="fb-tx">Weekend at Khao Yai with the girls 🌿</div><div class="fb-peek-img"></div></div>
+      </div>
+      <div class="fb-capsule"><span class="on"><svg viewBox="0 0 28 28"><use href="#fbt-home"/></svg></span><span><svg viewBox="0 0 28 28"><use href="#fbt-video"/></svg></span><span><svg viewBox="0 0 28 28"><use href="#fbt-market"/></svg></span><span><svg viewBox="0 0 28 28"><use href="#fbt-friends"/></svg></span><span><svg viewBox="0 0 28 28"><use href="#fbt-bell"/></svg><i class="fb-bdg">1</i></span><span><i class="me"></i></span></div>
+      <div class="sysnav over"></div>
     </div></div></div>
   </figure>
 
@@ -169,18 +196,17 @@
 
   <!-- ============ TikTok · Android · in-feed ad ============ -->
   <figure class="shot" data-shot="tt-android-infeed">
-    <figcaption class="label"><div class="k">TikTok · Android</div><div class="h">For You in-feed ad</div><div class="d">CTA bar lights up (.lit) ~3s in. ?safe=1 shows safe-zone guide.</div></figcaption>
+    <figcaption class="label"><div class="k">TikTok · Android</div><div class="h">For You in-feed ad</div><div class="d">Anatomy per TikTok Ads Help mocks: @name → caption + Sponsored pill → Promoted music → CTA bar (.lit after 2–7 s). ?safe=1 = official safe zone.</div></figcaption>
     <div class="frame"><div class="dev android"><div class="screen dark">
       <div class="tt">
         <div class="vid"><div class="art tall"><div class="k">POV</div><div class="h">When the barista<br>remembers<br>your order</div></div></div>
         <div class="sb over" data-time="21:14" data-bat="41" style="color:#fff"></div>
-        <div class="tt-top"><span class="lv"><svg width="26" height="22" viewBox="0 0 28 24"><use href="#tt-live"/></svg></span><span>Following</span><span class="on">For You</span><span class="se"><svg width="24" height="24"><use href="#tt-search"/></svg></span></div>
-        <div class="tt-rail"><div class="av"><b>+</b></div>
-          <div class="it"><svg viewBox="0 0 36 36"><use href="#tt-heart"/></svg>48.2K</div><div class="it"><svg viewBox="0 0 36 36"><use href="#tt-comment"/></svg>1,204</div><div class="it"><svg viewBox="0 0 36 36"><use href="#tt-save"/></svg>3,911</div><div class="it"><svg viewBox="0 0 36 36"><use href="#tt-share"/></svg>2,078</div><div class="disc"></div></div>
-        <div class="tt-cap"><div class="nm">Morrow Coffee</div><div class="tx">Your usual, ready before you ask ☕ Order ahead in LINE <span class="more">more</span></div><span class="sp">Sponsored</span>
-          <div class="tt-ctab lit">Order now <svg width="16" height="16" viewBox="0 0 24 24" style="transform:rotate(-90deg)"><use href="#chev"/></svg></div></div>
+        <div class="tt-top"><span class="lv"><svg width="26" height="22" viewBox="0 0 28 24"><use href="#tt-live"/></svg></span><span>Bangkok</span><span>Friends</span><span>Following</span><span class="on">For You</span><span class="se"><svg width="24" height="24"><use href="#tt-search"/></svg></span></div>
+        <div class="tt-rail"><div class="av"><b>+</b></div><div class="it"><svg viewBox="0 0 36 36"><use href="#tt-heart"/></svg>48.2K</div><div class="it"><svg viewBox="0 0 36 36"><use href="#tt-comment"/></svg>1,204</div><div class="it"><svg viewBox="0 0 36 36"><use href="#tt-save"/></svg>3,911</div><div class="it"><svg viewBox="0 0 36 36"><use href="#tt-share"/></svg>Share</div></div><div class="tt-disc av2"></div>
+        <div class="tt-cap"><div class="nm">Morrow Coffee</div><div class="tx">Your usual, ready before you ask ☕ Order ahead in LINE</div><span class="tt-ad">Ad</span><div class="snd"><svg viewBox="0 0 16 16"><use href="#tt-note"/></svg>Promoted music</div>
+          <div class="tt-ctab lit">Order now <svg viewBox="0 0 24 24"><use href="#chev"/></svg></div></div>
         <div class="tt-safe"></div>
-        <div class="tt-nav"><span class="on"><svg viewBox="0 0 24 24"><use href="#tt-home"/></svg>Home</span><span><svg viewBox="0 0 24 24"><use href="#tt-shop"/></svg>Shop</span><span><i class="tt-plus">+</i></span><span><svg viewBox="0 0 24 24"><use href="#tt-inbox"/></svg>Inbox</span><span><svg viewBox="0 0 24 24"><use href="#tt-me"/></svg>Profile</span></div>
+        <div class="tt-nav"><span class="on"><svg viewBox="0 0 24 24"><use href="#tt-home"/></svg>Home</span><span><svg viewBox="0 0 24 24"><use href="#tt-shop"/></svg>Shop</span><span><i class="tt-plus">+</i></span><span><svg viewBox="0 0 24 24"><use href="#tt-inbox"/></svg>Inbox<i class="bdg">4</i></span><span><svg viewBox="0 0 24 24"><use href="#tt-me"/></svg>Profile</span></div>
         <div class="sysnav over" style="color:#fff"></div>
       </div>
     </div></div></div>
@@ -188,17 +214,34 @@
 
   <!-- ============ TikTok · iOS · Spark ad (creator post) ============ -->
   <figure class="shot" data-shot="tt-ios-spark">
-    <figcaption class="label"><div class="k">TikTok · iOS</div><div class="h">Spark Ad (creator's post, boosted)</div><div class="d">Creator handle + "Sponsored"; CTA still grey (.lit removed).</div></figcaption>
+    <figcaption class="label"><div class="k">TikTok · iOS</div><div class="h">Spark Ad (creator's post, boosted), 2026 TH app</div><div class="d">Matched to real iPhone captures: city tab, "Ad" pill, Share label, brand avatar instead of disc.</div></figcaption>
     <div class="frame"><div class="dev ios"><div class="screen dark">
       <div class="tt">
-        <div class="vid"><div class="ph-img dark">VIDEO FRAME 9:16<br>creator holding cup</div></div>
+        <div class="vid"><div class="art tall" style="background:linear-gradient(160deg,#7A5A44,#2B1C15)"><div class="k">pt.3 · 10/10?</div><div class="h">Rating every<br>autumn drink<br>in Bangkok</div></div></div>
         <div class="sb over" data-time="9:41" style="color:#fff"></div>
-        <div class="tt-top"><span class="lv"><svg width="26" height="22" viewBox="0 0 28 24"><use href="#tt-live"/></svg></span><span>Following</span><span class="on">For You</span><span class="se"><svg width="24" height="24"><use href="#tt-search"/></svg></span></div>
-        <div class="tt-rail" style="bottom:124px"><div class="av ph-av" style="background:#7A5BD6">N</div>
-          <div class="it"><svg viewBox="0 0 36 36"><use href="#tt-heart"/></svg>112K</div><div class="it"><svg viewBox="0 0 36 36"><use href="#tt-comment"/></svg>2,431</div><div class="it"><svg viewBox="0 0 36 36"><use href="#tt-save"/></svg>8,804</div><div class="it"><svg viewBox="0 0 36 36"><use href="#tt-share"/></svg>5,120</div><div class="disc"></div></div>
-        <div class="tt-cap" style="bottom:92px"><div class="nm">@nong.cafehop <svg width="13" height="13"><use href="#tt-verified"/></svg></div><div class="tx">rating every autumn drink in Bangkok pt.3 🍂 #morrowcoffee <span class="more">more</span></div><span class="sp">Sponsored</span>
-          <div class="tt-ctab">Learn more <svg width="16" height="16" viewBox="0 0 24 24" style="transform:rotate(-90deg)"><use href="#chev"/></svg></div></div>
+        <div class="tt-top"><span class="lv"><svg width="26" height="22" viewBox="0 0 28 24"><use href="#tt-live"/></svg></span><span>Bangkok</span><span>Friends</span><span>Following</span><span class="on">For You</span><span class="se"><svg width="24" height="24"><use href="#tt-search"/></svg></span></div>
+        <div class="tt-rail"><div class="av ph-av" style="background:#7A5BD6">N<b>+</b></div><div class="it"><svg viewBox="0 0 36 36"><use href="#tt-heart"/></svg>112K</div><div class="it"><svg viewBox="0 0 36 36"><use href="#tt-comment"/></svg>2,431</div><div class="it"><svg viewBox="0 0 36 36"><use href="#tt-save"/></svg>8,804</div><div class="it"><svg viewBox="0 0 36 36"><use href="#tt-share"/></svg>Share</div></div><div class="tt-disc av2"></div>
+        <div class="tt-cap"><div class="nm">nong.cafehop <svg width="14" height="14"><use href="#tt-verified"/></svg></div><div class="tx l4">rating every autumn drink in Bangkok pt.3 🍂 the maple cold brew from @morrowcoffee is actually insane</div><span class="tt-ad">Ad</span><div class="snd"><svg viewBox="0 0 16 16"><use href="#tt-note"/></svg>original sound - nong.cafehop</div>
+          <div class="tt-ctab">Learn more <svg viewBox="0 0 24 24"><use href="#chev"/></svg></div></div>
         <div class="tt-safe"></div>
+        <div class="tt-nav"><span class="on"><svg viewBox="0 0 24 24"><use href="#tt-home"/></svg>Home</span><span><svg viewBox="0 0 24 24"><use href="#tt-shop"/></svg>Shop</span><span><i class="tt-plus">+</i></span><span><svg viewBox="0 0 24 24"><use href="#tt-inbox"/></svg>Inbox<i class="bdg">4</i></span><span><svg viewBox="0 0 24 24"><use href="#tt-me"/></svg>Profile</span></div>
+        <div class="sysnav over" style="color:#fff"></div>
+      </div>
+    </div></div></div>
+  </figure>
+  <figure class="shot" data-shot="tt-ios-productcard">
+    <figcaption class="label"><div class="k">TikTok · iOS (2026 TH app)</div><div class="h">In-feed ad with product card</div><div class="d">Product/LIVE card replaces the caption; "Ad" pill above it. Matched to a real capture.</div></figcaption>
+    <div class="frame"><div class="dev ios"><div class="screen dark">
+      <div class="tt">
+        <div class="vid"><div class="art tall" style="background:linear-gradient(170deg,#6B4A36,#22160F)"><div class="k">Morrow · autumn drop</div><div class="h">3 new drinks.<br>1 free cup.</div></div></div>
+        <div class="sb over" data-time="11:21" style="color:#fff"></div>
+        <div class="tt-top"><span class="lv"><svg width="26" height="22" viewBox="0 0 28 24"><use href="#tt-live"/></svg></span><span>Bangkok</span><span>Friends</span><span>Following</span><span class="on">For You</span><span class="se"><svg width="24" height="24"><use href="#tt-search"/></svg></span></div>
+        <div class="tt-rail"><div class="av live"><b>+</b></div><div class="it"><svg viewBox="0 0 36 36"><use href="#tt-heart"/></svg>1,482</div><div class="it"><svg viewBox="0 0 36 36"><use href="#tt-comment"/></svg>36</div><div class="it"><svg viewBox="0 0 36 36"><use href="#tt-save"/></svg>214</div><div class="it"><svg viewBox="0 0 36 36"><use href="#tt-share"/></svg>Share</div></div><div class="tt-disc av2"></div>
+        <span class="tt-ad tt-adtag">Ad</span>
+        <div class="tt-pcard"><div class="im"><div class="art" style="padding:8px"><div class="h" style="font-size:13px">Maple<br>Cold Brew</div></div></div>
+          <div class="bd"><div class="t">[โค้ดลดเพิ่ม] Maple Cold Brew ฿95</div><span class="fl">ส่งฟรี · วันนี้เท่านั้น</span><div class="rt">★ 4.9 · ขายแล้ว 2.3K</div>
+            <div class="row"><span class="pr">฿95</span><span class="btn">Learn more</span></div></div>
+          <svg class="x" viewBox="0 0 24 24"><use href="#close"/></svg></div>
         <div class="tt-nav"><span class="on"><svg viewBox="0 0 24 24"><use href="#tt-home"/></svg>Home</span><span><svg viewBox="0 0 24 24"><use href="#tt-shop"/></svg>Shop</span><span><i class="tt-plus">+</i></span><span><svg viewBox="0 0 24 24"><use href="#tt-inbox"/></svg>Inbox</span><span><svg viewBox="0 0 24 24"><use href="#tt-me"/></svg>Profile</span></div>
         <div class="sysnav over" style="color:#fff"></div>
       </div>
@@ -208,7 +251,7 @@
   <!-- ============ Facebook · Desktop ============ -->
   <figure class="shot wide" data-shot="fb-desktop-feed">
     <figcaption class="label"><div class="k">Facebook · Desktop · Chrome</div><div class="h">News Feed ad (590px feed column)</div></figcaption>
-    <div class="frame desk"><div class="dev desktop" style="width:1280px;height:800px"><div class="screen">
+    <div class="frame desk"><div class="dev desktop" style="width:1440px;height:900px"><div class="screen">
       <div class="chrome-tabs"><div class="tl"><i></i><i></i><i></i></div><div class="tab"><span class="fav" style="background:#0866FF"></span>Facebook</div></div>
       <div class="chrome-bar"><svg class="i" style="width:18px"><use href="#back"/></svg><div class="url"><svg width="14" height="14"><use href="#lock"/></svg>facebook.com</div></div>
       <div class="fbd grow">
@@ -216,14 +259,21 @@
           <div class="c"><span class="on"><svg width="28" height="28" viewBox="0 0 28 28"><use href="#fbt-home"/></svg></span><span><svg width="28" height="28" viewBox="0 0 28 28"><use href="#fbt-video"/></svg></span><span><svg width="28" height="28" viewBox="0 0 28 28"><use href="#fbt-market"/></svg></span><span><svg width="28" height="28" viewBox="0 0 28 28"><use href="#fbt-friends"/></svg></span></div>
           <div class="r"><span class="fb-round"><svg><use href="#burger"/></svg></span><span class="fb-round"><svg><use href="#fb-msgr"/></svg></span><span class="fb-round"><svg width="20" height="20" viewBox="0 0 28 28"><use href="#fbt-bell"/></svg></span><span class="fb-round ph-av" style="background:#8B9DC3">A</span></div></div>
         <div class="fbd-body">
-          <div class="fbd-side"><div><i class="ph-av" style="background:#8B9DC3;color:#fff">A</i>Alex Kim</div><div><i></i>Friends</div><div><i></i>Memories</div><div><i></i>Saved</div><div><i></i>Groups</div><div><i></i>Video</div><div><i></i>Marketplace</div></div>
-          <div class="fbd-feed"><div class="fb-post fb">
-            <div class="fb-ph"><div class="av"></div><div><div class="nm">Morrow Coffee</div><div class="mt">Sponsored · <svg width="12" height="12"><use href="#fb-globe"/></svg></div></div><div class="ac"><svg><use href="#fb-dots"/></svg><svg><use href="#fb-x"/></svg></div></div>
-            <div class="fb-tx">Autumn is here 🍂 Three new drinks, and your first one this week is on us.</div>
-            <div class="fb-media" style="height:590px"><div class="art"><div class="k">New · Autumn menu</div><div class="h" style="font-size:40px">Maple. Chestnut.<br>Pumpkin spice.</div><div class="s">From 6 Nov at all Morrow stores</div></div></div>
-            <div class="fb-link"><div><div class="d">morrowcoffee.example</div><div class="t" style="max-width:420px">Try the autumn menu</div></div><span class="b">Order now</span></div>
+          <div class="fbd-side"><div><i class="ph-av" style="background:#8B9DC3;color:#fff">A</i>Alex Kim</div><div><i class="c" style="background:#1877F2"><svg viewBox="0 0 28 28"><use href="#fbt-friends"/></svg></i>Friends</div><div><i class="c" style="background:#F7B928"><svg viewBox="0 0 24 24"><use href="#cal"/></svg></i>Memories</div><div><i class="c" style="background:#A033FF"><svg viewBox="0 0 24 24"><use href="#tag"/></svg></i>Saved</div><div><i class="c" style="background:#1877F2"><svg viewBox="0 0 28 28"><use href="#fbt-friends"/></svg></i>Groups</div><div><i class="c" style="background:#0B9BE3"><svg viewBox="0 0 28 28"><use href="#fbt-video"/></svg></i>Video</div><div><i class="c" style="background:#0866FF"><svg viewBox="0 0 28 28"><use href="#fbt-market"/></svg></i>Marketplace</div><div><i class="c" style="background:#F3425F"><svg viewBox="0 0 24 24"><use href="#cal"/></svg></i>Events</div><div><i style="background:#E4E6EB"></i>See more</div>
+            <hr><div class="h">Your shortcuts</div><div><i style="border-radius:8px;background:linear-gradient(135deg,#9FD3C7,#4E8D9C)"></i>Bangkok Coffee Lovers</div><div><i style="border-radius:8px;background:linear-gradient(135deg,#F0B37E,#C46A6A)"></i>Weekend Cafe Hopping</div></div>
+          <div class="fbd-feed" style="width:500px">
+            <div class="fbd-compose"><i class="ph-av" style="width:40px;height:40px;border-radius:50%;background:#8B9DC3;color:#fff">A</i><div class="in">What's on your mind, Alex?</div></div>
+            <div class="fb-post fb">
+            <div class="fb-ph"><div class="av"></div><div><div class="nm">Morrow Coffee <svg class="vf" viewBox="0 0 16 16"><use href="#fb-verified"/></svg></div><div class="mt">Sponsored · <svg width="12" height="12"><use href="#fb-globe"/></svg></div></div><div class="ac"><svg><use href="#fb-dots"/></svg><svg><use href="#fb-x"/></svg></div></div>
+            <div class="fb-tx" style="font-size:15px;line-height:20px">Autumn is here 🍂 Three new drinks, and your first one this week is on us.</div>
+            <div class="fb-media" style="height:500px"><div class="art"><div class="k">New · Autumn menu</div><div class="h" style="font-size:36px">Maple. Chestnut.<br>Pumpkin spice.</div><div class="s">From 6 Nov at all Morrow stores</div></div></div>
+            <div class="fb-link"><div><div class="d">morrowcoffee.example</div><div class="t" style="font-size:17px;max-width:360px">Try the autumn menu</div></div><span class="b" style="height:36px;line-height:36px;border-radius:6px">Order now</span></div>
           </div></div>
-          <div class="fbd-rail"><div class="h">Sponsored</div><div style="display:flex;gap:12px;align-items:center"><div class="ph-img" style="width:130px;height:130px;border-radius:8px">1:1</div><div style="font-size:14px"><b>Morrow Coffee</b><br><span style="color:#65676B">morrowcoffee.example</span></div></div></div>
+          <div class="fbd-rail"><div class="h">Sponsored</div>
+            <div class="fbd-ad"><div class="im"><div class="art" style="padding:10px"><div class="h" style="font-size:16px">Free<br>oat latte</div></div></div><div><b>Your first cup is on us</b><br><small>morrowcoffee.example</small></div></div>
+            <div class="fbd-ad"><div class="im" style="background:linear-gradient(160deg,#C9D6E3,#7C8FA6)"></div><div><b>Weekend stays in Hua Hin</b><br><small>example-travel.example</small></div></div>
+            <hr><div class="h">Contacts</div>
+            <div class="fbd-contact"><i class="on"></i>Ploy Charoen</div><div class="fbd-contact"><i class="on" style="background:linear-gradient(135deg,#F3B4C8,#9C7BE0)"></i>Nong Cafehop</div><div class="fbd-contact"><i style="background:linear-gradient(135deg,#9FD3C7,#4E8D9C)"></i>Tan Wattana</div><div class="fbd-contact"><i class="on" style="background:linear-gradient(135deg,#F0B37E,#C46A6A)"></i>Mint Sirikul</div></div>
         </div>
       </div>
     </div></div></div>
@@ -231,17 +281,37 @@
 
   <!-- ============ TikTok · Desktop web ============ -->
   <figure class="shot wide" data-shot="tt-desktop">
-    <figcaption class="label"><div class="k">TikTok · Desktop web</div><div class="h">For You, in-feed ad</div></figcaption>
-    <div class="frame desk"><div class="dev desktop" style="width:1280px;height:800px"><div class="screen">
+    <figcaption class="label"><div class="k">TikTok · Desktop web · Chrome</div><div class="h">For You, in-feed ad (2026 cinema layout, measured)</div></figcaption>
+    <div class="frame desk"><div class="dev desktop" style="width:1440px;height:900px"><div class="screen">
       <div class="chrome-tabs"><div class="tl"><i></i><i></i><i></i></div><div class="tab"><span class="fav" style="background:#000"></span>TikTok - Make Your Day</div></div>
       <div class="chrome-bar"><svg class="i" style="width:18px"><use href="#back"/></svg><div class="url"><svg width="14" height="14"><use href="#lock"/></svg>tiktok.com<small>/foryou</small></div></div>
       <div class="ttd grow">
-        <div class="ttd-side"><div style="font:800 24px var(--f-tiktok);padding:6px 8px 14px">TikTok</div><div class="it on"><svg class="i" viewBox="0 0 24 24"><use href="#tt-home"/></svg>For You</div><div class="it"><svg class="i wt"><use href="#tt-search"/></svg>Explore</div><div class="it"><svg class="i" viewBox="0 0 24 24"><use href="#user"/></svg>Following</div><div class="it"><svg class="i wt" viewBox="0 0 28 24"><use href="#tt-live"/></svg>LIVE</div><div class="it"><svg class="i" viewBox="0 0 24 24"><use href="#tt-me"/></svg>Profile</div></div>
-        <div class="ttd-main">
-          <div class="ttd-vid"><div class="art tall"><div class="k">POV</div><div class="h">When the barista<br>remembers<br>your order</div></div>
-            <div class="tt-cap" style="right:16px;bottom:16px"><div class="nm">Morrow Coffee</div><div class="tx">Your usual, ready before you ask ☕</div><span class="sp">Sponsored</span><div class="tt-ctab lit">Order now</div></div></div>
-          <div class="ttd-rail"><div><i class="ph-av" style="background:var(--brand-primary) var(--brand-logo) center/60% no-repeat"></i></div><div><i><svg class="wt" width="24" height="24" viewBox="0 0 36 36"><use href="#tt-heart"/></svg></i>48.2K</div><div><i><svg class="wt" width="24" height="24" viewBox="0 0 36 36"><use href="#tt-comment"/></svg></i>1,204</div><div><i><svg class="wt" width="24" height="24" viewBox="0 0 36 36"><use href="#tt-share"/></svg></i>2,078</div></div>
+        <div class="ttd-side">
+          <div class="ttd-logo"><svg viewBox="0 0 24 26"><path d="M17 1h-4v16a3.5 3.5 0 1 1-3.5-3.5V9.4A7.6 7.6 0 1 0 17 17V8.6a9 9 0 0 0 5 1.5V6a5 5 0 0 1-5-5Z" fill="#000"/></svg>TikTok</div>
+          <div class="ttd-search"><svg class="wt"><use href="#tt-search"/></svg>Search</div>
+          <div class="it on"><svg viewBox="0 0 24 24"><use href="#tt-home"/></svg>For You</div>
+          <div class="it"><svg viewBox="0 0 24 24"><use href="#i-compare"/></svg>Explore</div>
+          <div class="it"><svg viewBox="0 0 24 24"><use href="#user"/></svg>Following</div>
+          <div class="it"><svg viewBox="0 0 24 24"><use href="#i-link"/></svg>Friends</div>
+          <div class="it"><svg class="wt" viewBox="0 0 28 24"><use href="#tt-live"/></svg>LIVE</div>
+          <div class="it"><svg viewBox="0 0 24 24"><use href="#tt-inbox"/></svg>Messages</div>
+          <div class="it"><svg viewBox="0 0 24 24"><use href="#fb-plus"/></svg>Upload</div>
+          <div class="it"><svg viewBox="0 0 24 24"><use href="#tt-me"/></svg>Profile</div>
+          <div class="it"><svg viewBox="0 0 24 24"><use href="#dots"/></svg>More</div>
+          <hr><div class="sec">Following accounts</div>
+          <div class="ttd-acc"><i></i><div>nong.cafehop<small>Nong · Cafe hopper</small></div></div>
+          <div class="ttd-acc"><i style="background:linear-gradient(135deg,#9FD3C7,#4E8D9C)"></i><div>bkk.eats<small>BKK Eats</small></div></div>
+          <hr><div class="ttd-foot">Company<br>Program<br>Terms &amp; Policies<small>© 2026 TikTok</small></div>
+          <div class="ttd-pills"><span>🪙 Get Coins</span><span>📱 Get App</span></div>
         </div>
+        <div class="ttd-main"><div class="ttd-card">
+          <div class="ttd-vid"><div class="art tall"><div class="k">POV</div><div class="h">When the barista<br>remembers<br>your order</div></div></div>
+          <div class="ttd-cap"><div class="who"><i></i>Morrow Coffee</div><div class="tx">Your usual, ready before you ask ☕ Order ahead in LINE</div><span class="tt-ad">Ad</span><div class="tt-ctab lit">Order now <svg viewBox="0 0 24 24"><use href="#chev"/></svg></div></div>
+          <div class="ttd-arrows"><i style="transform:rotate(180deg)"><svg viewBox="0 0 24 24"><use href="#chev"/></svg></i><i><svg viewBox="0 0 24 24"><use href="#chev"/></svg></i></div>
+          <div class="ttd-rail"><div><svg viewBox="0 0 36 36"><use href="#tt-heart"/></svg>48.2K</div><div><svg viewBox="0 0 36 36"><use href="#tt-comment"/></svg>1,204</div><div><svg viewBox="0 0 36 36"><use href="#tt-save"/></svg>3,911</div><div><svg viewBox="0 0 36 36"><use href="#tt-share"/></svg>2,078</div></div>
+          <div class="ttd-prog" style="--p:38%"><i></i></div>
+          <div class="ttd-ctrl"><span>❚❚</span><span>00:06 / 00:15</span><span class="sp"></span><span>1.0x</span><span>CC</span><span>🔇</span><span>•••</span></div>
+        </div></div>
       </div>
     </div></div></div>
   </figure>

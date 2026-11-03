@@ -22,7 +22,7 @@ Swapping brands = swapping `brand.css` + images + copy. That is what makes resul
    - Name project classes with a project prefix (e.g. `.sb-hero`, not `.kv`/`.hero`) so they never collide with kit classes.
    - Thai copy: wrap prices, dates, units and final particles in `<span style="white-space:nowrap">` so lines never end with an orphan "ค่ะ", "ml" or a split word.
 5. **Export.** `node scripts/export.cjs <project>` (first time on a machine: `cd scripts && npm install`; it falls back to the installed Google Chrome if Playwright's browser isn't downloaded). It serves only the project folder. → `captures/NN-<shot-id>.png` (3× phones, 2× desktop, transparent), `00-overview.png`, `qa.json`. Fix every failed request and QA issue it prints.
-6. **Review like a client would.** Open every PNG at full size (not just the overview) and run `references/qa-checklist.md`. Compare against `references/screens/` if real app screenshots exist there.
+6. **Review like a client would.** Open every PNG at full size (not just the overview) and run `references/qa-checklist.md`. Put your mockup side by side with a real device capture from `references/screens/device/` (or ask the user for fresh phone screenshots of the same surface). Platform UIs change every few months, and a real capture is the only ground truth.
 7. **Record.** Update `notes.md`: placeholders still open, assumptions, image sources, timeline. Then report the capture paths to the user.
 
 ### Gallery matrix (✓ = ready-made shot; others = adapt from the same row)
@@ -32,10 +32,10 @@ Swapping brands = swapping `brand.css` + images + copy. That is what makes resul
 | LINE OA chat + Flex | ✓ dark | ✓ light | – (not in kit yet) |
 | LINE rich menu | ✓ | adapt | – |
 | LINE push / lock screen | adapt (`.android .notif`) | ✓ | – |
-| FB feed single image | ✓ | adapt | ✓ |
-| FB carousel | adapt | ✓ | adapt |
+| FB feed single image | ✓ light | ✓ dark | ✓ |
+| FB carousel | adapt | ✓ light | adapt |
 | FB Stories/Reels | adapt | ✓ | – |
-| TikTok in-feed / Spark | ✓ in-feed | ✓ Spark | ✓ |
+| TikTok in-feed / Spark / product card | ✓ in-feed | ✓ Spark, ✓ product card | ✓ |
 
 ## Realism rules (learned the hard way)
 
