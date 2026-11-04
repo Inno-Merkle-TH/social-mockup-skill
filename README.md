@@ -44,7 +44,9 @@ What makes these look real:
 
 All the rich-menu layouts Claude can make:
 
-<img src="docs/richmenu-templates.jpg" width="520" alt="LINE rich menu templates">
+<img src="templates/richmenu-picker.png" width="620" alt="LINE rich menu layout picker: every layout with its code">
+
+This is the same picture Claude shows you when you ask for a rich menu.
 
 ---
 
@@ -174,7 +176,7 @@ Claude only asks what it needs. Anything you already said in your first message 
 
 **For LINE rich menus**
 - Large (half the screen) or compact (a smaller strip)?
-- Which layout? Claude shows you the 12 official layouts, plus custom and tab-style options.
+- Which layout? Claude first shows you a picture of every layout (the 12 official ones, plus custom and tab-style). Each layout has a short code like **L6** or **C3**, so you just reply with the code, or say "you choose".
 - What goes in each button area, and should it use photos or icons?
 - The text on the menu bar ("Menu" or your own, up to 14 characters).
 
@@ -280,6 +282,7 @@ Claude rebuilds only what changed and re-exports the images.
 | `scripts/find_images.py`, `fetch_image.py` | Find and download real photos and log their sources |
 | `scripts/new_project.sh` | Creates a new project folder with the kit |
 | `scripts/preflight.py` | Checks first whether this computer can render, and whether the brand site and photo sites are reachable |
+| `scripts/richmenu_picker.py` | Rebuilds `templates/richmenu-picker.svg` and `.png`, the layout picture shown at intake. Run with `--png` after changing rich menu layouts in `kit.css` |
 | `scripts/clean_image.py` | Trims white edges off uploaded images (logged), checks sizes, makes an edge-zoom sheet |
 | `scripts/bundle.py` | Packs a project into one HTML file and checks that scripts, status bars and icons work |
 | `templates/captures/` | Only `04-line-richmenu-templates.png` is kept (shown during intake). Regenerate the rest with the gallery export below; they're git-ignored |

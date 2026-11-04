@@ -58,7 +58,27 @@ If L1 = open and L2 = previous messages, the visible chat area is small (~250 pt
 
 ## Round 3b: LINE rich menu (only if "rich menu" was picked in Q3)
 
-Ask these with AskUserQuestion. Use the **ASCII previews** below as option `preview`s so the user can see the layouts side by side, and/or show them `templates/captures/04-line-richmenu-templates.png`.
+**Always show the layout picker first, before asking R1/R2.** People choose a layout by looking, not by reading codes. The picker shows every layout: the 7 large and 5 compact OA Manager templates, plus custom and tabbed (API). Each one has its reply code, tap areas, area count and a "good for" hint:
+- `templates/richmenu-picker.png` (2432×2612, 260 KB) and `templates/richmenu-picker.svg` (16 KB, self-contained: no fonts, images or scripts). Regenerate both with `python3 scripts/richmenu_picker.py --png` after any layout change in `kit.css`.
+
+Show it so it actually appears in the conversation, depending on where you run:
+
+| Where | How to show it |
+|---|---|
+| **Claude app** (web / desktop) | Create an **SVG artifact** (`image/svg+xml`) whose content is `templates/richmenu-picker.svg` copied **unchanged**, so it renders inline. If artifacts aren't available, copy the PNG to the outputs folder (`/mnt/user-data/outputs/` when it exists) so it appears as a file card |
+| **Cowork** | Copy `richmenu-picker.png` into the user's working/outputs folder and name it in your message, so it shows as an image the user can open. Then ask the question |
+| **Claude Code** | Run `open templates/richmenu-picker.png` (macOS; `xdg-open` on Linux) so it pops up, **and** print its path. Then ask with AskUserQuestion using the ASCII previews below |
+| Nothing can display images | Paste the ASCII block below as a code block in your message |
+
+Then ask. **AskUserQuestion takes at most 4 options**, so split the choice:
+1. **R1 size**: Large (7 layouts, default) · Compact (5 layouts, more chat visible) · Advanced: custom or tabbed (Messaging API).
+2. **R2 layout**, options from the chosen group with ASCII `preview`s:
+   - Large: **L6** (default) · L4b · L4 · "Other: type L3, L2r, L2c or L1 from the picture".
+   - Compact: **C3** (default) · C2 · C2l · "Other: type C2r or C1".
+   - Advanced: custom · tabbed.
+3. In plain chat without AskUserQuestion, ask one short question: *"Which layout? Reply with a code from the picture (L6, L4b, C3…), or say 'you choose'."* Accept codes, area counts ("the 4-button one") or descriptions, repeat back the code you understood, and record it in notes.md → Brief.
+
+If the user can't decide, propose one layout from the brief's number of actions (6 actions → L6, banner + 3 → L4b, 3 actions with chat focus → C3). Mark it in Assumptions to confirm.
 
 | # | Question | Options / default |
 |---|---|---|
