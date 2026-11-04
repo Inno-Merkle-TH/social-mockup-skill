@@ -9,13 +9,17 @@
 ## Brief (intake answers: every shot is checked against this before delivery)
 - Brand / OA / page / handle:
 - Platforms × devices:
-- Screens (order):
+- Screens: see Storyboard below (path: user list / Claude proposal / mix; confirmed by user? yes / no)
 - Language / theme:
 - **LINE message format** (rich message / Flex / both, and order):
 - **LINE chat state per shot**: rich menu open / collapsed / none · only the new message (top-anchored) / with previous messages (bottom-anchored)
 - **Exact copy per shot** (text bubble, CTA wording): every item listed here must appear in the shot
 - Rich menu: size · template · areas A–… · look · bar label
 - Brand colours (hex), logo file, CTA wording: confirmed by user? yes / no
+
+## Storyboard (confirmed build list; overview board uses this order)
+| # | Platform · device | Surface | Purpose / stage | Key content | Source (user / suggested) |
+|---|---|---|---|---|---|
 
 ## Pre-delivery check against the Brief
 | Shot | Brief items present? | Anchoring as asked? | Format as asked? | Anything removed or moved? (must be "no", or agreed with the user) |

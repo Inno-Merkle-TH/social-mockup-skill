@@ -23,7 +23,41 @@ Run `python3 scripts/preflight.py --brand <brand site> --surfaces line,fb,tiktok
 | 2 | Which devices? (multi-select) | Android (Galaxy, default for TH market) · iOS (iPhone) · Desktop |
 | 3 | Which surfaces? (multi-select, depends on 1). For any LINE chat, also ask Round 3a (rich menu open? previous messages?) | LINE: OA chat · Flex message · rich menu · push/lock screen. FB: feed single image · carousel · video · Stories/Reels. TikTok: in-feed ad · Spark Ad (creator) · organic post · desktop web |
 | 3c | **LINE only: rich message, Flex, or both?** Show the comparison from `references/line.md` ("Rich message vs Flex") as the option `preview` | Rich message (one designed image, text inside the art, no card) · **Flex** (white card: photo + live text + buttons) · Both (e.g. rich message then Flex carousel; ask the order). No silent default: if the user says "just go", use Flex for product/coupon cards and rich message for a promo banner, and list it under Assumptions to confirm |
-| 4 | How many screens and in what order? Is it a journey (CRM stages / campaign phases) or standalone ads? | free text; offer "I'll propose a storyboard" |
+| 4 | **Screens: do you already know which screens you want, or should I help you plan them?** Then follow Round 1b | **I know what I want** (list them) · **Help me plan** (Claude proposes) · A mix: I know some, fill in the rest |
+
+## Round 1b: Screens (storyboard): ALWAYS settle this before building
+
+Some users arrive with an exact shot list; others are exploring. Q4 decides which path, and both paths end with the same **confirmed storyboard table**. Write that table into notes.md → Storyboard. Every later question (copy, chat state, rich menu) is asked **per screen** from that table.
+
+**Path A: "I know what I want"**
+1. Ask: *"How many screens, and what's on each one? One line per screen is enough, e.g. '1. LINE chat with the promo message, 2. rich menu, 3. FB feed ad'."*
+2. Turn the answer into the storyboard table (below), filling platform and device from Round 1. Ask only about gaps (for example which device screen 3 is on). Don't add, merge or drop screens on your own. If you think something is missing (e.g. no screen shows where the CTA leads), **suggest** it as an optional extra.
+
+**Path B: "Help me plan"** (exploring)
+1. Ask at most two short questions first, if the brief doesn't already say:
+   - **Goal**: pitch / concept visuals · CRM journey (stages) · ad previews for approval · single hero shot.
+   - **Audience / moment**: who sees it and when (e.g. new followers in launch week, members before a sale).
+2. Propose **2–3 storyboard options of different sizes**, each as a short numbered list with one line per screen and why it's there. For example:
+   - **Lean (3 screens)**: 1 LINE push on the lock screen · 2 LINE chat with the Flex offer · 3 rich menu.
+   - **Standard (5)**: Lean, plus 4 FB feed ad · 5 TikTok in-feed ad.
+   - **Full journey (8)**: teaser → launch → reminder → purchase → thank-you across LINE, FB and TikTok.
+
+   Base them on the brief, the platforms from Round 1, and real patterns (`line.md`, `facebook.md`, `tiktok.md`). Ask with AskUserQuestion (options = the storyboards, recommended one first, `preview` = its numbered list), or as a numbered list in plain chat.
+3. The user picks one and edits it ("drop 4, add a coupon screen"). Repeat the final list back as the storyboard table and get a clear yes.
+
+**Path C: a mix.** Take the screens the user named as fixed, mark them "user", and propose the rest as "suggested". Confirm the whole table.
+
+Storyboard table (repeat it in chat for confirmation, then copy it into notes.md):
+
+| # | Platform · device | Surface | Purpose / stage | Key content | Source |
+|---|---|---|---|---|---|
+| 1 | LINE · Android | lock-screen push | teaser | "New drop Friday" notification | user |
+| 2 | LINE · Android | OA chat + Flex | launch offer | Flex card, CTA "Shop now" | suggested |
+
+Rules:
+- **Default if the user says "you decide":** the Lean storyboard for their platforms, listed under Assumptions to confirm.
+- More than about 10 screens: confirm that's intended, and offer to deliver in batches (first 3 for direction, then the rest).
+- Once confirmed, the storyboard is the build list and the overview-board order. Changing it later means asking, not silently adding or removing screens.
 
 ## Round 2: Brand
 

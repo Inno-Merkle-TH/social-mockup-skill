@@ -175,7 +175,12 @@ Claude only asks what it needs. Anything you already said in your first message 
 - Which platforms: LINE, Facebook, TikTok?
 - Which devices: iPhone, Android, desktop?
 - Which screens: for example LINE chat, rich menu, Facebook feed ad, TikTok ad?
-- How many screens, and is it a journey (step 1 → 2 → 3) or separate ads?
+- **How many screens, and what's on each one?** Two ways to answer:
+  - **You already know:** just list them, one line each, e.g. *"1. LINE chat with the promo, 2. rich menu, 3. Facebook feed ad"*. Claude builds exactly that and only asks about gaps.
+  - **You're exploring:** say *"help me plan"*. Claude asks your goal (a pitch, a CRM journey, ad previews) and who it's for, then suggests 2–3 storyboards (for example a 3-screen lean version, a 5-screen standard and a full 8-screen journey). Pick one and change anything you like.
+  - Or mix them: name the screens you're sure of and let Claude suggest the rest.
+
+  Claude repeats the final numbered list back to you before it builds, so you always know what's coming.
 
 **About the brand**
 - The brand name, and the LINE / Facebook / TikTok account name to show.
