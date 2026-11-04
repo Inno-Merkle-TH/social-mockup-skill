@@ -39,7 +39,7 @@ What makes these look real:
 - **App screens** (header, buttons, fonts, spacing) are matched to real 2026 screenshots of each app.
 - **Fonts** are the ones each app actually uses: SF Pro and Thonburi on iPhone, Roboto on Android, TikTok's own font in TikTok.
 - **Image shapes** are correct for each placement. For example, a Facebook feed image is 4:5 portrait and a TikTok video fills the whole screen.
-- **Photos are real.** Your brand's photos are used if you have them. If not, Claude finds suitable photos online.
+- **Photos are real.** Your brand's photos are used if you have them. If not, Claude finds suitable photos online, **in Cowork and Claude Code only**. In a normal Claude chat you upload the photos yourself ([how](#step-4-photos-who-gets-them)).
 - **Thai or English copy**, with correct Thai line breaks.
 
 All the rich-menu layouts Claude can make:
@@ -52,13 +52,13 @@ This is the same picture Claude shows you when you ask for a rich menu.
 
 ## 2. Which Claude are you using?
 
-| You use… | Follow | What you get |
-|---|---|---|
-| The **Claude app** on Mac/Windows, or **claude.ai** in the browser | [Section 3](#3-set-up-in-the-claude-app-desktop-web-cowork) | Claude chats with you and produces the screens in its built-in workspace |
-| **Cowork** (Claude doing tasks on your computer) | [Section 3](#3-set-up-in-the-claude-app-desktop-web-cowork) | Same as above. Files can go straight into a folder on your computer |
-| **Claude Code** (the terminal / coding tool) | [Section 4](#4-set-up-in-claude-code) | The best quality: exact iPhone fonts when run on a Mac, and full control over the files |
+| You use… | Follow | What you get | Photos from the internet? |
+|---|---|---|---|
+| **Chat** in the Claude app on Mac/Windows, or **claude.ai** in the browser | [Section 3](#3-set-up-in-the-claude-app-desktop-web-cowork) | Claude chats with you and produces the screens in its built-in workspace | ✗ **No.** Chat can't download photos from websites. You upload them yourself |
+| **Cowork** (Claude doing tasks on your computer) | [Section 3](#3-set-up-in-the-claude-app-desktop-web-cowork) | Same as above. Files can go straight into a folder on your computer | ✓ Yes. Claude finds and downloads photos into your folder |
+| **Claude Code** (the terminal / coding tool) | [Section 4](#4-set-up-in-claude-code) | The best quality: exact iPhone fonts when run on a Mac, and full control over the files | ✓ Yes. Works out of the box |
 
-Not sure? If you chat with Claude in a normal window, use Section 3.
+Not sure? If you chat with Claude in a normal window, use Section 3. **No photos of your own?** Use Cowork or Claude Code, so Claude can find photos online for you.
 
 ---
 
@@ -88,8 +88,26 @@ You do this **once**. It takes about 2 minutes.
 3. Choose the file from Step 1 (`.skill` or `.zip`).
 4. Make sure the switch next to **social-mockup-studio** is **on**.
 
-### Step 4 (recommended): Allow internet access
-Claude uses the internet to find photos and fonts. If your settings have network or web access options for code, allow them. Without internet, Claude can still build the screens, but it will ask you to provide all the photos yourself.
+### Step 4: Photos: who gets them?
+
+**Claude chat (claude.ai or a normal chat in the app) can't download photos from the internet.** Its workspace can't fetch images from brand websites or photo sites. So in chat, **you** provide the photos:
+1. Start your request. Claude replies with a list of exactly which photos it needs, with sizes (for example *logo, square PNG*; *rich message image 1040×1040*; *one photo per menu button*).
+2. Save those photos to your computer: from the brand's website (right-click → **Save image as…**), your brand folder, Google Drive or the client's assets.
+3. Attach them to the chat: click the **paperclip / +** button, or drag the files into the message box. Use the largest version you have (at least 1500 px wide is best).
+4. Tell Claude which photo goes where, for example *"photo 1 is the hero, photo 2 for button A"*. If you're not sure, let Claude decide.
+
+Don't have the photos? Use **Cowork** or **Claude Code** for that project instead. There, Claude finds and downloads real photos itself.
+
+**Cowork: Claude downloads photos for you**
+1. Open the Claude Desktop app and switch to **Cowork**.
+2. Start a task and choose (or create) a **folder** on your computer for the project, for example `Desktop/Client X mockups`.
+3. Type your request, for example *"…find real photos online"*. Claude searches the brand's website and free photo sites, downloads the photos into your folder, and lists each source in `assets/credits.json`.
+4. If Claude says a site is blocked, open **Settings → Capabilities** and allow network access for code, or add the site to the allowed domains. On a company plan, ask your admin to allow it. Then tell Claude *"try again"*.
+
+**Claude Code: Claude downloads photos for you**
+Nothing to set up: Claude Code can download photos as soon as the skill is installed ([Section 4](#4-set-up-in-claude-code)). Optionally add free Pexels/Unsplash keys for more stock photos (Section 4, step 3).
+
+> Either way, Claude tells you in its **first reply** whether it can download photos in your current setup, and which files it needs from you if it can't.
 
 ### Step 5: Try it
 Start a **new chat** (or a new Cowork task) and type:
@@ -162,7 +180,7 @@ Claude only asks what it needs. Anything you already said in your first message 
 **About the brand**
 - The brand name, and the LINE / Facebook / TikTok account name to show.
 - Logo, colours and fonts, or permission to take them from the brand's website.
-- **Where photos should come from:** you provide them, the brand's website, or **Claude finds photos online** (the usual choice).
+- **Where photos should come from:** you provide them, the brand's website, or **Claude finds photos online** (the usual choice in Cowork and Claude Code; in a normal chat you upload them, see [Step 4](#step-4-photos-who-gets-them)).
 
 **About the content**
 - Should you or Claude write the copy, and in which language?
@@ -183,7 +201,7 @@ Claude only asks what it needs. Anything you already said in your first message 
 **About the output**
 - Light or dark mode, safe-zone guides, and where to deliver the files.
 
-> **In a hurry?** Say *"just go with the defaults"*. Claude will then use: Android Galaxy, LINE with the rich menu open and previous messages, Facebook light mode, TikTok, Thai copy, and real photos found online.
+> **In a hurry?** Say *"just go with the defaults"*. Claude will then use: Android Galaxy, LINE with the rich menu open and previous messages, Facebook light mode, TikTok, Thai copy, and real photos found online (Cowork and Claude Code; in chat it asks you for the photos).
 
 ---
 
@@ -241,7 +259,7 @@ Claude rebuilds only what changed and re-exports the images.
 |---|---|
 | Claude doesn't ask questions or doesn't seem to use the skill | Check the skill is switched **on** (Customize → Skills), start a **new chat**, and say *"use the social-mockup-studio skill"*. |
 | Upload of the skill file fails | Make sure you're uploading the original file (`.skill` or renamed to `.zip`), not a folder. Check that "Code execution and file creation" is on. On Team/Enterprise, ask your admin to allow skills. If you get a server error, try again later or in the other app (web vs desktop). |
-| "Can't download photos" or "no internet" | Allow network/internet access for code in your settings (or ask your admin to allow the brand's domain), or attach your own photos. Claude lists exactly which files it needs. |
+| "Can't download photos" or "no internet" | **In a normal Claude chat this is expected**: chat can't download photos. Attach your own (paperclip / drag in), or move the project to **Cowork** or **Claude Code** ([Step 4](#step-4-photos-who-gets-them)). In Cowork, allow network access for code in Settings → Capabilities (or ask your admin to allow the site). Claude lists exactly which files it needs. |
 | A white line or gap shows at the edge of a picture | Usually it's in the uploaded file itself (screenshots often have a white strip). Claude trims uploads automatically. If you still see one, say *"check the edges of the image on screen 2"*. |
 | The screen lost something you asked for (a message, a button) | It shouldn't happen: Claude must ask before removing or moving anything. Point to it, e.g. *"bring back the text message above the image, top of the chat"*. |
 | Rich message vs card looks wrong | Say which you want: a **rich message** (one designed picture) or a **Flex message** (a white card with photo, text and buttons). |
