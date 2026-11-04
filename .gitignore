@@ -18,3 +18,10 @@ references/screens/**/official/
 references/screens/**/*.PNG
 references/screens/**/*.JPG
 references/screens/calibrate/out/
+
+# example gallery exports: regenerate with  node scripts/export.cjs templates --page gallery.html --root .
+# only the rich-menu template sheet is kept (intake shows it to users)
+templates/captures/*
+!templates/captures/04-line-richmenu-templates.png
+dist/
+__pycache__/

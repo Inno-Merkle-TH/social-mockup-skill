@@ -54,7 +54,7 @@ Exports must run on a Mac to get real SF Pro + Thonburi. Elsewhere, kit.js swaps
 | FB/IG Stories, Reels | 9:16 | `.fb-full` |
 | TikTok in-feed | 9:16, full screen behind the UI | `.tt .vid` |
 | LINE Flex hero | 20:13 is the common template ratio (1:1, 1.51:1, 16:9 also used) | `style="aspect-ratio:20/13"` on `.fx-hero` |
-| LINE rich message (imagemap) | 1040 px base, usually **1:1**, drawn **edge to edge** with no avatar or bubble | `.ln-imap` (`--r`) |
+| LINE rich message (imagemap) | 1040 px base, **1:1 default**; other OA Manager heights need confirmation (`line-image-sizes.md`). No avatar or bubble. Edge-to-edge is ⚠ UNVERIFIED (`line.md`) | `.ln-imap` (`--r`) |
 | LINE rich menu | 2500×1686 (large, 1.48:1) or 2500×843 (compact) | `.rm-art` |
 | LINE image message | the image's own ratio, rounded corners, max ~220 pt wide | — |
 

@@ -158,6 +158,7 @@ Claude only asks what it needs. Anything you already said in your first message 
 **For LINE chats (asked every time)**
 - **Is the rich menu open?** Open (most common), collapsed (only the "Menu" bar), or no rich menu (normal typing bar).
 - **Only the new message, or previous messages too?** With previous messages looks like a real, lived-in chat; only the new message looks like a brand-new chat.
+- **Rich message, Flex message, or both?** A rich message is one designed picture, with all the text inside the image. A Flex message is a white card with a photo, real text and buttons. Claude shows you a small drawing of each.
 
 **For LINE rich menus**
 - Large (half the screen) or compact (a smaller strip)?
@@ -187,7 +188,9 @@ You get one image per screen, and one overview board with all screens together.
 - **Cowork:** ask Claude to save them in a folder you choose, for example *"put the final PNGs in my Desktop/Client X folder"*.
 - **Claude Code:** they're in the project folder, under `captures/`.
 
-> If Claude says the screenshot tool can't run in its workspace, it will give you the project as a ZIP containing `index.html`. Open that file in **Google Chrome** and you'll see all the screens. For final high-resolution files, ask a teammate with Claude Code on a Mac to run the export.
+> If Claude says the screenshot tool can't run in its workspace, it tells you so in its **first reply** and gives you **one HTML file** (it opens by double-click, with everything built in) plus the project ZIP. Open the HTML in **Google Chrome** to see all the screens. Claude will also say plainly that it couldn't check them visually, and list what is unverified. For final high-resolution files, ask a teammate with Claude Code on a Mac to run the export.
+>
+> **Claude will also tell you at the start** if it can't reach the brand's website or photo sites from its workspace. It then asks you to upload specific files (logo, rich message image, menu tile images, brand colours, CTA wording) instead of building with made-up artwork. With your first delivery it lists its **"Assumptions to confirm"**, everything it had to guess. Reply to that list first; it saves several rounds of changes.
 
 ---
 
@@ -224,7 +227,10 @@ Claude rebuilds only what changed and re-exports the images.
 |---|---|
 | Claude doesn't ask questions or doesn't seem to use the skill | Check the skill is switched **on** (Customize → Skills), start a **new chat**, and say *"use the social-mockup-studio skill"*. |
 | Upload of the skill file fails | Make sure you're uploading the original file (`.skill` or renamed to `.zip`), not a folder. Check that "Code execution and file creation" is on. On Team/Enterprise, ask your admin to allow skills. If you get a server error, try again later or in the other app (web vs desktop). |
-| "Can't download photos" or "no internet" | Allow network/internet access for code in your settings, or attach your own photos. |
+| "Can't download photos" or "no internet" | Allow network/internet access for code in your settings (or ask your admin to allow the brand's domain), or attach your own photos. Claude lists exactly which files it needs. |
+| A white line or gap shows at the edge of a picture | Usually it's in the uploaded file itself (screenshots often have a white strip). Claude trims uploads automatically. If you still see one, say *"check the edges of the image on screen 2"*. |
+| The screen lost something you asked for (a message, a button) | It shouldn't happen: Claude must ask before removing or moving anything. Point to it, e.g. *"bring back the text message above the image, top of the chat"*. |
+| Rich message vs card looks wrong | Say which you want: a **rich message** (one designed picture) or a **Flex message** (a white card with photo, text and buttons). |
 | iPhone text looks slightly different from a real iPhone | The real iPhone fonts only exist on Macs. For final files, export with Claude Code on a Mac. |
 | A photo looks blurry or wrong | Tell Claude: *"replace the photo on screen 2 with a sharper one of …"*, or attach your own. |
 | Text is cut off or overlaps | Tell Claude which screen. It also checks this automatically, but copy changes can introduce it. |
@@ -261,12 +267,17 @@ Claude rebuilds only what changed and re-exports the images.
 | `scripts/calibrate.cjs` | Overlays a rebuilt screen on a real phone screenshot and reports where they differ |
 | `scripts/find_images.py`, `fetch_image.py` | Find and download real photos and log their sources |
 | `scripts/new_project.sh` | Creates a new project folder with the kit |
+| `scripts/preflight.py` | Checks first whether this computer can render, and whether the brand site and photo sites are reachable |
+| `scripts/clean_image.py` | Trims white edges off uploaded images (logged), checks sizes, makes an edge-zoom sheet |
+| `scripts/bundle.py` | Packs a project into one HTML file and checks that scripts, status bars and icons work |
+| `templates/captures/` | Only `04-line-richmenu-templates.png` is kept (shown during intake). Regenerate the rest with the gallery export below; they're git-ignored |
 
 **Use without Claude**
 ```bash
 bash scripts/new_project.sh ~/work/acme-launch        # new project
 # edit brand.css, add images, copy screens from templates/gallery.html into index.html
 node scripts/export.cjs ~/work/acme-launch            # → captures/*.png + qa.json
+python3 scripts/bundle.py ~/work/acme-launch           # → dist/acme-launch.html (one file, checked)
 node scripts/export.cjs templates --root . --page gallery.html   # rebuild the gallery
 ```
 Preview while editing: `python3 -m http.server 8000` in the parent folder, then open `http://127.0.0.1:8000/acme-launch/`. Add `?only=<shot-id>` for one screen, `?safe=1` for safe zones, and `?areas=1` for rich-menu tap areas.
@@ -279,10 +290,9 @@ Preview while editing: `python3 -m http.server 8000` in the parent folder, then 
 
 **Adding a new screen type** (Instagram, Messenger, LINE VOOM…): add CSS to `kit.css`, an example to `gallery.html`, notes to the platform reference, then re-export and commit.
 
-**Making the shareable `.skill` file** (keeps it small: no full-size gallery PNGs). The folder must be named `social-mockup-studio`.
+**Making the shareable `.skill` file** (Claude accepts up to 30 MB; this one is about 8 MB because the gallery PNGs aren't in git). The folder must be named `social-mockup-studio`.
 ```bash
 mkdir -p /tmp/pkg/social-mockup-studio && git archive HEAD | tar -x -C /tmp/pkg/social-mockup-studio
-rm -rf /tmp/pkg/social-mockup-studio/templates/captures
 # from the skill-creator skill folder:
 python3 -m scripts.package_skill /tmp/pkg/social-mockup-studio <output-folder>
 ```

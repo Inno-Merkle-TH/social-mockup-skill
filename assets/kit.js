@@ -6,7 +6,7 @@
    - sets <html data-ready="1"> once fonts + images are loaded (export waits on it)
 */
 (function () {
-  const KIT = document.currentScript.src.replace(/kit\.js.*$/, "");
+  const KIT = (document.currentScript.src || "").replace(/kit\.js.*$/, "");
   const q = new URLSearchParams(location.search);
 
   const ICON = {
@@ -49,6 +49,7 @@
   }
 
   async function inlineSprite() {
+    if (document.querySelector("svg[data-kit-sprite]")) return;   // bundle.py already inlined it (single-file HTML)
     try {
       const r = await fetch(KIT + "icons.svg"); const svg = await r.text();
       const d = document.createElement("div"); d.innerHTML = svg; document.body.prepend(d.firstElementChild);
@@ -72,6 +73,16 @@
     document.querySelectorAll(".ph-img").forEach(p => issues.push("placeholder " + (p.textContent || "").trim().slice(0, 40)));
     document.querySelectorAll(".flex, .fb-tx, .tt-cap, .rm-t, .fb-link .t").forEach(el => { if (!el.classList.contains("one") && el.scrollWidth > el.clientWidth + 1) issues.push("overflow-x " + el.className + ": " + el.textContent.trim().slice(0, 30)); });
     document.querySelectorAll(".flex img, .fb-media img, .rm-t img, .notif img").forEach(i => { const r = i.getBoundingClientRect(); if (r.width && (r.width < 28 || r.height < 28)) issues.push("tiny-img " + i.getAttribute("src")); });
+    // status bars and icons must actually render (an empty .sb / unresolved <use> = kit.js or sprite broke)
+    document.querySelectorAll(".sb").forEach(sb => { if (!sb.textContent.trim() && !sb.querySelector("svg")) issues.push("statusbar-empty"); });
+    const badUse = new Set();
+    document.querySelectorAll("use").forEach(u => { const h = u.getAttribute("href") || ""; if (h.startsWith("#") && !document.getElementById(h.slice(1))) badUse.add(h); });
+    badUse.forEach(h => issues.push("icon-missing " + h));
+    // LINE rich message (imagemap) shape vs. references/line-image-sizes.md: 1040 wide, square by default
+    document.querySelectorAll(".ln-imap").forEach(m => { const b = (m.querySelector("img") || m).getBoundingClientRect(); if (!b.width) return;
+      const h = Math.round(1040 * b.height / b.width), std = [1040, 350, 585, 700, 1300, 1850];
+      if (h < 250 || h > 2080) issues.push("imap-size 1040x" + h + " is outside every LINE limit");
+      else if (h !== 1040 && !m.dataset.sizeOk) issues.push("imap-shape 1040x" + h + (std.some(s => Math.abs(s - h) <= 4) ? " (OA Manager template)" : " (custom height)") + ": not square; confirm with the user, then set data-size-ok on .ln-imap"); });
     window.__kitIssues = issues;
     document.documentElement.dataset.ready = "1";
   }
