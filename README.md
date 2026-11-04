@@ -64,8 +64,15 @@ Not sure? If you chat with Claude in a normal window, use Section 3.
 
 You do this **once**. It takes about 2 minutes.
 
-### Step 1: Get the skill file
-Ask your team lead for **`social-mockup-studio.skill`**, or copy it from the shared folder. It's a normal file you can download. If your computer can't open a `.skill` file, rename it to `social-mockup-studio.zip`; that's what it is inside.
+### Step 1: Download the skill file
+1. Open the repo on GitHub: **https://github.com/Inno-Merkle-TH/social-mockup-skill**
+2. In the file list, click **`social-mockup-studio.skill`**.
+3. Click the **download button** (the ⬇ arrow at the top right of the file view, "Download raw file").
+4. You now have `social-mockup-studio.skill` (about 9 MB) in your Downloads folder. **Don't unzip it and don't rename it**: Claude takes it as it is.
+
+> Don't use the green **Code → Download ZIP** button for the Claude app. That ZIP contains the whole repo in a folder called `social-mockup-skill-main`, which isn't the file Claude needs.
+>
+> Uploading fails or your computer won't accept a `.skill` file? Rename it to `social-mockup-studio.zip` and upload that. It's the same file.
 
 ### Step 2: Turn on file creation
 1. Open Claude and go to **Settings → Capabilities**.
@@ -95,11 +102,16 @@ Claude should reply with questions. That means the skill is working. 🎉
 
 You do this once on each computer.
 
-1. Copy the skill folder into your personal skills folder:
-   ```bash
-   cp -R social-mockup-studio ~/.claude/skills/
-   ```
-   To share it with a whole project, put it in `<your-repo>/.claude/skills/` and commit it.
+1. Put the skill into your personal skills folder. The folder **must be named `social-mockup-studio`**. Pick one way:
+   - **With git (easiest to update later with `git pull`):**
+     ```bash
+     git clone https://github.com/Inno-Merkle-TH/social-mockup-skill.git ~/.claude/skills/social-mockup-studio
+     ```
+   - **Without git:** on GitHub click the green **Code → Download ZIP** and unzip it. You get a folder called **`social-mockup-skill-main`**. **Rename it to `social-mockup-studio`** (removing `-main` alone isn't enough, because the repo name is different), then move it:
+     ```bash
+     mv ~/Downloads/social-mockup-skill-main ~/.claude/skills/social-mockup-studio
+     ```
+   To share it with a whole project, put it in `<your-repo>/.claude/skills/social-mockup-studio/` and commit it.
 2. Install the screenshot tool. This needs Node.js 18 or newer; Google Chrome is used automatically if it's installed.
    ```bash
    cd ~/.claude/skills/social-mockup-studio/scripts && npm install
@@ -290,11 +302,11 @@ Preview while editing: `python3 -m http.server 8000` in the parent folder, then 
 
 **Adding a new screen type** (Instagram, Messenger, LINE VOOM…): add CSS to `kit.css`, an example to `gallery.html`, notes to the platform reference, then re-export and commit.
 
-**Making the shareable `.skill` file** (Claude accepts up to 30 MB; this one is about 8 MB because the gallery PNGs aren't in git). The folder must be named `social-mockup-studio`.
+**Updating the shareable `.skill` file** (it lives in the repo root so teammates download it from GitHub; Claude accepts up to 30 MB, and this one is about 9 MB). **Rebuild it after every change and commit it with that change**, otherwise people download an old version. `.gitattributes` keeps the `.skill` out of `git archive`, so it never packs itself. The folder must be named `social-mockup-studio`.
 ```bash
-mkdir -p /tmp/pkg/social-mockup-studio && git archive HEAD | tar -x -C /tmp/pkg/social-mockup-studio
+rm -rf /tmp/pkg && mkdir -p /tmp/pkg/social-mockup-studio && git archive HEAD | tar -x -C /tmp/pkg/social-mockup-studio
 # from the skill-creator skill folder:
-python3 -m scripts.package_skill /tmp/pkg/social-mockup-studio <output-folder>
+python3 -m scripts.package_skill /tmp/pkg/social-mockup-studio <this repo folder>   # writes social-mockup-studio.skill here
 ```
 Keep client-specific material (client logos, paid fonts) **out** of this skill; it belongs in client projects.
 
