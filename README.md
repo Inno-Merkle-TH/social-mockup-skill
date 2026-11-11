@@ -37,6 +37,8 @@ You describe the campaign in plain words. Claude asks you a few questions, finds
 What makes these look real:
 - **Phone frames** are drawn to the real iPhone 17 Pro and Samsung Galaxy S26 sizes.
 - **App screens** (header, buttons, fonts, spacing) are matched to real 2026 screenshots of each app.
+- **Status bars** (time, signal, Wi-Fi, battery) are measured on real iPhone (iOS 26) and Samsung (One UI 8.5) screenshots, down to the battery percentage inside the pill.
+- **Lock screens and app launch screens** look like the real ones: the iOS 26 lock screen with glass notifications, and the actual LINE, Facebook and TikTok screens you see while each app opens.
 - **Fonts** are the ones each app actually uses: SF Pro and Thonburi on iPhone, Roboto on Android, TikTok's own font in TikTok.
 - **Image shapes** are correct for each placement. For example, a Facebook feed image is 4:5 portrait and a TikTok video fills the whole screen.
 - **Photos are real.** Your brand's photos are used if you have them. If not, Claude finds suitable photos online, **in Cowork and Claude Code only**. In a normal Claude chat you upload the photos yourself ([how](#step-4-photos-who-gets-them)).
@@ -207,6 +209,7 @@ Claude only asks what it needs. Anything you already said in your first message 
 
 **About the output**
 - Light or dark mode, safe-zone guides, and where to deliver the files.
+- **Do you also want a video?** If yes: which screens in which order, what gets tapped, and the format (MP4 on a plain background, 9:16 for phones, 16:9 for slides, or a transparent `.mov` for video editors). No video unless you say yes.
 
 > **In a hurry?** Say *"just go with the defaults"*. Claude will then use: Android Galaxy, LINE with the rich menu open and previous messages, Facebook light mode, TikTok, Thai copy, and real photos found online (Cowork and Claude Code; in chat it asks you for the photos).
 
@@ -245,8 +248,10 @@ Just say what you want, as you would to a designer:
 - *"Same screens but on iPhone."*
 - *"Translate everything to English."*
 - *"Add a TikTok version of the same ad."*
+- *"In the video, hold longer on the reply and make it 9:16."*
+- *"Make the video open TikTok instead of LINE."*
 
-Claude rebuilds only what changed and re-exports the images.
+Claude rebuilds only what changed and re-exports the images (and the video, if there is one).
 
 ---
 
@@ -274,6 +279,7 @@ Claude rebuilds only what changed and re-exports the images.
 | iPhone text looks slightly different from a real iPhone | The real iPhone fonts only exist on Macs. For final files, export with Claude Code on a Mac. |
 | A photo looks blurry or wrong | Tell Claude: *"replace the photo on screen 2 with a sharper one of …"*, or attach your own. |
 | Text is cut off or overlaps | Tell Claude which screen. It also checks this automatically, but copy changes can introduce it. |
+| Asked for a video but only got an HTML file | The Claude chat app can't record video in its workspace. Open the HTML in Chrome (the video plays there) and screen-record it (Mac: ⇧⌘5 → Record Selected Portion), or ask a teammate with Claude Code on a Mac to run the export. In Claude Code, install ffmpeg once with `brew install ffmpeg`. |
 | The app's look has changed (new LINE / Facebook / TikTok design) | Send a fresh phone screenshot of the real app to the skill maintainer (see Section 12). |
 
 ---
@@ -301,7 +307,7 @@ Claude rebuilds only what changed and re-exports the images.
 | `assets/kit.css`, `kit.js`, `icons.svg`, `fonts/` | The kit: phone frames, status bars, LINE/FB/TikTok screens, fonts |
 | `templates/gallery.html` | One ready-made example of every screen type (fictional brand "Morrow Coffee") |
 | `templates/stock/` | Demo photos (Wikimedia Commons, see `credits.json`) |
-| `references/` | Intake questions, platform rules, fonts and ratios, devices, realism rules, QA checklist, Thai notes, image sourcing |
+| `references/` | Intake questions, platform rules, fonts and ratios, devices (status bars, lock screens), realism rules, QA checklist, Thai notes, image sourcing, video flows (`video.md`) |
 | `references/screens/` | Real-app screenshots (local only, git-ignored) and `calibrate/` replica pages |
 | `scripts/export.cjs` | Renders every screen to PNG and runs QA (`qa.json`) |
 | `scripts/video.cjs` | Records each flow (`data-flow`: several screens + a step script, see `references/video.md`) to MP4, transparent ProRes or GIF. Needs ffmpeg |
