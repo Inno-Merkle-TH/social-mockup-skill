@@ -1,6 +1,6 @@
 ---
 name: social-mockup-studio
-description: Build realistic, client-ready mockups of LINE (OA chat, Flex messages, rich menus, push notifications), Facebook (feed, carousel, Stories/Reels ads) and TikTok (For You in-feed, Spark Ads) on iOS, Android and desktop, for any brand, exported as high-res transparent PNGs plus an overview board. Use this whenever someone wants to show how a campaign, CRM journey, ad, chatbot or LINE OA flow will look on a phone or desktop. That includes "mock up this LINE message", "show the FB ad on iPhone", "make a TikTok ad preview", "visualise the CRM journey", "rich menu per segment", "pitch visuals for social", or a sketch/brief of social screens, even if they never say the word "mockup".
+description: Build realistic, client-ready mockups of LINE (OA chat, Flex messages, rich menus, push notifications), Facebook (feed, carousel, Stories/Reels ads) and TikTok (For You in-feed, Spark Ads) on iOS, Android and desktop, for any brand, exported as high-res transparent PNGs plus an overview board, and as an MP4 walk-through video of several screens (taps, transitions, messages arriving). Use this whenever someone wants to show how a campaign, CRM journey, ad, chatbot or LINE OA flow will look on a phone or desktop. That includes "mock up this LINE message", "show the FB ad on iPhone", "make a TikTok ad preview", "visualise the CRM journey", "rich menu per segment", "pitch visuals for social", "a video of the flow", "animate the journey", or a sketch/brief of social screens, even if they never say the word "mockup".
 ---
 
 # Social Mockup Studio
@@ -36,6 +36,7 @@ Swapping brands = swapping `brand.css` + images + copy. That is what makes resul
    - **If the export can't run here** (Claude app / Cowork sandbox without Node, Playwright or internet): try `cd scripts && npm install && npx playwright install chromium` once. If that still fails, try Python (`pip install playwright && python -m playwright install chromium`) and screenshot each `.frame` at 3× yourself. As the last resort, run `python3 scripts/bundle.py <project>` to make **one self-contained HTML** (`dist/<name>.html`, which opens by double-click). Deliver it with the project ZIP, and tell the user plainly: "I couldn't render anything here, so these screens haven't been visually checked. Open the HTML in Chrome; to save a screen, right-click → Inspect → Capture node screenshot on the phone frame, or run the export on a Mac." Then list the unverified details. Never present an unrendered result as checked, and never stop with nothing to show.
    - **Single-file HTML:** always build it with `scripts/bundle.py`, never with an ad-hoc script. It syntax-checks every inline script (`node --check`), fails if any icon id or file is missing, and when a browser exists it confirms status bars and icons render. An ad-hoc bundler once corrupted the icon sprite and killed kit.js, leaving no status bar or icons.
    - Off macOS, iOS text uses Inter instead of SF Pro (kit.js swaps it in). Say so in notes.md, and offer a Mac re-export for final client files.
+5b. **Video (only if asked, intake Q14b).** Read `references/video.md`. Once the stills are approved, put the screens of one journey into a `data-flow` figure (several `.screen`s in one `.dev`, plus a JSON step script: wait / tap / go / reveal / scroll / type), starting from the `line-ios-journey` example in the gallery. Opening an app is never a cut: tap the notification → `zoom` into the app's real launch screen (`.screen.splash[data-app=line|facebook|tiktok|tiktok-loading]`, no status bar) → `fade` into the app screen. Add the Face ID `unlock` step only if the user asks for it. Check moments with `node scripts/video.cjs <project> --stills 0,2.5,…` (every transition midpoint), then record: `node scripts/video.cjs <project>` → `captures/video/<id>.mp4` (`--canvas 1080x1920` for 9:16, `--bg transparent` for a ProRes .mov with alpha, `--gif` for a small preview). Before delivering, pull frames out of the finished MP4 (`ffmpeg -i <mp4> -vf "fps=2,scale=300:-1,tile=8x4" -frames:v 1 sheet.png`) and look at them, plus the `--stills` at each transition midpoint. If it can't render here, deliver the bundle HTML (the flow plays in Chrome) and say the video wasn't rendered or checked.
 6. **Review like a client would.** Open every PNG at full size (not just the overview) and run `references/qa-checklist.md`. Fill in notes.md → "Pre-delivery check against the Brief" for every shot: all brief copy present, anchoring, menu state and message format as asked, nothing removed. Put your mockup side by side with a real device capture from `references/screens/device/` (or ask the user for fresh phone screenshots of the same surface). Platform UIs change every few months, and a real capture is the only ground truth.
 7. **Record and deliver honestly.** Update `notes.md`: placeholders, assumptions, unverified details, image sources and cleaning log, timeline. The delivery message must contain:
    (a) the file paths;
@@ -55,6 +56,7 @@ Swapping brands = swapping `brand.css` + images + copy. That is what makes resul
 | FB carousel | adapt | ✓ light | adapt |
 | FB Stories/Reels | adapt | ✓ | – |
 | TikTok in-feed / Spark / product card | ✓ in-feed | ✓ Spark, ✓ product card | ✓ |
+| Flow → video (several screens + taps) | adapt | ✓ LINE push → chat → rich menu → reply | – |
 
 ## Realism rules (learned the hard way)
 
@@ -89,6 +91,7 @@ Build it in the project's `index.html` `<style>` using the same conventions (pla
 | `scripts/find_images.py`, `fetch_image.py` | find real photos online (contact sheet) · download + crop + log source |
 | `references/image-sourcing.md` | where images come from, crops per placement, ad-craft rules |
 | `scripts/export.cjs` | render + QA (needs `npm install` in `scripts/` once) |
+| `scripts/video.cjs`, `references/video.md` | flows (several screens + a step script) → MP4 / ProRes with alpha / GIF; needs ffmpeg |
 | `references/intake.md` | the question rounds + defaults |
 | `references/line.md`, `facebook.md`, `tiktok.md` | anatomy, limits, class map per platform |
 | `references/devices.md` | frames, status bars, OS differences |

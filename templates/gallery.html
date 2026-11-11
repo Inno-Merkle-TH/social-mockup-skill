@@ -203,12 +203,81 @@
     <figcaption class="label"><div class="k">LINE · iOS</div><div class="h">Lock-screen push</div><div class="d">Title = OA name, body = first message / altText.</div></figcaption>
     <div class="frame"><div class="dev ios"><div class="screen dark">
       <div class="lock"><div class="date">Monday 3 November</div><div class="clk">9:41</div>
-        <span class="qa l"><svg class="i" viewBox="0 0 24 24"><use href="#i-tips"/></svg></span><span class="qa r"><svg class="i" viewBox="0 0 24 24"><use href="#cam"/></svg></span></div>
+        <span class="qa l"><svg class="i" viewBox="0 0 24 24"><use href="#torch"/></svg></span><span class="qa r"><svg class="i" viewBox="0 0 24 24"><use href="#cam"/></svg></span></div>
       <div class="sb over" data-time="9:41"></div>
       <div class="notif"><div class="appi" style="background:#06C755;color:#fff"><svg class="i" style="--bg:#06C755"><use href="#lineicon"/></svg></div>
         <div class="body"><div class="ttl">Morrow Coffee</div><div class="txt">Good morning! Your first cup this week is on us ☕</div></div><span class="tm">now</span></div>
       <div class="sysnav over light" style="color:#fff"></div>
     </div></div></div>
+  </figure>
+
+  <!-- ============ FLOW (video) · LINE · iOS · push → chat → rich menu → reply ============ -->
+  <figure class="shot" data-flow="line-ios-journey" data-poster="2">
+    <figcaption class="label"><div class="k">Flow → video · LINE · iOS</div><div class="h">Push → LINE launch screen → chat → rich menu → "My stamps" → reply</div><div class="d">Several screens in one phone plus a timeline (the JSON script below). Plays here in the browser (click to pause); <code>node scripts/video.cjs</code> records it to MP4. See references/video.md.</div></figcaption>
+    <div class="frame"><div class="dev ios">
+      <div class="screen dark" data-scene="lock">
+        <div class="lock"><div class="date">Monday 3 November</div><div class="clk">9:41</div>
+          <span class="qa l"><svg class="i" viewBox="0 0 24 24"><use href="#torch"/></svg></span><span class="qa r"><svg class="i" viewBox="0 0 24 24"><use href="#cam"/></svg></span></div>
+        <div class="sb over" data-time="9:41"></div>
+        <div class="notif"><div class="appi" style="background:#06C755;color:#fff"><svg class="i" style="--bg:#06C755"><use href="#lineicon"/></svg></div>
+          <div class="body"><div class="ttl">Morrow Coffee</div><div class="txt">Good morning! Your first oat latte this week is on us ☕</div></div><span class="tm">now</span></div>
+        <div class="sysnav over light" style="color:#fff"></div>
+      </div>
+      <div class="screen splash" data-app="line" data-scene="splash" data-time="9:41"></div>
+      <div class="screen line-light" data-scene="chat">
+        <div class="sb" data-time="9:41"></div>
+        <div class="ln-head"><span class="back"><svg class="i"><use href="#back"/></svg>1</span>
+          <div class="ti"><div class="nm"><svg class="shield" viewBox="2.5 1 19 22"><use href="#shield"/></svg>Morrow Coffee</div><div class="sub">Automated responses</div></div>
+          <div class="acts"><svg class="i"><use href="#searchclock"/></svg><svg class="i"><use href="#burger"/></svg></div></div>
+        <div class="ln-msgs bottom">
+          <div class="ln-row"><div class="ln-av"></div><div class="ln-line"><div class="flex kilo"><div class="fx-hero" style="aspect-ratio:20/13"><img src="stock/card-mocha.jpg" alt=""></div><div class="fx-bd"><div class="fx-t1">Chestnut Mocha</div><div class="fx-t2">฿110 · new this week</div></div><div class="fx-ft" style="gap:0"><div class="cta link">Order ahead</div></div></div><div class="ln-tm">Yesterday</div></div></div>
+          <div class="ln-date">Today</div>
+          <div class="ln-row"><div class="ln-av"></div><div class="ln-col"><div class="ln-line"><div class="ln-bub tail">Good morning! ☕ Your first oat latte this week is on us at every Morrow store. Tap <b>Menu</b> below to see your stamps.</div><div class="ln-tm">09:41</div></div></div></div>
+          <div class="ln-row me fl-me"><div class="ln-line"><div class="ln-bub tail">My stamps</div><div class="ln-tm">Read<br>09:42</div></div></div>
+          <div class="ln-row fl-reply"><div class="ln-av"></div><div class="ln-col"><div class="ln-line"><div class="ln-bub tail">You have 7 / 10 stamps ⭐ Three more and your next drink is free!</div><div class="ln-tm">09:42</div></div></div></div>
+        </div>
+        <div class="rm fl-menu"><div class="rm-art L4b"><div class="rm-t ph"><img src="stock/flex-mocha.jpg" alt=""><b>Autumn menu is here</b><span>Maple Cold Brew · Chestnut Mocha</span></div><div class="rm-t hl"><svg viewBox="0 0 24 24"><use href="#i-cart"/></svg>Order ahead<small>skip the queue</small></div><div class="rm-t fl-stamps"><svg viewBox="0 0 24 24"><use href="#i-gift"/></svg>My stamps<small>7 / 10</small></div><div class="rm-t"><svg viewBox="0 0 24 24"><use href="#i-store"/></svg>Find a store</div></div></div>
+        <div class="ln-bar"><span class="kb"><svg class="i"><use href="#kbd"/></svg></span>Menu <i class="tri"></i></div>
+        <div class="sysnav"></div>
+      </div>
+    </div></div>
+    <script type="application/json" data-flow-script>[
+      {"wait": 0.8},
+      {"reveal": ".notif", "with": "up", "dur": 0.5},
+      {"wait": 1.6},
+      {"tap": ".notif"},
+      {"go": "splash", "with": "zoom", "dur": 0.5},
+      {"wait": 0.7},
+      {"go": "chat", "with": "fade", "dur": 0.25},
+      {"wait": 1.6},
+      {"tap": ".ln-bar"},
+      {"reveal": ".fl-menu", "with": "grow", "dur": 0.45},
+      {"class": ".ln-bar .tri", "add": "up", "together": true},
+      {"wait": 1.4},
+      {"tap": ".fl-stamps"},
+      {"reveal": ".fl-me", "with": "grow", "dur": 0.35},
+      {"wait": 0.9},
+      {"reveal": ".fl-reply", "with": "grow", "dur": 0.4},
+      {"wait": 1.5}
+    ]</script>
+  </figure>
+
+  <!-- ============ App launch screens (for flows: the app opens on these) ============ -->
+  <figure class="shot" data-shot="launch-ios-line">
+    <figcaption class="label"><div class="k">App launch screen · iOS</div><div class="h">LINE</div><div class="d">Brand green #06C755, white bubble 175pt, centred. No status bar. Measured on real iPhone captures. <code>&lt;div class="screen splash" data-app="line"&gt;&lt;/div&gt;</code></div></figcaption>
+    <div class="frame"><div class="dev ios"><div class="screen splash" data-app="line"></div></div></div>
+  </figure>
+  <figure class="shot" data-shot="launch-ios-facebook">
+    <figcaption class="label"><div class="k">App launch screen · iOS</div><div class="h">Facebook</div><div class="d">White, blue f Ø72pt, "from ∞Meta" at the bottom. Add class dark for dark mode. No status bar. Measured on real iPhone captures. <code>&lt;div class="screen splash" data-app="facebook"&gt;&lt;/div&gt;</code></div></figcaption>
+    <div class="frame"><div class="dev ios"><div class="screen splash" data-app="facebook"></div></div></div>
+  </figure>
+  <figure class="shot" data-shot="launch-ios-tiktok">
+    <figcaption class="label"><div class="k">App launch screen · iOS</div><div class="h">TikTok · splash</div><div class="d">Black, colour logo + wordmark in the upper third. No status bar. Measured on real iPhone captures. <code>&lt;div class="screen splash" data-app="tiktok"&gt;&lt;/div&gt;</code></div></figcaption>
+    <div class="frame"><div class="dev ios"><div class="screen splash" data-app="tiktok"></div></div></div>
+  </figure>
+  <figure class="shot" data-shot="launch-ios-tiktok-loading">
+    <figcaption class="label"><div class="k">App launch screen · iOS</div><div class="h">TikTok · loading</div><div class="d">Shown after the splash on a cold start: watermark logo + the animated red/cyan dots. Measured on real iPhone captures. <code>&lt;div class="screen splash" data-app="tiktok-loading"&gt;&lt;/div&gt;</code></div></figcaption>
+    <div class="frame"><div class="dev ios"><div class="screen splash" data-app="tiktok-loading"></div></div></div>
   </figure>
 
   <!-- ============ Facebook · Android · feed single image ============ -->

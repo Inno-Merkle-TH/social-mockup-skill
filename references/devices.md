@@ -16,8 +16,15 @@ Need another device (Pixel 412×915, iPhone Pro Max 440×956, Galaxy Z Fold)? Co
 <div class="sysnav btn3"></div>                          <!-- Android 3-button nav -->
 ```
 - Colour follows `.light`/`.dark` on the screen (or add `.light`/`.dark` on the bar itself). Add `.over` to lay it transparently over full-bleed content (TikTok, Stories, lock screen).
-- Android One UI: time left, wifi + signal + pill battery with % right [V]. iOS: time centred-left beside the island, signal + wifi + battery right [~].
+- Android One UI 8.5: semibold clock 12 dp from the left; wifi arcs, four signal bars and a 20.7×12 dp battery pill with the % cut into it on the right, measured against a Galaxy S25 1080×2340 capture (SamMobile, Dec 2025) to within 1 px @3x [V]. The fill turns red at 15% or below. iOS 26: time centred-left beside the island; signal, wifi and a solid battery pill with the % cut out of it on the right, measured against IMG_0906-0910 to within 1 px @3x [V].
+- `data-bat` sets the level (default 82). iOS turns the fill red at 20% or below. `data-pct="0"` gives the classic outlined iOS battery without a number (battery percentage switched off in Settings).
 - Default times: iOS "9:41" (Apple marketing convention), Android "10:24". Set `data-time` so times follow the story.
+
+## Lock screens (`<div class="lock"><div class="date">…</div><div class="clk">9:41</div></div>` + `.sb.over` + `.notif` + `.sysnav.over`)
+- iOS 26 [V] (Apple WWDC25 images, MacStories review): the status bar has **no time** on the lock screen (empty, or `data-carrier="AIS"`), with the Control Centre grabber under the icons (automatic). Small bold date, glass clock (`.lock.solid` for a plain white clock, `.lock.tall` for the stretched one), dark frosted notification cards 20 pt from the edges just above the glass torch (`#torch`) and camera (`#cam`) buttons.
+- Android One UI 8 [~]: padlock at the top centre (automatic), date and a thin clock at the top left, light frosted notification cards.
+- Wallpaper: set `--wall: url(…)` on `.lock` to a photo. The default is an abstract dusk gradient; never a flat colour.
+- In a flow, `.screen.splash[data-app]` draws the LINE / Facebook / TikTok launch screen measured from real iPhone captures, and the optional `{"unlock": true}` plays Face ID / the padlock opening (see `video.md`).
 
 ## OS differences that make or break realism
 

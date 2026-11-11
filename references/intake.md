@@ -159,6 +159,7 @@ tabbed (API)                custom (API, any ≤20 areas)
 |---|---|---|
 | 13 | Theme | LINE dark on Android, light on iOS; FB light; TikTok always dark |
 | 14 | Export | transparent PNG per screen (3× phone, 2× desktop) + overview board |
+| 14b | Also a video walking through the screens? If yes: which screens in which order, what gets tapped, and the format (MP4 on a plain background, 9:16 canvas, 16:9 for slides, or transparent .mov for editing). See `references/video.md` | no video; if yes, MP4 of the confirmed storyboard order, phone on light grey |
 | 15 | Show TikTok/Stories safe-zone guides? | no (internal review only) |
 | 16 | Deadline / where to deliver | project `captures/` folder |
 

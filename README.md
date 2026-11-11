@@ -42,6 +42,8 @@ What makes these look real:
 - **Photos are real.** Your brand's photos are used if you have them. If not, Claude finds suitable photos online, **in Cowork and Claude Code only**. In a normal Claude chat you upload the photos yourself ([how](#step-4-photos-who-gets-them)).
 - **Thai or English copy**, with correct Thai line breaks.
 
+**Walk-through videos.** Claude can also turn the screens into a short video on one phone. The notification arrives on a real-looking lock screen, a finger taps it, LINE (or Facebook, or TikTok) opens on its real launch screen, then the rich menu slides up and a reply comes in. You get an MP4 for slides or chat, a 9:16 version for phones, or a transparent `.mov` for video editors. Ask for it, e.g. *"also make a video of the journey from the push to the reply"*. (Needs Claude Code or Cowork on a Mac; in the Claude chat app you get a file that plays the animation in Chrome, which you can screen-record.)
+
 All the rich-menu layouts Claude can make:
 
 <img src="templates/richmenu-picker.png" width="620" alt="LINE rich menu layout picker: every layout with its code">
@@ -218,6 +220,7 @@ You get one image per screen, and one overview board with all screens together.
 |---|---|
 | `captures/01-…png`, `02-…png` … | One screen each, with a transparent background, high resolution (3× for phones), ready for PowerPoint, Keynote or Figma |
 | `captures/00-overview.png` | All screens on one board, for a quick review or email |
+| `captures/video/<name>.mp4` | Only if you asked for a video: the walk-through, ready for PowerPoint, Keynote, Slack or LINE. Also `.gif` (small preview) or `.mov` (transparent, for video editors) if you asked |
 | `notes.md` | What was decided, what's still a placeholder, and where every photo came from |
 | `assets/credits.json` | The source of each photo that was found online |
 
@@ -301,6 +304,7 @@ Claude rebuilds only what changed and re-exports the images.
 | `references/` | Intake questions, platform rules, fonts and ratios, devices, realism rules, QA checklist, Thai notes, image sourcing |
 | `references/screens/` | Real-app screenshots (local only, git-ignored) and `calibrate/` replica pages |
 | `scripts/export.cjs` | Renders every screen to PNG and runs QA (`qa.json`) |
+| `scripts/video.cjs` | Records each flow (`data-flow`: several screens + a step script, see `references/video.md`) to MP4, transparent ProRes or GIF. Needs ffmpeg |
 | `scripts/calibrate.cjs` | Overlays a rebuilt screen on a real phone screenshot and reports where they differ |
 | `scripts/find_images.py`, `fetch_image.py` | Find and download real photos and log their sources |
 | `scripts/new_project.sh` | Creates a new project folder with the kit |
@@ -315,6 +319,7 @@ Claude rebuilds only what changed and re-exports the images.
 bash scripts/new_project.sh ~/work/acme-launch        # new project
 # edit brand.css, add images, copy screens from templates/gallery.html into index.html
 node scripts/export.cjs ~/work/acme-launch            # → captures/*.png + qa.json
+node scripts/video.cjs ~/work/acme-launch             # → captures/video/*.mp4 (flows only; needs ffmpeg)
 python3 scripts/bundle.py ~/work/acme-launch           # → dist/acme-launch.html (one file, checked)
 node scripts/export.cjs templates --root . --page gallery.html   # rebuild the gallery
 ```

@@ -2,6 +2,8 @@
    - inlines icons.svg so <svg class="i"><use href="#id"/></svg> works
    - fills .sb (status bar) and .sysnav per device OS (.dev.ios / .dev.android)
    - ?only=<data-shot id>  → render one shot on a transparent page (export mode)
+   - [data-flow] figures   → several screens + a timeline, played in the browser, recorded by scripts/video.cjs
+   - ?flow=<id>[&rec=1]    → render one flow on its own (rec=1: don't autoplay, video.cjs drives kitFlows[id].render(t))
    - ?safe=1               → show TikTok safe-zone guides
    - sets <html data-ready="1"> once fonts + images are loaded (export waits on it)
 */
@@ -11,12 +13,14 @@
 
   const ICON = {
     ios: {
-      sig: '<svg width="19" height="12" viewBox="0 0 19 12"><g fill="currentColor"><rect x="0" y="8" width="3.2" height="4" rx=".9"/><rect x="5" y="5.5" width="3.2" height="6.5" rx=".9"/><rect x="10" y="3" width="3.2" height="9" rx=".9"/><rect x="15" y="0" width="3.2" height="12" rx=".9"/></g></svg>',
-      wifi: '<svg width="17" height="12" viewBox="0 0 17 12"><g fill="currentColor"><path d="M8.5 2.3c2.4 0 4.6.9 6.2 2.5l1.2-1.2A10.4 10.4 0 0 0 8.5.6 10.4 10.4 0 0 0 1.1 3.6l1.2 1.2a8.7 8.7 0 0 1 6.2-2.5Z"/><path d="M8.5 5.6c1.5 0 2.9.6 3.9 1.5l1.2-1.2a7.2 7.2 0 0 0-10.2 0l1.2 1.2c1-.9 2.4-1.5 3.9-1.5Z"/><path d="M8.5 8.9c.6 0 1.1.2 1.6.6L8.5 11.2 6.9 9.5c.5-.4 1-.6 1.6-.6Z"/></g></svg>'
+      // [V] measured on iPhone 17 Pro / iOS 26 captures IMG_0906-0910 (pt): signal 19.3x12.3, wifi 17x12.3, battery 25x13.3 + cap
+      sig: '<svg width="19.3" height="12.3" viewBox="0 0 19.3 12.3"><g fill="currentColor"><rect x="0" y="7.6" width="3.3" height="4.7" rx="1"/><rect x="5.33" y="5.3" width="3.3" height="7" rx="1"/><rect x="10.67" y="2.6" width="3.3" height="9.7" rx="1"/><rect x="16" y="0" width="3.3" height="12.3" rx="1"/></g></svg>',
+      wifi: '<svg width="17.4" height="12.3" viewBox="-0.2 0 17.4 12.3"><g fill="currentColor"><path d="M-0.20 3.60 A12.30 12.30 0 0 1 17.20 3.60 L15.43 5.37 A9.80 9.80 0 0 0 1.57 5.37Z"/><path d="M2.84 6.64 A8.00 8.00 0 0 1 14.16 6.64 L12.39 8.41 A5.50 5.50 0 0 0 4.61 8.41Z"/><path d="M8.50 12.30 L5.67 9.47 A4.00 4.00 0 0 1 11.33 9.47Z"/></g></svg>'
     },
     android: {
-      wifi: '<svg width="17" height="13" viewBox="0 0 24 18"><path d="M12 17.5 23.5 4.3A17.6 17.6 0 0 0 12 .2C7.6.2 3.6 1.7.5 4.3Z" fill="currentColor"/></svg>',
-      sig: '<svg width="15" height="15" viewBox="0 0 16 16"><path d="M15.5 .5v15H.5Z" fill="currentColor"/></svg>',
+      // [V] One UI 8.5, Galaxy S25 1080x2340 capture (SamMobile, 2025-12): wifi 10.4x8.9 dp, 4 signal bars 1.7 dp, battery pill 20.7x12 dp
+      wifi: '<svg width="10.4" height="9" viewBox="0 0 10.4 9"><g fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round"><path d="M-0.09 2.99A7.35 7.35 0 0 1 10.49 2.99"/><path d="M1.86 4.87A4.65 4.65 0 0 1 8.54 4.87"/><path d="M3.76 6.71A2.00 2.00 0 0 1 6.64 6.71"/></g><circle cx="5.2" cy="8.1" r=".9" fill="currentColor"/></svg>',
+      sig: '<svg width="10.4" height="10.7" viewBox="0 0 10.4 10.7"><g fill="currentColor"><rect x="0" y="7.7" width="1.7" height="3" rx=".85"/><rect x="2.9" y="5" width="1.7" height="5.7" rx=".85"/><rect x="5.8" y="2.4" width="1.7" height="8.3" rx=".85"/><rect x="8.7" y="0" width="1.7" height="10.7" rx=".85"/></g></svg>',
       back: '<svg width="20" height="20" viewBox="0 0 24 24"><path d="M15 5 8 12l7 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>',
       home: '<svg width="20" height="20" viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>',
       rec: '<svg width="20" height="20" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 5v14M12 5v14M17 5v14"/></g></svg>'
@@ -34,18 +38,66 @@
 
   function osOf(el) { const d = el.closest(".dev"); return d ? (d.classList.contains("ios") ? "ios" : d.classList.contains("android") ? "android" : "desktop") : "desktop"; }
 
+  // iOS 26 battery: solid pill, level in currentColor, rest at 40%, percentage knocked out of the body (data-pct="0" → classic outline)
+  let batN = 0;
+  function iosBattery(bat, pct) {
+    bat = Math.max(0, Math.min(100, bat)); const id = "kitbat" + (++batN), w = 25 * bat / 100;
+    const lvl = bat <= 20 ? "#FF3B30" : "currentColor";
+    if (!pct) return `<svg class="ibat" width="27.3" height="13.3" viewBox="0 0 27.3 13.3"><rect x=".5" y=".5" width="24" height="12.3" rx="3.8" fill="none" stroke="currentColor" stroke-opacity=".4"/><rect x="2" y="2" width="${21 * bat / 100}" height="9.3" rx="2.2" fill="${lvl}"/><path d="M25.9 4.65a1.4 2 0 0 1 0 4Z" fill="currentColor" fill-opacity=".4"/></svg>`;
+    return `<svg class="ibat" width="27.3" height="13.3" viewBox="0 0 27.3 13.3"><defs><mask id="${id}" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="13.3"><rect width="25" height="13.3" fill="#fff"/>` +
+      `<text x="12.5" y="10.95" text-anchor="middle" fill="#000" style="font:700 ${bat === 100 ? 10.6 : 11.8}px var(--f-ios);letter-spacing:-.2px">${bat}</text></mask></defs>` +
+      `<g mask="url(#${id})"><rect width="25" height="13.3" rx="4.3" fill="currentColor" fill-opacity=".4"/>` +
+      `<rect width="25" height="13.3" rx="4.3" fill="${lvl}" style="clip-path:inset(0 ${25 - w}px 0 0)"/></g>` +
+      `<path d="M25.9 4.65a1.4 2 0 0 1 0 4Z" fill="currentColor" fill-opacity="${bat === 100 ? 1 : .4}"/></svg>`;
+  }
+
+  // One UI 8.5 battery: pill, level in currentColor, rest at 55%, dark number cut into it
+  function androidBattery(bat) {
+    bat = Math.max(0, Math.min(100, bat)); const id = "kitbat" + (++batN), W = 20.7, w = W * bat / 100;
+    return `<svg class="bat" width="${W}" height="12" viewBox="0 0 ${W} 12"><defs><mask id="${id}" maskUnits="userSpaceOnUse" x="0" y="0" width="${W}" height="12"><rect width="${W}" height="12" fill="#fff"/>` +
+      `<text x="${W / 2}" y="9.35" text-anchor="middle" fill="#000" fill-opacity=".82" style="font:700 ${bat === 100 ? 8.4 : 9.4}px var(--f-android)">${bat}</text></mask></defs>` +
+      `<g mask="url(#${id})"><rect width="${W}" height="12" rx="6" fill="currentColor" fill-opacity=".55"/>` +
+      `<rect width="${W}" height="12" rx="6" fill="${bat <= 15 ? "#FF4B4B" : "currentColor"}" fill-opacity=".93" style="clip-path:inset(0 ${W - w}px 0 0)"/></g></svg>`;
+  }
+
   function fillStatus(sb) {
     if (sb.dataset.filled) return; sb.dataset.filled = 1;
     const os = osOf(sb), t = sb.dataset.time || (os === "ios" ? "9:41" : "10:24"), bat = +(sb.dataset.bat || 82);
+    const onLock = !!(sb.closest(".screen") && sb.closest(".screen").querySelector(":scope > .lock"));
+    if (onLock && os === "ios") { sb.classList.add("lock-sb"); }   // iOS lock screen: carrier name (data-carrier) or nothing on the left, never the time
     if (os === "ios") {
-      sb.innerHTML = `<div class="l">${t}</div><div class="r">${ICON.ios.sig}${ICON.ios.wifi}<span class="ibat"><i style="width:${bat}%"></i></span></div>`;
+      sb.innerHTML = `<div class="l">${onLock ? (sb.dataset.carrier || "") : t}</div><div class="r">${ICON.ios.sig}${ICON.ios.wifi}${iosBattery(bat, sb.dataset.pct !== "0")}</div>`;
     } else if (os === "android") {
-      sb.innerHTML = `<div class="l">${t}</div><div class="r">${ICON.android.wifi}${ICON.android.sig}<span class="bat" style="--lvl:${bat}%"><i style="width:${bat}%"></i><b>${bat}</b></span></div>`;
+      sb.innerHTML = `<div class="l">${t}</div><div class="r">${ICON.android.wifi}${ICON.android.sig}${androidBattery(bat)}</div>`;
     }
   }
   function fillNav(n) {
     if (n.dataset.filled) return; n.dataset.filled = 1;
     if (osOf(n) === "android" && n.classList.contains("btn3")) n.innerHTML = ICON.android.rec + ICON.android.home + ICON.android.back;
+  }
+
+  const PAD = '<svg viewBox="0 0 14 18"><path class="shk" d="M3.6 8.2V5.6a3.4 3.4 0 0 1 6.8 0v2.6" fill="none" stroke="currentColor" stroke-width="1.9"/><rect x="1.2" y="8" width="11.6" height="9.4" rx="2.4" fill="currentColor"/></svg>';
+  // TikTok glyph: Simple Icons (CC0). Meta mark: simplified infinity loop
+  const TT = 'M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z';
+  // Launch screens, measured on real iPhone captures (see kit.css "APP LAUNCH SCREENS"). None of them shows a status bar.
+  const ttGlyph = (o = 1) => `<svg viewBox="-1 -1 26 26"><path d="${TT}" fill="#25F4EE" transform="translate(-.75 -.65)" opacity="${o}"/><path d="${TT}" fill="#FE2C55" transform="translate(.75 .65)" opacity="${o}"/><path d="${TT}" fill="#fff" opacity="${o}"/></svg>`;
+  const SPLASH = {
+    line: '<div class="sp-logo"><svg viewBox="0 0 24 24" style="--bg:#06C755"><use href="#lineicon"/></svg></div>',
+    facebook: '<div class="sp-logo"><svg viewBox="0 0 40 40"><use href="#fb-f"/></svg></div><div class="sp-foot"><span>from</span><b><svg viewBox="0 0 24 16"><path d="M12 8C10 4.2 7.4 3 5.4 3 3.3 3 2 5.4 2 8s1.3 5 3.4 5c2 0 4.6-1.2 6.6-5s4.6-5 6.6-5c2.1 0 3.4 2.4 3.4 5s-1.3 5-3.4 5c-2 0-4.6-1.2-6.6-5Z" fill="none" stroke="currentColor" stroke-width="2.7"/></svg>Meta</b></div>',
+    tiktok: `<div class="sp-logo">${ttGlyph()}<b>TikTok</b></div>`,
+    "tiktok-loading": `<div class="sp-logo">${ttGlyph(1)}</div><div class="tt-dots"><i></i><i></i></div>`
+  };
+  // <div class="screen splash" data-app="line|facebook|tiktok|tiktok-loading"></div> → the app's launch screen (logo + home indicator)
+  function fillSplash(sc) {
+    const html = SPLASH[sc.dataset.app]; if (!html || sc.dataset.filled) return; sc.dataset.filled = 1;
+    sc.classList.add("splash-" + sc.dataset.app);
+    sc.innerHTML = `${html}<div class="grow"></div><div class="sysnav"></div>`;
+  }
+  // TikTok loader: the red and cyan dots circle past each other (period 0.75 s); t = seconds (flows drive it, otherwise a rAF loop)
+  function ttDots(root, t) {
+    root.querySelectorAll(".tt-dots").forEach(d => { const [r, c] = d.children, a = t / .75 * 2 * Math.PI, x = 5.35 * Math.cos(a), z = Math.sin(a);
+      r.style.transform = `translateX(${-x}px) scale(${1 + .12 * z})`; c.style.transform = `translateX(${x}px) scale(${1 - .12 * z})`;
+      r.style.zIndex = z > 0 ? 2 : 1; c.style.zIndex = z > 0 ? 1 : 2; });
   }
 
   async function inlineSprite() {
@@ -56,9 +108,212 @@
     } catch (e) { console.warn("[kit] icons.svg not loaded – serve over http, not file://", e); }
   }
 
+  /* =====================================================================
+     FLOWS · one phone, several screens, a scripted timeline (→ scripts/video.cjs)
+     <figure class="shot" data-flow="id" [data-poster="2.5"]>
+       <div class="frame"><div class="dev ios">
+         <div class="screen …" data-scene="lock">…</div>
+         <div class="screen …" data-scene="chat">…</div>
+       </div></div>
+       <script type="application/json" data-flow-script>[ {"wait":1}, {"tap":".notif"}, {"go":"chat","with":"zoom"} ]</script>
+     </figure>
+     Steps run one after another; add "together": true to start a step with the previous one.
+     Selectors are looked up in the screen that is showing at that point (or "scene": "name").
+     See references/video.md for every step and option.
+     ===================================================================== */
+  function bez(x1, y1, x2, y2) {
+    return t => { if (t <= 0) return 0; if (t >= 1) return 1; let lo = 0, hi = 1, u = t;
+      for (let i = 0; i < 26; i++) { u = (lo + hi) / 2; const x = 3 * (1 - u) * (1 - u) * u * x1 + 3 * (1 - u) * u * u * x2 + u * u * u; if (x < t) lo = u; else hi = u; }
+      return 3 * (1 - u) * (1 - u) * u * y1 + 3 * (1 - u) * u * u * y2 + u * u * u; };
+  }
+  const EASE = { ios: bez(.32, .72, 0, 1), android: bez(.2, 0, 0, 1), inout: bez(.45, 0, .25, 1), linear: t => t };
+  const KINDS = ["wait", "go", "tap", "unlock", "reveal", "hide", "scroll", "type", "class"];
+  const DUR = { wait: 1, go: .5, tap: .45, unlock: .85, reveal: .4, hide: .3, scroll: .9, type: null, class: 0 };
+  const clamp = v => v < 0 ? 0 : v > 1 ? 1 : v;
+
+  function makeFlow(fig, issues) {
+    const id = fig.dataset.flow, dev = fig.querySelector(".dev");
+    const bad = m => { issues.push("flow " + id + ": " + m); };
+    if (!dev) { bad("no .dev"); return null; }
+    const scenes = [...dev.querySelectorAll(":scope > .screen")], os = dev.classList.contains("android") ? "android" : "ios";
+    const ease = EASE[os];
+    // clip moving screens to the glass: they share one viewport with the screen's own corner radius
+    const vp = document.createElement("div"); vp.className = "kit-vp"; vp.style.borderRadius = getComputedStyle(scenes[0]).borderRadius;
+    dev.insertBefore(vp, scenes[0]); scenes.forEach(s => vp.appendChild(s));
+    let script = [];
+    try { script = JSON.parse((fig.querySelector("script[data-flow-script]") || {}).textContent || "[]"); } catch (e) { bad("script is not valid JSON: " + e.message); }
+    const named = n => scenes.find(s => s.dataset.scene === n);
+    const saved = new Map(), typed = new Map(), hiddenAtStart = new Set();
+    const keep = el => { if (el && !saved.has(el)) saved.set(el, { css: el.getAttribute("style"), cls: el.getAttribute("class"), disp: el.style.display }); return el; };
+    const restore = (el, v) => { v.css == null ? el.removeAttribute("style") : el.setAttribute("style", v.css); v.cls == null ? el.removeAttribute("class") : el.setAttribute("class", v.cls); };
+    scenes.forEach(s => { keep(s); s.querySelectorAll(":scope > .sb, :scope > .sysnav").forEach(keep); });
+
+    // system bars stay put while screens move: a fixed copy of each screen's status bar + home indicator
+    const sys = new Map();
+    scenes.forEach(s => {
+      const w = document.createElement("div");
+      w.className = "kit-sys " + s.className.replace(/\bscreen\b/, "");
+      const sb = s.querySelector(":scope > .sb"), nav = s.querySelector(":scope > .sysnav");
+      w.appendChild(sb ? sb.cloneNode(true) : document.createElement("i"));
+      if (nav) w.appendChild(nav.cloneNode(true));
+      dev.appendChild(keep(w)); sys.set(s, w);
+    });
+    const touch = keep(Object.assign(document.createElement("i"), { className: "kit-touch" })); dev.appendChild(touch);
+    // Face ID: the Dynamic Island grows and shows a padlock that opens (iOS); the lock-screen padlock opens (Android)
+    const island = keep(Object.assign(document.createElement("i"), { className: "kit-island", innerHTML: `<i class="lk-pad">${PAD}</i>` })); dev.appendChild(island);
+    const islandPad = keep(island.firstChild);
+    let tapRect = null;
+
+    // compile the script into timed items
+    let cur = scenes[0], t = 0, prev0 = 0;
+    const first = script[0] && script[0].show ? named(script.shift().show) || cur : cur;
+    cur = first;
+    const items = [];
+    for (const s of script) {
+      const k = KINDS.find(k => k in s);
+      if (!k) { bad("unknown step " + JSON.stringify(s)); continue; }
+      const scope = s.scene ? named(s.scene) : cur;
+      if (!scope) { bad("no scene " + s.scene); continue; }
+      const it = { k, s, t0: s.together ? prev0 : t + (+s.delay || 0) };
+      let dur = s.dur != null ? +s.dur : k === "wait" ? +s.wait : k === "type" ? .07 * (s.text || "").length : DUR[k];
+      if (k === "go") {
+        it.from = cur; it.to = named(s.go);
+        if (!it.to) { bad("no scene " + s.go); continue; }
+        if ((s.with || "push") === "none") dur = 0;
+        cur = it.to;
+      } else if (k === "unlock") {
+        it.scene = scope;
+      } else if (k !== "wait") {
+        const sel = s[k];
+        it.el = scope.querySelector(sel) || dev.querySelector(sel);
+        if (!it.el) { bad(`no element "${sel}" in scene ${scope.dataset.scene || "?"}`); continue; }
+        if (k === "scroll") it.el.classList.add("kit-scroll");
+        keep(it.el);
+        if (k === "reveal") hiddenAtStart.add(it.el);
+        if (k === "type" && !typed.has(it.el)) typed.set(it.el, it.el.innerHTML);
+      }
+      it.t1 = it.t0 + dur; prev0 = it.t0; t = Math.max(t, it.t1); items.push(it);
+    }
+    const duration = t + (+fig.dataset.hold || 1.5);
+
+    function setBars(scene, hide) { scene.querySelectorAll(":scope > .sb, :scope > .sysnav").forEach(b => b.style.color = hide ? "transparent" : ""); }
+
+    function go(it, p) {
+      const { from, to } = it, mode = it.s.with || "push";
+      if (p >= 1 || from === to) { from.style.visibility = "hidden"; to.style.visibility = ""; return; }
+      const e = ease(p), W = dev.offsetWidth, H = dev.offsetHeight;
+      from.style.visibility = to.style.visibility = "";
+      const top = mode === "pop" || mode === "down" ? from : to, under = top === to ? from : to;
+      top.style.zIndex = 2; under.style.zIndex = 1;
+      const A = os === "android";
+      if (mode === "push" || mode === "pop") {
+        const q = mode === "push" ? e : 1 - e;           // 0 = from showing, 1 = to showing (push direction)
+        const [inc, out] = mode === "push" ? [to, from] : [from, to];
+        if (A) { inc.style.transform = `translateX(${(1 - q) * 30}px)`; inc.style.opacity = clamp((q - .3) / .7);
+                 out.style.transform = `translateX(${-q * 30}px)`; out.style.opacity = clamp(1 - q / .35); }
+        else { inc.style.transform = `translateX(${(1 - q) * W}px)`; inc.style.boxShadow = "-6px 0 24px rgba(0,0,0,.18)";
+               out.style.transform = `translateX(${-.3 * q * W}px)`; out.style.filter = `brightness(${1 - .14 * q})`; }
+      } else if (mode === "up") { to.style.transform = `translateY(${(1 - e) * H}px)`; from.style.filter = `brightness(${1 - .1 * e})`; }
+      else if (mode === "down") { from.style.transform = `translateY(${e * H}px)`; to.style.filter = `brightness(${.9 + .1 * e})`; }
+      else if (mode === "zoom") {                        // the app grows out of what was tapped (notification, icon), like iOS / One UI
+        const r = tapRect || { x: W / 2 - 30, y: H / 2 - 30, w: 60, h: 60 }, R = parseFloat(vp.style.borderRadius) || 40;
+        const z = EASE.ios(p);
+        to.style.clipPath = `inset(${r.y * (1 - z)}px ${(W - r.x - r.w) * (1 - z)}px ${(H - r.y - r.h) * (1 - z)}px ${r.x * (1 - z)}px round ${22 + (R - 22) * z}px)`;
+        to.style.transformOrigin = `${r.x + r.w / 2}px ${r.y + r.h / 2}px`; to.style.transform = `scale(${.94 + .06 * z})`;
+        to.style.opacity = clamp(p * 20);   // an opaque snapshot of the app, not a cross-fade
+        from.style.filter = `brightness(${1 - .4 * e}) blur(${4 * e}px)`;
+      }
+      else { to.style.opacity = e; }                     // fade
+      // fixed system bars, cross-faded when their colours differ
+      setBars(from, true); setBars(to, true);
+      const a = sys.get(from), b = sys.get(to), same = getComputedStyle(a).color === getComputedStyle(b).color;
+      a.style.visibility = b.style.visibility = "visible";
+      a.style.opacity = same ? 1 : 1 - e; b.style.opacity = same ? 0 : e;
+    }
+
+    function tap(it, p) {
+      if (p >= 1) return;
+      const el = it.el, r = el.getBoundingClientRect(), d = dev.getBoundingClientRect(), k = d.width / dev.offsetWidth || 1;
+      const [fx, fy] = it.s.at || [.5, .5];
+      touch.style.left = (r.left + r.width * fx - d.left) / k + "px"; touch.style.top = (r.top + r.height * fy - d.top) / k + "px";
+      const a = clamp(p / .3), o = clamp((p - .62) / .38);
+      touch.style.opacity = a * (1 - o); touch.style.transform = `scale(${.6 + .4 * a + .25 * o})`;
+      if (p > .18 && p < .78) el.style.opacity = .6;
+    }
+
+    function unlock(it, p) {
+      if (p >= 1) return;
+      const pad = it.scene.querySelector(".lk-pad");
+      if (os === "android") { if (pad) { pad.classList.toggle("open", p > .45); pad.style.opacity = 1 - clamp((p - .75) / .25); } return; }
+      const g = clamp(p / .25) * (1 - clamp((p - .72) / .28)), ge = EASE.ios(g);   // grow in, hold, shrink back
+      island.style.visibility = "visible"; island.style.width = 126 + 22 * ge + "px"; island.style.height = 37 + 25 * ge + "px"; island.style.marginLeft = -(126 + 22 * ge) / 2 + "px";
+      islandPad.style.opacity = clamp((g - .5) * 2); islandPad.classList.toggle("open", p > .48);
+    }
+
+    function reveal(it, p, show) {
+      const el = it.el, mode = it.s.with || "fade";
+      let v = show ? ease(p) : 1 - ease(p);
+      if (!show && p >= 1) { el.style.display = "none"; return; }
+      el.style.display = saved.get(el).disp || "";
+      if (show && p >= 1) return;
+      if (mode === "grow") {
+        el.style.height = ""; el.style.marginTop = el.style.marginBottom = "";
+        const cs = getComputedStyle(el), h = el.offsetHeight, mt = parseFloat(cs.marginTop), mb = parseFloat(cs.marginBottom);
+        el.style.height = h * v + "px"; el.style.marginTop = mt * v + "px"; el.style.marginBottom = mb * v + "px"; el.style.overflow = "hidden";
+        el.style.opacity = clamp((v - .35) / .65); el.style.transform = `translateY(${(1 - v) * 10}px)`;
+      } else {
+        el.style.opacity = mode === "pop" ? clamp(v * 2) : v;
+        if (mode === "pop") el.style.transform = `scale(${.86 + .14 * v})`;
+        if (mode === "up") el.style.transform = `translateY(${(1 - v) * 28}px)`;
+        if (mode === "down") el.style.transform = `translateY(${-(1 - v) * 28}px)`;
+      }
+    }
+
+    function render(time) {
+      saved.forEach((v, el) => restore(el, v));
+      typed.forEach((h, el) => { el.innerHTML = h; });
+      hiddenAtStart.forEach(el => { el.style.display = "none"; });
+      scenes.forEach(s => { s.style.visibility = s === first ? "" : "hidden"; });
+      const scroll = new Map(); tapRect = null;
+      ttDots(dev, time);
+      for (const it of items) {
+        if (time < it.t0) continue;
+        const p = it.t1 > it.t0 ? clamp((time - it.t0) / (it.t1 - it.t0)) : 1;
+        switch (it.k) {
+          case "go": go(it, p); break;
+          case "tap": { const r = it.el.getBoundingClientRect(), d = dev.getBoundingClientRect(), k = d.width / dev.offsetWidth || 1;
+            tapRect = { x: (r.left - d.left) / k, y: (r.top - d.top) / k, w: r.width / k, h: r.height / k }; tap(it, p); break; }
+          case "unlock": unlock(it, p); break;
+          case "reveal": reveal(it, p, true); break;
+          case "hide": reveal(it, p, false); break;
+          case "scroll": { const y0 = scroll.get(it.el) || 0, y = y0 + (+it.s.by || 0) * EASE.inout(p); scroll.set(it.el, y); it.el.style.setProperty("--kit-sy", y + "px"); break; }
+          case "type": { const tx = it.s.text || ""; it.el.textContent = tx.slice(0, Math.round(tx.length * p)); break; }
+          case "class": ["add", "remove", "toggle"].forEach(m => it.s[m] && it.s[m].split(/\s+/).forEach(c => it.el.classList[m](c))); break;
+        }
+      }
+    }
+    return { id, duration, render, fig };
+  }
+
+  function initFlows(issues) {
+    const flows = [];
+    document.querySelectorAll("[data-flow]").forEach(fig => { const f = makeFlow(fig, issues); if (f) flows.push(f); });
+    window.kitFlows = Object.fromEntries(flows.map(f => [f.id, f]));
+    const auto = !navigator.webdriver && !q.get("rec");
+    flows.forEach(f => {
+      f.render(+(f.fig.dataset.poster || 0));
+      if (!auto) return;
+      let start = performance.now(), at = 0, paused = false;
+      const loop = now => { if (!paused) { at = ((now - start) / 1000) % f.duration; f.render(at); } requestAnimationFrame(loop); };
+      requestAnimationFrame(loop);
+      f.fig.querySelector(".frame").addEventListener("click", () => { paused = !paused; if (!paused) start = performance.now() - at * 1000; });
+      f.fig.querySelector(".frame").title = "click to pause / play";
+    });
+  }
+
   function onlyMode() {
-    const id = q.get("only"); if (!id) return;
-    const shot = document.querySelector(`[data-shot="${id}"]`);
+    const id = q.get("only") || q.get("flow"); if (!id) return;
+    const shot = document.querySelector(q.get("flow") ? `[data-flow="${id}"]` : `[data-shot="${id}"]`);
     if (!shot) { console.error("[kit] no shot", id); return; }
     // keep the whole <figure data-shot> so project CSS scoped to [data-shot="…"] still applies; labels hide in .capture
     document.body.className += " capture"; document.body.innerHTML = ""; document.body.appendChild(shot);
@@ -83,6 +338,7 @@
       const h = Math.round(1040 * b.height / b.width), std = [1040, 350, 585, 700, 1300, 1850];
       if (h < 250 || h > 2080) issues.push("imap-size 1040x" + h + " is outside every LINE limit");
       else if (h !== 1040 && !m.dataset.sizeOk) issues.push("imap-shape 1040x" + h + (std.some(s => Math.abs(s - h) <= 4) ? " (OA Manager template)" : " (custom height)") + ": not square; confirm with the user, then set data-size-ok on .ln-imap"); });
+    initFlows(issues);
     window.__kitIssues = issues;
     document.documentElement.dataset.ready = "1";
   }
@@ -94,6 +350,8 @@
     if (src) document.documentElement.style.setProperty("--brand-logo", `url("${new URL(src, location.href).href}")`);
     onlyMode();
     await inlineSprite();
+    document.querySelectorAll(".screen.splash").forEach(fillSplash);
+    document.querySelectorAll(".dev.android .lock").forEach(l => { if (!l.querySelector(".lk-pad")) l.insertAdjacentHTML("beforeend", `<i class="lk-pad">${PAD}</i>`); });
     document.querySelectorAll(".sb").forEach(fillStatus);
     document.querySelectorAll(".sysnav").forEach(fillNav);
     document.querySelectorAll(".dev.ios .screen, .dev.android .screen").forEach(s => { if (!s.parentElement.querySelector(".cam")) { const c = document.createElement("div"); c.className = "cam"; s.parentElement.appendChild(c); } });
