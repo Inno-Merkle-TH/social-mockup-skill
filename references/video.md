@@ -42,7 +42,7 @@ Tapping a push on a locked phone is never a straight cut to the chat. The real s
 4. **The app grows out of the notification** you tapped: `{"go": "splash", "with": "zoom"}`. `zoom` always expands from the last tapped element (a notification, an app icon). Without a tap it grows from the centre.
 5. **Launch screen**, held ~0.6–0.9 s: `{"wait": 0.7}`. Add it as a scene with one line; the kit draws it:
    `<div class="screen splash" data-app="line" data-scene="splash" data-time="9:41"></div>`
-   `data-app`: `line` (LINE green #06C755, big white bubble logo, centred), `facebook` (white, blue f, "from ∞ Meta" at the bottom; add class `dark` for dark mode), `tiktok` (black, colour logo + "TikTok" wordmark) and `tiktok-loading` (the dark screen with a faint logo and the animated red/cyan dots that follows the TikTok splash). All four are measured on real iPhone captures and, like the real apps, show **no status bar**. TikTok cold start = `tiktok` ~0.6 s → `fade` to `tiktok-loading` ~0.8 s → `fade` to the For You screen. See them in the gallery (`launch-ios-*`).
+   `data-app`: `line` (LINE green #06C755, big white bubble logo, centred), `facebook` (white, blue f, "from ∞ Meta" at the bottom; add class `dark` for dark mode), `tiktok` (black, colour logo + "TikTok" wordmark) and `tiktok-loading` (the dark screen with a faint logo and the animated red/cyan dots that follows the TikTok splash). All four are measured on real iPhone captures, use the brands' own logo artwork (`assets/icons.svg`, never redrawn) and, like the real apps, show **no status bar**. TikTok cold start = `tiktok` ~0.6 s → `fade` to `tiktok-loading` ~0.8 s → `fade` to the For You screen. See them in the gallery (`launch-ios-*`).
 6. **The app's screen appears**: `{"go": "chat", "with": "fade", "dur": 0.25}`.
 
 Leave out step 5 only when the brief says the app was already open in the background (a warm start shows the app straight away). Android launch screens re-use the iPhone measurements scaled to the screen width [~].
@@ -81,6 +81,7 @@ node scripts/video.cjs <project> --canvas 1080x1920           # phone centred on
 node scripts/video.cjs <project> --canvas 1920x1080 --bg "#FFFFFF"   # for 16:9 slides
 node scripts/video.cjs <project> --bg transparent             # ProRes 4444 .mov with alpha: drop onto any slide background (Keynote, Premiere, After Effects)
 node scripts/video.cjs <project> --stills 0,3.5,7             # PNG frames at those seconds only: check a moment fast
+node scripts/video.cjs <project> --bare                        # screen only, no phone (a screen recording look); --bare round keeps the corners
 ```
 
 - Frames are rendered one by one, so the motion is perfectly smooth whatever the machine. A 13 s flow takes ~40 s at 30 fps.

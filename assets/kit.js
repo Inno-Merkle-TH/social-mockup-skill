@@ -10,6 +10,8 @@
 (function () {
   const KIT = (document.currentScript.src || "").replace(/kit\.js.*$/, "");
   const q = new URLSearchParams(location.search);
+  // ?bare=1 → screen only, no phone frame (?bare=round keeps the rounded screen corners). See kit.css "SCREEN ONLY".
+  if (q.get("bare")) document.documentElement.classList.add("bare", ...(q.get("bare") === "round" ? ["round"] : []));
 
   const ICON = {
     ios: {
@@ -77,16 +79,17 @@
   }
 
   const PAD = '<svg viewBox="0 0 14 18"><path class="shk" d="M3.6 8.2V5.6a3.4 3.4 0 0 1 6.8 0v2.6" fill="none" stroke="currentColor" stroke-width="1.9"/><rect x="1.2" y="8" width="11.6" height="9.4" rx="2.4" fill="currentColor"/></svg>';
-  // TikTok glyph: Simple Icons (CC0). Meta mark: simplified infinity loop
-  const TT = 'M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z';
   // Launch screens, measured on real iPhone captures (see kit.css "APP LAUNCH SCREENS"). None of them shows a status bar.
-  const ttGlyph = (o = 1) => `<svg viewBox="-1 -1 26 26"><path d="${TT}" fill="#25F4EE" transform="translate(-.75 -.65)" opacity="${o}"/><path d="${TT}" fill="#FE2C55" transform="translate(.75 .65)" opacity="${o}"/><path d="${TT}" fill="#fff" opacity="${o}"/></svg>`;
+  // Every logo is the brand's own artwork from assets/icons.svg (#line-mark, #fb-f, #meta-logo, #tt-logo, #tt-wordmark), never redrawn.
   const SPLASH = {
-    line: '<div class="sp-logo"><svg viewBox="0 0 24 24" style="--bg:#06C755"><use href="#lineicon"/></svg></div>',
-    facebook: '<div class="sp-logo"><svg viewBox="0 0 40 40"><use href="#fb-f"/></svg></div><div class="sp-foot"><span>from</span><b><svg viewBox="0 0 24 16"><path d="M12 8C10 4.2 7.4 3 5.4 3 3.3 3 2 5.4 2 8s1.3 5 3.4 5c2 0 4.6-1.2 6.6-5s4.6-5 6.6-5c2.1 0 3.4 2.4 3.4 5s-1.3 5-3.4 5c-2 0-4.6-1.2-6.6-5Z" fill="none" stroke="currentColor" stroke-width="2.7"/></svg>Meta</b></div>',
-    tiktok: `<div class="sp-logo">${ttGlyph()}<b>TikTok</b></div>`,
-    "tiktok-loading": `<div class="sp-logo">${ttGlyph(1)}</div><div class="tt-dots"><i></i><i></i></div>`
+    line: '<div class="sp-logo"><svg><use href="#line-mark"/></svg></div>',
+    facebook: '<div class="sp-logo"><svg><use href="#fb-f"/></svg></div><div class="sp-foot"><span>from</span><svg class="meta"><use href="#meta-logo"/></svg></div>',
+    // laid out in the capture's own points (390 pt wide screen): note at x 156.7 y 246.2, wordmark 118.1 × 26.3 at x 134.9 y 355.7
+    tiktok: '<div class="sp-logo"><svg viewBox="130 245 130 140"><use href="#tt-logo" x="156.65" y="246.15" width="87.1" height="87.1"/><use href="#tt-wordmark" x="134.9" y="355.7" width="118.1" height="26.3" fill="#fff"/></svg></div>',
+    "tiktok-loading": '<div class="sp-logo"><svg><use href="#tt-logo"/></svg></div><div class="tt-dots"><i></i><i></i></div>'
   };
+  // App icons for notifications: <div class="appi" data-app="line|facebook|tiktok"></div>
+  const APPICON = { line: "line-app", facebook: "fb-app", tiktok: "tt-app" };
   // <div class="screen splash" data-app="line|facebook|tiktok|tiktok-loading"></div> → the app's launch screen (logo + home indicator)
   function fillSplash(sc) {
     const html = SPLASH[sc.dataset.app]; if (!html || sc.dataset.filled) return; sc.dataset.filled = 1;
@@ -350,6 +353,7 @@
     if (src) document.documentElement.style.setProperty("--brand-logo", `url("${new URL(src, location.href).href}")`);
     onlyMode();
     await inlineSprite();
+    document.querySelectorAll(".appi[data-app]").forEach(e => { const id = APPICON[e.dataset.app]; if (id && !e.firstElementChild) e.innerHTML = `<svg><use href="#${id}"/></svg>`; });
     document.querySelectorAll(".screen.splash").forEach(fillSplash);
     document.querySelectorAll(".dev.android .lock").forEach(l => { if (!l.querySelector(".lk-pad")) l.insertAdjacentHTML("beforeend", `<i class="lk-pad">${PAD}</i>`); });
     document.querySelectorAll(".sb").forEach(fillStatus);

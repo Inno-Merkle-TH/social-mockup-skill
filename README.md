@@ -38,6 +38,7 @@ What makes these look real:
 - **Phone frames** are drawn to the real iPhone 17 Pro and Samsung Galaxy S26 sizes.
 - **App screens** (header, buttons, fonts, spacing) are matched to real 2026 screenshots of each app.
 - **Status bars** (time, signal, Wi-Fi, battery) are measured on real iPhone (iOS 26) and Samsung (One UI 8.5) screenshots, down to the battery percentage inside the pill.
+- **Logos are the real ones.** The LINE, Facebook, Meta and TikTok logos and app icons are copied from each brand's own artwork, not redrawn.
 - **Lock screens and app launch screens** look like the real ones: the iOS 26 lock screen with glass notifications, and the actual LINE, Facebook and TikTok screens you see while each app opens.
 - **Fonts** are the ones each app actually uses: SF Pro and Thonburi on iPhone, Roboto on Android, TikTok's own font in TikTok.
 - **Image shapes** are correct for each placement. For example, a Facebook feed image is 4:5 portrait and a TikTok video fills the whole screen.
@@ -209,6 +210,7 @@ Claude only asks what it needs. Anything you already said in your first message 
 
 **About the output**
 - Light or dark mode, safe-zone guides, and where to deliver the files.
+- **In a phone, or the screen only?** By default each screen sits in a realistic phone. Say *"screen only"* and you get just the screen, like a real screenshot (no phone body, no camera notch), at the exact size a real iPhone or Galaxy screenshot has. Handy if you place the screens in your own device template or slides.
 - **Do you also want a video?** If yes: which screens in which order, what gets tapped, and the format (MP4 on a plain background, 9:16 for phones, 16:9 for slides, or a transparent `.mov` for video editors). No video unless you say yes.
 
 > **In a hurry?** Say *"just go with the defaults"*. Claude will then use: Android Galaxy, LINE with the rich menu open and previous messages, Facebook light mode, TikTok, Thai copy, and real photos found online (Cowork and Claude Code; in chat it asks you for the photos).
@@ -250,6 +252,7 @@ Just say what you want, as you would to a designer:
 - *"Add a TikTok version of the same ad."*
 - *"In the video, hold longer on the reply and make it 9:16."*
 - *"Make the video open TikTok instead of LINE."*
+- *"Give me the screens without the phone frame."* (or *"…with rounded corners"*)
 
 Claude rebuilds only what changed and re-exports the images (and the video, if there is one).
 
@@ -325,11 +328,12 @@ Claude rebuilds only what changed and re-exports the images (and the video, if t
 bash scripts/new_project.sh ~/work/acme-launch        # new project
 # edit brand.css, add images, copy screens from templates/gallery.html into index.html
 node scripts/export.cjs ~/work/acme-launch            # → captures/*.png + qa.json
+node scripts/export.cjs ~/work/acme-launch --bare     # screen only, no phone (real screenshot size); --bare round keeps the corners
 node scripts/video.cjs ~/work/acme-launch             # → captures/video/*.mp4 (flows only; needs ffmpeg)
 python3 scripts/bundle.py ~/work/acme-launch           # → dist/acme-launch.html (one file, checked)
 node scripts/export.cjs templates --root . --page gallery.html   # rebuild the gallery
 ```
-Preview while editing: `python3 -m http.server 8000` in the parent folder, then open `http://127.0.0.1:8000/acme-launch/`. Add `?only=<shot-id>` for one screen, `?safe=1` for safe zones, and `?areas=1` for rich-menu tap areas.
+Preview while editing: `python3 -m http.server 8000` in the parent folder, then open `http://127.0.0.1:8000/acme-launch/`. Add `?only=<shot-id>` for one screen, `?safe=1` for safe zones, and `?areas=1` for rich-menu tap areas, and `?bare=1` for screen only.
 
 **When an app changes its design**
 1. Take a real phone screenshot and put it in `references/screens/device/`.

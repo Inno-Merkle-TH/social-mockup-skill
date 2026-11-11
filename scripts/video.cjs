@@ -4,7 +4,7 @@
 
    usage:  node video.cjs <project-dir> [--root <dir>] [--page index.html] [--only id1,id2]
                           [--fps 30] [--scale 2] [--bg "#F2F2F4" | transparent] [--pad 60]
-                          [--canvas 1080x1920] [--gif] [--stills 0,2.5,5]
+                          [--canvas 1080x1920] [--gif] [--stills 0,2.5,5] [--bare [round]]
    output: <project-dir>/captures/video/<flow-id>.mp4   (H.264, plays everywhere: Keynote, PowerPoint, Slack, WhatsApp)
            --bg transparent → <flow-id>.mov  (ProRes 4444 with alpha, for Keynote / Premiere / After Effects)
            --gif            → also <flow-id>.gif (small, for email / chat previews)
@@ -24,7 +24,8 @@ const args = process.argv.slice(2);
 const dir = path.resolve(args[0] || ".");
 const opt = (k, d) => { const i = args.indexOf("--" + k); return i < 0 ? d : (args[i + 1] && !args[i + 1].startsWith("--") ? args[i + 1] : true); };
 const page = opt("page", "index.html"), only = opt("only", null), fps = +opt("fps", 30), scale = +opt("scale", 2);
-const bg = String(opt("bg", "#F2F2F4")), alpha = bg === "transparent", pad = +opt("pad", 60);
+const bg = String(opt("bg", "#F2F2F4")), alpha = bg === "transparent", pad = +opt("pad", args.includes("--bare") ? 0 : 60);
+const bareQ = args.includes("--bare") ? "&bare=" + (opt("bare", true) === "round" ? "round" : "1") : "";   // --bare: screen only, no phone frame
 const canvas = opt("canvas", null), gif = args.includes("--gif"), stills = opt("stills", null);
 const root = path.resolve(opt("root", dir) === true ? dir : opt("root", dir));
 if (!dir.startsWith(root)) { console.error("--root must contain the project dir"); process.exit(2); }
@@ -72,7 +73,7 @@ function ffmpeg(argv, label) {
   if (issues.length) { console.error("flow script problems:\n  " + issues.join("\n  ")); process.exit(1); }
 
   for (const id of ids) {
-    const url = base + "?flow=" + encodeURIComponent(id) + "&rec=1";
+    const url = base + "?flow=" + encodeURIComponent(id) + "&rec=1" + bareQ;
     // measure the frame at 1× first, then open a page exactly that size with `pad` around it
     const m = await (async () => { const { ctx, pg } = await open(url, 1700, 1300, 1); const b = await pg.locator(".frame").first().boundingBox(); await ctx.close(); return b; })();
     const vw = Math.ceil(m.width) + 2 * pad, vh = Math.ceil(m.height) + 2 * pad;

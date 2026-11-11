@@ -2,7 +2,7 @@
 /* social-mockup-studio · export.cjs
    Renders every [data-shot] in a page to a transparent PNG, plus an overview board.
 
-   usage:  node export.cjs <project-dir> [--root <dir>] [--page index.html] [--only id1,id2] [--scale 3] [--overview-width 2000] [--no-overview] [--safe]
+   usage:  node export.cjs <project-dir> [--root <dir>] [--page index.html] [--only id1,id2] [--scale 3] [--overview-width 2000] [--no-overview] [--safe] [--bare [round]]
    output: <project-dir>/captures/<NN>-<shot-id>.png, 00-overview.png, qa.json
 
    - serves the project over a local http server (sprites/fonts need http, not file://)
@@ -21,6 +21,7 @@ const args = process.argv.slice(2);
 const dir = path.resolve(args[0] || ".");
 const opt = (k, d) => { const i = args.indexOf("--" + k); return i < 0 ? d : (args[i + 1] && !args[i + 1].startsWith("--") ? args[i + 1] : true); };
 const page = opt("page", "index.html"), scale = +opt("scale", 3), only = opt("only", null);
+const bareQ = args.includes("--bare") ? "&bare=" + (opt("bare", true) === "round" ? "round" : "1") : "";   // --bare: screen only, no phone frame (--bare round keeps the corners)
 const outDir = path.join(dir, "captures"); fs.mkdirSync(outDir, { recursive: true });
 
 // serves ONLY the project folder by default (projects carry their own kit/). Use --root <dir> to widen
@@ -71,11 +72,11 @@ const srv = http.createServer((q, r) => {
   // 2) each shot on its own transparent page
   for (const id of ids) {
     const n = allIds.indexOf(id) + 1;   // stable numbering = order in the page
-    const desk = await (async () => { const { ctx, pg } = await open(base + "?only=" + encodeURIComponent(id) + (args.includes("--safe") ? "&safe=1" : ""), 1700, 1100, 1);
+    const desk = await (async () => { const { ctx, pg } = await open(base + "?only=" + encodeURIComponent(id) + (args.includes("--safe") ? "&safe=1" : "") + bareQ, 1700, 1100, 1);
       const b = await pg.locator(".frame").first().boundingBox(); const d = await pg.locator(".dev.desktop").count(); await ctx.close(); return { b, d }; })();
     const vw = Math.ceil(desk.b.width) + 2, vh = Math.ceil(desk.b.height) + 2;
     const dsf = desk.d ? Math.min(scale, 2) : scale;
-    const { ctx, pg } = await open(base + "?only=" + encodeURIComponent(id) + (args.includes("--safe") ? "&safe=1" : ""), vw, vh, dsf);
+    const { ctx, pg } = await open(base + "?only=" + encodeURIComponent(id) + (args.includes("--safe") ? "&safe=1" : "") + bareQ, vw, vh, dsf);
     const file = path.join(outDir, String(n).padStart(2, "0") + "-" + id + ".png");
     const fb = await pg.locator(".frame").first().boundingBox();
     await pg.locator(".frame").first().screenshot({ path: file, omitBackground: true });
