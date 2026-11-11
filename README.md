@@ -2,6 +2,8 @@
 
 **Realistic LINE, Facebook and TikTok mockups for any brand, on iPhone, Android and desktop, made by Claude.**
 
+**Current version: 1.0.0** · [What's new](CHANGELOG.md) · [Download the latest version](https://github.com/Inno-Merkle-TH/social-mockup-skill/releases/latest/download/social-mockup-studio.skill)
+
 You describe the campaign in plain words. Claude asks you a few questions, finds real photos, builds the screens so they look like real app screenshots, and gives you ready-to-use images (PNG) for your slides.
 
 ![Example phone screens](docs/preview-phones.jpg)
@@ -23,6 +25,8 @@ You describe the campaign in plain words. Claude asks you a few questions, finds
 10. [Troubleshooting](#10-troubleshooting)
 11. [Good to know (usage rules)](#11-good-to-know-usage-rules)
 12. [For the people who maintain this skill](#12-for-the-people-who-maintain-this-skill)
+
+**Already installed?** [Updating to a new version](#updating-to-a-new-version)
 
 ---
 
@@ -72,12 +76,9 @@ Not sure? If you chat with Claude in a normal window, use Section 3. **No photos
 You do this **once**. It takes about 2 minutes.
 
 ### Step 1: Download the skill file
-1. Open the repo on GitHub: **https://github.com/Inno-Merkle-TH/social-mockup-skill**
-2. In the file list, click **`social-mockup-studio.skill`**.
-3. Click the **download button** (the ⬇ arrow at the top right of the file view, "Download raw file").
-4. You now have `social-mockup-studio.skill` (about 9 MB) in your Downloads folder. **Don't unzip it and don't rename it**: Claude takes it as it is.
+Click this link: **[Download social-mockup-studio.skill](https://github.com/Inno-Merkle-TH/social-mockup-skill/releases/latest/download/social-mockup-studio.skill)**. It always gives you the newest version (about 8 MB, saved to your Downloads folder). **Don't unzip it and don't rename it**: Claude takes it as it is.
 
-> Don't use the green **Code → Download ZIP** button for the Claude app. That ZIP contains the whole repo in a folder called `social-mockup-skill-main`, which isn't the file Claude needs.
+> Older versions and the list of changes are on the [Releases page](https://github.com/Inno-Merkle-TH/social-mockup-skill/releases). Don't use the green **Code → Download ZIP** button: that's the source code, not the file Claude needs.
 >
 > Uploading fails or your computer won't accept a `.skill` file? Rename it to `social-mockup-studio.zip` and upload that. It's the same file.
 
@@ -127,17 +128,14 @@ Claude should reply with questions. That means the skill is working. 🎉
 
 You do this once on each computer.
 
-1. Put the skill into your personal skills folder. The folder **must be named `social-mockup-studio`**. Pick one way:
-   - **With git (easiest to update later with `git pull`):**
-     ```bash
-     git clone https://github.com/Inno-Merkle-TH/social-mockup-skill.git ~/.claude/skills/social-mockup-studio
-     ```
-   - **Without git:** on GitHub click the green **Code → Download ZIP** and unzip it. You get a folder called **`social-mockup-skill-main`**. **Rename it to `social-mockup-studio`** (removing `-main` alone isn't enough, because the repo name is different), then move it:
-     ```bash
-     mv ~/Downloads/social-mockup-skill-main ~/.claude/skills/social-mockup-studio
-     ```
-   To share it with a whole project, put it in `<your-repo>/.claude/skills/social-mockup-studio/` and commit it.
-2. Install the screenshot tool. This needs Node.js 18 or newer; Google Chrome is used automatically if it's installed.
+1. Install the skill with this one command (Mac or Linux). It downloads the latest release into your personal skills folder:
+   ```bash
+   curl -fsSL https://github.com/Inno-Merkle-TH/social-mockup-skill/releases/latest/download/social-mockup-studio.skill -o /tmp/social-mockup-studio.zip && mkdir -p ~/.claude/skills && rm -rf ~/.claude/skills/social-mockup-studio && unzip -q /tmp/social-mockup-studio.zip -d ~/.claude/skills && (cd ~/.claude/skills/social-mockup-studio/scripts && npm install)
+   ```
+   The **same command updates** it later ([Updating](#updating-to-a-new-version)). It also does step 2 for you. On Windows, download the file from Step 1 of Section 3, unzip it, and move the `social-mockup-studio` folder into `%USERPROFILE%\.claude\skills\`.
+
+   To share it with a whole project, unzip it into `<your-repo>/.claude/skills/` instead and commit that folder.
+2. The screenshot tool needs Node.js 18 or newer (Google Chrome is used automatically if it's installed). The command above already ran this; run it yourself only if you installed another way:
    ```bash
    cd ~/.claude/skills/social-mockup-studio/scripts && npm install
    ```
@@ -149,6 +147,20 @@ You do this once on each computer.
 4. Start Claude Code and just ask, for example *"mock up a TikTok ad for our new drink on Android"*, or type `/social-mockup-studio`.
 
 > **Tip:** run it on a **Mac** for final client files. Only macOS has the real iPhone fonts (SF Pro and Thonburi). On Windows or Linux, iPhone screens use a close look-alike font.
+
+### Updating to a new version
+
+When a new version comes out it's listed on the [Releases page](https://github.com/Inno-Merkle-TH/social-mockup-skill/releases) and in [What's new](CHANGELOG.md). In Claude Code and Cowork, Claude also tells you in its first reply of a new project: *"A newer version of this skill (x.y.z) is out"*. Your projects and finished mockups are never touched by an update.
+
+**Claude app (chat or Cowork):**
+1. Download the new file: **[social-mockup-studio.skill](https://github.com/Inno-Merkle-TH/social-mockup-skill/releases/latest/download/social-mockup-studio.skill)** (always the newest).
+2. Go to **Customize → Skills**, open **social-mockup-studio** and delete it.
+3. Upload the new file (**+ → Create skill → Upload a skill**) and check the switch is on.
+4. Start a **new chat**. Ask *"which version of social-mockup-studio are you using?"* to confirm.
+
+**Claude Code:** run the install command again (Section 4, step 1). It replaces the old version and reinstalls the screenshot tool.
+
+> Installed with `git clone` before version 1.0.0? The skill now lives in a sub-folder of the repo, so your old clone stops working after `git pull`. Delete `~/.claude/skills/social-mockup-studio` and run the install command once.
 
 ---
 
@@ -283,6 +295,7 @@ Claude rebuilds only what changed and re-exports the images (and the video, if t
 | A photo looks blurry or wrong | Tell Claude: *"replace the photo on screen 2 with a sharper one of …"*, or attach your own. |
 | Text is cut off or overlaps | Tell Claude which screen. It also checks this automatically, but copy changes can introduce it. |
 | Asked for a video but only got an HTML file | The Claude chat app can't record video in its workspace. Open the HTML in Chrome (the video plays there) and screen-record it (Mac: ⇧⌘5 → Record Selected Portion), or ask a teammate with Claude Code on a Mac to run the export. In Claude Code, install ffmpeg once with `brew install ffmpeg`. |
+| Claude says a newer version is out | Follow [Updating to a new version](#updating-to-a-new-version). It takes a minute; your projects aren't affected. |
 | The app's look has changed (new LINE / Facebook / TikTok design) | Send a fresh phone screenshot of the real app to the skill maintainer (see Section 12). |
 
 ---
@@ -293,7 +306,7 @@ Claude rebuilds only what changed and re-exports the images (and the video, if t
 - Photos found online are fine for internal mockups. Before anything is published, replace them with licensed or client-supplied photos. `credits.json` lists every one.
 - LINE, Facebook, TikTok, their logos and app designs belong to their owners.
 - Don't put real customers' names or personal data into mockups. Claude uses plausible made-up names.
-- See `LICENSES.md` for the fonts and files included.
+- See [`LICENSES.md`](skills/social-mockup-studio/LICENSES.md) for the fonts, logos and files included.
 
 ---
 
@@ -304,8 +317,12 @@ Claude rebuilds only what changed and re-exports the images (and the video, if t
 
 **What's inside**
 
+The repo root holds this README, `CHANGELOG.md`, the preview images (`docs/`) and the release setup (`tools/`, `.github/`). **The skill itself is the folder `skills/social-mockup-studio/`**: that's exactly what gets packed into the `.skill` file. Paths below are inside that folder; run the commands from there.
+
 | Path | What it is |
 |---|---|
+| `VERSION` | The skill's version number (`1.0.0`). Claude reads it, and the release checks it |
+| `scripts/check_update.py` | Compares `VERSION` with the latest GitHub release; Claude runs it at the start of a project |
 | `SKILL.md` | The workflow Claude follows (intake → scaffold → images → build → export → review → notes) |
 | `assets/kit.css`, `kit.js`, `icons.svg`, `fonts/` | The kit: phone frames, status bars, LINE/FB/TikTok screens, fonts |
 | `templates/gallery.html` | One ready-made example of every screen type (fictional brand "Morrow Coffee") |
@@ -333,7 +350,7 @@ node scripts/video.cjs ~/work/acme-launch             # → captures/video/*.mp4
 python3 scripts/bundle.py ~/work/acme-launch           # → dist/acme-launch.html (one file, checked)
 node scripts/export.cjs templates --root . --page gallery.html   # rebuild the gallery
 ```
-Preview while editing: `python3 -m http.server 8000` in the parent folder, then open `http://127.0.0.1:8000/acme-launch/`. Add `?only=<shot-id>` for one screen, `?safe=1` for safe zones, and `?areas=1` for rich-menu tap areas, and `?bare=1` for screen only.
+Preview while editing: `python3 -m http.server 8000` in the parent folder of the project, then open `http://127.0.0.1:8000/acme-launch/`. Add `?only=<shot-id>` for one screen, `?safe=1` for safe zones, and `?areas=1` for rich-menu tap areas, and `?bare=1` for screen only.
 
 **When an app changes its design**
 1. Take a real phone screenshot and put it in `references/screens/device/`.
@@ -343,12 +360,15 @@ Preview while editing: `python3 -m http.server 8000` in the parent folder, then 
 
 **Adding a new screen type** (Instagram, Messenger, LINE VOOM…): add CSS to `kit.css`, an example to `gallery.html`, notes to the platform reference, then re-export and commit.
 
-**Updating the shareable `.skill` file** (it lives in the repo root so teammates download it from GitHub; Claude accepts up to 30 MB, and this one is about 9 MB). **Rebuild it after every change and commit it with that change**, otherwise people download an old version. `.gitattributes` keeps the `.skill` out of `git archive`, so it never packs itself. The folder must be named `social-mockup-studio`.
-```bash
-rm -rf /tmp/pkg && mkdir -p /tmp/pkg/social-mockup-studio && git archive HEAD | tar -x -C /tmp/pkg/social-mockup-studio
-# from the skill-creator skill folder:
-python3 -m scripts.package_skill /tmp/pkg/social-mockup-studio <this repo folder>   # writes social-mockup-studio.skill here
-```
+**Releasing a new version** (the `.skill` is no longer committed; GitHub builds it)
+1. Make and test the changes in `skills/social-mockup-studio/`, then commit.
+2. Bump `skills/social-mockup-studio/VERSION` (1.0.0 → 1.0.1 for fixes, 1.1.0 for new features, 2.0.0 when users must change how they work), and update "Current version" at the top of this README.
+3. Add a `## x.y.z (date)` section at the top of `CHANGELOG.md`, in plain words for users.
+4. Test the package: `python3 tools/build_skill.py --tag vx.y.z` (from the repo root; writes `dist/`, which is git-ignored).
+5. Commit, then tag and push: `git tag vx.y.z && git push origin main vx.y.z`.
+
+The `release` workflow (`.github/workflows/release.yml`) rebuilds the `.skill`, checks the tag matches `VERSION` and the changelog has notes, and publishes a GitHub release with the file attached. The download link in this README then serves the new version automatically, and Claude starts telling users about it.
+
 Keep client-specific material (client logos, paid fonts) **out** of this skill; it belongs in client projects.
 
 </details>

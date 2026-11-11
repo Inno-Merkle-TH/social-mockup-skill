@@ -1,27 +1,31 @@
 node_modules/
-scripts/node_modules/
+skills/social-mockup-studio/scripts/node_modules/
 .DS_Store
 *-workspace/
 .impeccable/
 
 # third-party reference screenshots: local calibration only (SPEC.md + source URLs are committed)
-references/screens/**/*.png
-references/screens/**/*.jpg
-references/screens/**/*.jpeg
-references/screens/**/*.webp
-references/screens/**/*.gif
-references/screens/**/raw/
-references/screens/**/data/
-references/screens/**/official_assets/
-references/screens/**/*.zip
-references/screens/**/official/
-references/screens/**/*.PNG
-references/screens/**/*.JPG
-references/screens/calibrate/out/
+skills/social-mockup-studio/references/screens/**/*.png
+skills/social-mockup-studio/references/screens/**/*.jpg
+skills/social-mockup-studio/references/screens/**/*.jpeg
+skills/social-mockup-studio/references/screens/**/*.webp
+skills/social-mockup-studio/references/screens/**/*.gif
+skills/social-mockup-studio/references/screens/**/raw/
+skills/social-mockup-studio/references/screens/**/data/
+skills/social-mockup-studio/references/screens/**/official_assets/
+skills/social-mockup-studio/references/screens/**/*.zip
+skills/social-mockup-studio/references/screens/**/official/
+skills/social-mockup-studio/references/screens/**/*.PNG
+skills/social-mockup-studio/references/screens/**/*.JPG
+skills/social-mockup-studio/references/screens/calibrate/out/
 
-# example gallery exports: regenerate with  node scripts/export.cjs templates --page gallery.html --root .
+# example gallery exports: regenerate with  (in skills/social-mockup-studio/) node scripts/export.cjs templates --page gallery.html --root .
 # only the rich-menu template sheet is kept (intake shows it to users)
-templates/captures/*
-!templates/captures/04-line-richmenu-templates.png
+skills/social-mockup-studio/templates/captures/*
+!skills/social-mockup-studio/templates/captures/04-line-richmenu-templates.png
 dist/
 __pycache__/
+
+# release builds (python3 tools/build_skill.py) go to dist/; the .skill is published on GitHub Releases, not committed
+*.skill
+.claude/

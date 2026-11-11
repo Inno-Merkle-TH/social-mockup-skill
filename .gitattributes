@@ -1,2 +1,2 @@
-social-mockup-studio.skill export-ignore
-social-mockup-studio.skill binary
+*.skill binary
+docs/** export-ignore

@@ -14,6 +14,7 @@ Swapping brands = swapping `brand.css` + images + copy. That is what makes resul
 
 ## Workflow
 
+0. **Version check (once per project, silent unless there's news).** Run `python3 scripts/check_update.py`. If it prints **update available**, add one line to your first reply: "A newer version of this skill (x.y.z) is out: see <link> for what's new and how to update." Then carry on with this version. Never stop or update anything yourself. If it prints offline or no release, say nothing. This skill's version is in `VERSION`; quote it if the user asks which version they have.
 0. **Preflight (before the first question).** Run `python3 scripts/preflight.py --brand <brand site> --surfaces <line,fb,tiktok>`. Put its **TELL THE USER** lines in your first reply:
    - **No browser:** say that nothing can be rendered, exported or visually checked here.
    - **Brand site or image sources blocked:** say so, name the exact files to upload (logo, rich message hero, tile images…, plus brand hex colours and CTA wording), or ask the user to allow the domain.
@@ -84,6 +85,7 @@ Build it in the project's `index.html` `<style>` using the same conventions (pla
 | `templates/brand.example.css` | brand variables with comments |
 | `templates/index.starter.html`, `notes.template.md` | project starters |
 | `scripts/new_project.sh` | scaffold a project |
+| `VERSION`, `scripts/check_update.py` | this skill's version · compares it with the latest GitHub release (step 0) |
 | `scripts/preflight.py` | step 0: can we render? is it a Mac? are the brand site and image sources reachable? prints what to tell the user |
 | `scripts/clean_image.py` | trim white edges from uploads (logged), size check per placement, edge-zoom QA sheet |
 | `scripts/bundle.py` | one self-contained HTML (CSS/JS/fonts/images/sprite inlined), with syntax, icon and render checks |
